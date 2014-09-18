@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>7F0448C0-45F7-421A-B156-D64E98C104F7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>fips-pi</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>5470D968-BFD2-4FC3-A347-4B84F5EEEFB3</key>
+		<string>ssh://git.t2.local/git/mobile/crossplatform/fcids.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>test/fips-pi/fips-pi.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>5470D968-BFD2-4FC3-A347-4B84F5EEEFB3</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://git.t2.local/git/mobile/crossplatform/fcids.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>5470D968-BFD2-4FC3-A347-4B84F5EEEFB3</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>5470D968-BFD2-4FC3-A347-4B84F5EEEFB3</string>
+			<key>IDESourceControlWCCName</key>
+			<string>fcids</string>
+		</dict>
+	</array>
+</dict>
+</plist>
