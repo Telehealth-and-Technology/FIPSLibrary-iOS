@@ -12,7 +12,7 @@ echo "using $FIPS_BASE.tar.gz"
 
 # for testing we might want to automatically copy these files
 # for production don't do this because we want to make sure the "official" files are used
-#./copyLocalSshFiles.sh
+./copyLocalSshFiles.sh
 
 
 
