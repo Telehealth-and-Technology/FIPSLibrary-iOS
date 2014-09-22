@@ -5,11 +5,13 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>323A02A3-A2F9-4628-B1F5-C9CFF324C4CD</string>
+	<string>D6E6285A-AE32-4CF0-9EDC-AB3C682F1C68</string>
 	<key>IDESourceControlProjectName</key>
 	<string>testSqlCipher</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>EEF69582-CD41-41F0-88B3-2B894E88B2BF</key>
+		<string>https://github.com/sqlcipher/sqlcipher.git</string>
 		<key>FB4FB5FC-5EDC-40D5-8B38-16F7AF06765E</key>
 		<string>scoleman@git.t2.local:/git/mobile/crossplatform/fcids.git</string>
 	</dict>
@@ -17,6 +19,8 @@
 	<string>test/testSqlCipher/testSqlCipher.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>EEF69582-CD41-41F0-88B3-2B894E88B2BF</key>
+		<string>../../../../sqlcipher</string>
 		<key>FB4FB5FC-5EDC-40D5-8B38-16F7AF06765E</key>
 		<string>../../../..</string>
 	</dict>
@@ -32,9 +36,17 @@
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>EEF69582-CD41-41F0-88B3-2B894E88B2BF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>sqlcipher</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>FB4FB5FC-5EDC-40D5-8B38-16F7AF06765E</string>
 			<key>IDESourceControlWCCName</key>
-			<string>fcids</string>
+			<string>testSqlCipher</string>
 		</dict>
 	</array>
 </dict>

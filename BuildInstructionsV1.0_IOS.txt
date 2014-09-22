@@ -1,4 +1,9 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+
 Notes:
+
+	Note that builsall.sh builds all of the openssl/fips files then putss the results in /usr/local/ssl/Release-iphoneos
+
 	Test Programs:
 		fips-pi	
 			IOS test progrma that links directory (and only) with /usr/local/ssl/Release-iphoneos/libcrypto.a
@@ -6,7 +11,21 @@ Notes:
 				Tests signature and that you can enter fips mode successfully
 		
 
+To create ios test program and link to sqlcipher and openssl files
+	1. Make regular test IOS program
+	IN test program:
+	2. 	Drag sqlcipher.xcodeproj to the test program
+	2a.		Add sqlcipher to target dependencies in "Build Phases"
+	2b.		Expand target/Build Phases/ Link with Binaries, Add libsqlcipher.a
+	3. 	In Build Settings add -DSQLITE_HAS_CODEC
+	4. Add to header search paths: /usr/local/ssl/Release-iphoneos/include
+	  (not user header search paths)
+	5. Add to Other linker flags: /usr/local/ssl/Release-iphoneos/libcrypto.a
 
+	6. Add files to the supporting files xcode dir
+		fips_assert.c/h, fips-premain.c
+	7. Add new run build script phase to taeget (Embed fingerprint)
+		/usr/local/bin/incore_macho --debug -exe "$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH"
 
 
 Tools Necessary for Build
