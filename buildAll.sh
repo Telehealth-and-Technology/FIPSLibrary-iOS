@@ -2,6 +2,8 @@
 #
 # files are necessary from fips/openssl, and sqlcipher
 
+LOGFILE=FIPS_build.log
+echo "buildall.sh"  1>$LOGFILE 2>&1
 
 
 # This sets up environment vars to point to which openssl/fips we cant to use
@@ -76,21 +78,30 @@ else
       # Build iOS FIPS module and library
       #
 
-      LOGFILE=FIPS_build.log
+
+      # Switch to old (4.6 dev tools) for device build 
+      xcode-select --switch /XCode4.6/Xcode.app
+
+
+
+
       RETURN_CODE=0
 
       #----------------------------------------------------------------------
       echo "Step 1 remove quarantine"
+      echo "Step 1 remove quarantine" 1>>$LOGFILE 2>&1
       #----------------------------------------------------------------------
-      ./step1_remove_Quarantine.sh 1>$LOGFILE 2>&1
+      ./step1_remove_Quarantine.sh 1>>$LOGFILE 2>&1
 
       #----------------------------------------------------------------------
       echo "Step 2 build and install Incore Utility"
+      echo "Step 2 build and install Incore Utility" 1>>$LOGFILE 2>&1
       #----------------------------------------------------------------------
       ./step2_build_Incore_utility.sh 1>>$LOGFILE 2>&1
 
       #----------------------------------------------------------------------
       echo "Step 3 build FIPS Object Module"
+      echo "Step 3 build FIPS Object Module" 1>>$LOGFILE 2>&1
       #----------------------------------------------------------------------
       ./step3_build_FIPS_module.sh 1>>$LOGFILE 2>&1
       if [ $? -eq 0 ] ; then
@@ -104,6 +115,7 @@ else
 
       #----------------------------------------------------------------------
       echo "Step 4 install FIPS Object Module (/usr/local/ssl/Release-iphoneos/)"
+      echo "Step 4 install FIPS Object Module (/usr/local/ssl/Release-iphoneos/)" 1>>$LOGFILE 2>&1
       #----------------------------------------------------------------------
       ./step4_install_FIPS_module.sh 1>>$LOGFILE 2>&1
 
@@ -119,6 +131,7 @@ else
 
       #----------------------------------------------------------------------
       echo "Step 5 build FIPS Capable library"
+      echo "Step 5 build FIPS Capable library" 1>>$LOGFILE 2>&1
       #----------------------------------------------------------------------
       ./step5_build_FIPS_capable_library.sh 1>>$LOGFILE 2>&1
 
@@ -133,6 +146,7 @@ else
       if [ "$RETURN_CODE" -eq "0" ] ; then
       #----------------------------------------------------------------------
       echo "Step 6 install FIPS Capable library (/usr/local/ssl/Release-iphoneos/)"
+      echo "Step 6 install FIPS Capable library (/usr/local/ssl/Release-iphoneos/)" 1>>$LOGFILE 2>&1
       #----------------------------------------------------------------------
       ./step6_install_FIPS_capable_library.sh 1>>$LOGFILE 2>&1
 
