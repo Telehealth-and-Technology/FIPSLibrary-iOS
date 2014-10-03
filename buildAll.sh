@@ -13,8 +13,8 @@ echo "-----------------------------------------"
 cd $PROJECTPATH
 
 
-[[ -s ${PROJECTPATH}/devSim/libcrypto.a ]] && _LIB_SIM_CRYPTO=${PROJECTPATH}/devSim/libcrypto.a || _LIB_SIM_CRYPTO=""
-[[ -s ${PROJECTPATH}/dev/$OPENSSL_BASE/libcrypto.a ]] && _LIB_DEVICE_CRYPTO=${PROJECTPATH}/dev/$OPENSSL_BASE/libcrypto.a || _LIB_DEVICE_CRYPTO=""
+[[ -s ${PROJECTPATH}/devSim/libi386/libcrypto.a ]] && _LIB_SIM_CRYPTO=${PROJECTPATH}/devSim/libi386/libcrypto.a  || _LIB_SIM_CRYPTO=""
+[[ -s ${PROJECTPATH}/dev/libarmv7/libcrypto.a ]] && _LIB_DEVICE_CRYPTO=${PROJECTPATH}/dev/libarmv7/libcrypto.a || _LIB_DEVICE_CRYPTO=""
 
 
 
@@ -35,6 +35,7 @@ echo "_LIB_DEVICE_CRYPTO = $_LIB_DEVICE_CRYPTO"
 if test ! -z "$_LIB_SIM_CRYPTO" || test ! -z "$_LIB_DEVICE_CRYPTO";  then
     echo "command line = ./iphoneoslipo -create $_LIB_SIM_CRYPTO  $_LIB_DEVICE_CRYPTO -output ./libcrypto.a" 
     ./iphoneoslipo -create $_LIB_SIM_CRYPTO  $_LIB_DEVICE_CRYPTO -output ./libcrypto.a
+    cp ./libcrypto.a $INSTALL_DIR
 else
     echo "No libaraies to create fat file from!"
 
@@ -43,5 +44,5 @@ fi
 
 
 
-cp ./libcrypto.a $INSTALL_DIR
+
 

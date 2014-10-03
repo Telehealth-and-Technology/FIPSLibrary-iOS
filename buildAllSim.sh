@@ -5,7 +5,12 @@
 SDKVERSION="7.1"    
 
 LOGFILE=FIPS_buildSimulator.log
-echo "buildall.sh"  1>$LOGFILE 2>&1
+echo "buildallSim.sh"  1>$LOGFILE 2>&1
+
+echo ""
+echo "-----------------------------------------"
+echo " Building for IOS Simulator"
+echo "-----------------------------------------"
 
 
 
@@ -76,140 +81,64 @@ else
     case $yn in
       [Yy]* ) 
 
-        cd devSim
-
         # Switch to new (5.5 dev tools) for device build 
         sudo xcode-select --switch /Applications/Xcode.app
 
+        RETURN_CODE=0
 
         #----------------------------------------------------------------------
-        #
-        # Build iOS FIPS module
-        #
+            echo "Step 2 build and install Incore Utility"
+            echo "Step 2 build and install Incore Utility" 1>>$LOGFILE 2>&1
         #----------------------------------------------------------------------
+        ./devSim/step2_build_Incore_utility.sh 1>>$LOGFILE 2>&1
 
-        #extract the fips code base into devSim direcgtory
-        tar xzf $FIPS_BASE.tar.gz
+          #----------------------------------------------------------------------
+          echo "Step 3 build FIPS Object Module"
+          echo "Step 3 build FIPS Object Module" 1>>$LOGFILE 2>&1
+          #----------------------------------------------------------------------
+          ./devSim/step3_build_FIPS_module.sh 1>>$LOGFILE 2>&1
+          if [ $? -eq 0 ] ; then
+            RETURN_CODE=0
+          else
+            echo "\t***error***"
+            RETURN_CODE=1
+          fi
 
-        #unpack incore tools to a sub-sirectory in the fips directory
-        cp -r SupplementalFiles/iOSIncoreTools/iOS $FIPS_BASE
+          if [ "$RETURN_CODE" -eq "0" ] ; then
 
-        # setup environment for os-x for build the incore utility
-        # this utility is used by the applicaition build process to embed the fips fingerprint into 
-        # the final executable
-        . ./setenv-reset.sh
-        . ./setenv-darwin-i386.sh
+          #----------------------------------------------------------------------
+          echo "Step 4 install FIPS Object Module (/usr/local/ssl/Release-iphoneos/)"
+          echo "Step 4 install FIPS Object Module (/usr/local/ssl/Release-iphoneos/)" 1>>$LOGFILE 2>&1
+          #----------------------------------------------------------------------
+          ./devSim/step4_install_FIPS_module.sh 1>>$LOGFILE 2>&1
 
-        # verify paths set by darwin script
-        env 
+            if [ $? -eq 0 ] ; then
+              RETURN_CODE=0
+            else
+              echo "\t***error***"
+              RETURN_CODE=1
+            fi
+          fi
 
-        # move to fips' dir
-        cd $FIPS_BASE
+        if [ "$RETURN_CODE" -eq "0" ] ; then
 
-        # configure and make fips module for incore utility
-        ./config fipscanisterbuild
-        make
-
-        # make the incore utility with the fips module just built
-        cd iOS/
-        make
-
-        # copy the infore utility to local bin dirt
-        cp ./incore_macho /usr/local/bin
-
-        # check which compiler we're using
-        echo "llvm-gcc -v = " llvm-gcc -v
-
-        # Clean up
-        cd ..
-        make clean
-        rm -f *.dylib
-
-        # Now do the cross compile build for th esikulator 
-        pwd
-        . ../setenv-reset.sh
-        . ../setenv-ios-11.sh
-
-
-        # Due to a problem with the newer os-x tools the simulator (not the device) build fails the fips signature check
-        # For now we'll disable this check (for the simulator only)
-        # Note that this breaks fips compiliance for the simulator but we're still fips compliant with the actual device build
-         sed -ie 's/FIPS_check_incore_fingerprint(void)/FIPS_check_incore_fingerprint(void) {return 1;}  int dummy(void)/' "./fips/fips.c"
-        
-
-        ./config fipscanisterbuild >> $LOGFILE 2>&1
-
-        echo "-------------------------Build log make"
-        make
-        echo "-------------------------Build log make install"
-        make install
+          #----------------------------------------------------------------------
+          echo "Step 5 build FIPS Capable library"
+          echo "Step 5 build FIPS Capable library" 1>>$LOGFILE 2>&1
+          #----------------------------------------------------------------------
+          ./devSim/step5_build_FIPS_capable_library.sh 1>>$LOGFILE 2>&1
+            if [ $? -eq 0 ] ; then
+              RETURN_CODE=0
+            else
+              echo "\t***error***"
+              RETURN_CODE=1
+            fi
+          fi
 
 
 
 
-        echo "-------------------------Build log make create openssl files"
-        cd ..
-        . ./setenv-reset.sh
-        #----------------------------------------------------------------------
-        #
-        # Build openssl
-        #
-        #----------------------------------------------------------------------
-        ARCH="i386"
-        CURRENTPATH=`pwd`
-        PLATFORM="iPhoneSimulator"
-        DEVELOPER=`xcode-select -print-path`
-        INSTALL_DIR=/usr/local/ssl/Release-iphoneos
 
-
-
-        set -e
-
-        mkdir -p "${CURRENTPATH}/src"
-        mkdir -p "${CURRENTPATH}/bin"
-        mkdir -p "${CURRENTPATH}/lib"
-
-        tar zxf $OPENSSL_BASE.tar.gz -C "${CURRENTPATH}/src"
-        cd "${CURRENTPATH}/src/$OPENSSL_BASE"
-
-        export CROSS_TOP="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
-        export CROSS_SDK="${PLATFORM}${SDKVERSION}.sdk"
-        export BUILD_TOOLS="${DEVELOPER}"
-
-        echo "Building $OPENSSL_BASE for ${PLATFORM} ${SDKVERSION} ${ARCH}"
-        echo "Please stand by..."
-
-        export CC="${BUILD_TOOLS}/usr/bin/gcc -arch ${ARCH}"
-        mkdir -p "${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk"
-        LOG="${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk/$OPENSSL_BASE.log"
-
-        set +e
-
-        ./Configure iphoneos-cross --openssldir="${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk" fips --with-fipsdir=/usr/local/ssl/Release-iphoneos > "${LOG}" 2>&1
-      #./Configure iphoneos-cross --openssldir="${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk" fips --with-fipsdir=/usr/local/ssl/Release-iphoneos > "${LOG}" 2>&1
-
-        if [ $? != 0 ];
-        then 
-            echo "Problem while configure - Please check ${LOG}"
-            exit 1
-        fi
-
-        # add -isysroot to CC=
-        sed -ie "s!^CFLAG=!CFLAG=-isysroot ${CROSS_TOP}/SDKs/${CROSS_SDK} -miphoneos-version-min=7.0 !" "Makefile"
-
-        make >> "${LOG}" 2>&1
-
-        if [ $? != 0 ];
-        then 
-            echo "Problem while make - Please check ${LOG}"
-            exit 1
-        fi
-          
-    set -e
-    make install >> "${LOG}" 2>&1
-  #  make clean >> "${LOG}" 2>&1  
-
-  cp ${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk/lib/libcrypto.a ../..
     esac
 
  fi

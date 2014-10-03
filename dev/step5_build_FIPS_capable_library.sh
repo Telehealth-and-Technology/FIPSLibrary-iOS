@@ -4,6 +4,7 @@
 
 # move to Source dir
 cd dev
+mkdir libarmv7
 
 # make incore_macho available to build
 export PATH="/usr/local/bin":$PATH
@@ -29,3 +30,5 @@ mv crypto/err/err_all.c.new crypto/err/err_all.c
 ./config fips -no-shared -no-comp -no-dso -no-hw -no-engines -no-sslv2 -no-sslv3 --with-fipsdir=/usr/local/ssl/Release-iphoneos
 make build_libs
 
+# copy the lib to the intermediate lib directory
+cp libcrypto.a ../libarmv7
