@@ -17,8 +17,10 @@ INCDIR=/usr/local/ssl/Release-iphoneos/include/openssl
 
 # install - may require root...
 # libraries
-cp libssl.a $FIPSDIR
-cp libcrypto.a $FIPSDIR
+
+# Don't copy these, wait until we create a fat file from them in buildAll.sh then copy them
+# cp libssl.a $FIPSDIR
+# cp libcrypto.a $FIPSDIR
 # headers
 cp crypto/stack/stack.h     $INCDIR
 cp crypto/stack/safestack.h $INCDIR
