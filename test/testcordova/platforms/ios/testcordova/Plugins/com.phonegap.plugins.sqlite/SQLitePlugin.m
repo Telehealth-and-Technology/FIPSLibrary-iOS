@@ -10,6 +10,8 @@
 #include <regex.h>
 
 
+
+
 //LIBB64
 typedef enum
 {
@@ -192,6 +194,8 @@ static void sqlite_regexp(sqlite3_context* context, int argc, sqlite3_value** va
     NSString *dbname = [self getDBPath:[options objectForKey:@"name"]];
     NSValue *dbPointer;
 
+    
+
     if (dbname == NULL) {
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@"You must specify database name"];
     }
@@ -214,7 +218,11 @@ static void sqlite_regexp(sqlite3_context* context, int argc, sqlite3_value** va
                 // Extra for SQLCipher:
                 // const char *key = [@"your_key_here" UTF8String];
                 // if(key != NULL) sqlite3_key(db, key, strlen(key));
-
+		        const char *key = [[options objectForKey:@"password"] UTF8String];
+                if (key != NULL) {
+                    sqlite3_key(db, key, strlen(key));
+                }
+                
 		sqlite3_create_function(db, "regexp", 2, SQLITE_ANY, NULL, &sqlite_regexp, NULL, NULL);
 	
                 // Attempt to read the SQLite master table (test for SQLCipher version):

@@ -34,6 +34,36 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+        console.log('ssssssssss');
+        var db = window.sqlitePlugin.openDatabase({name: "myencrypt.db", password: "password233333"}, onOpenSuccess);
+        console.log('ddddddddddddddddd');
+        
+        db.transaction(function (tx) {
+                       tx.executeSql("CREATE TABLE IF NOT EXISTS todo(ID INTEGER PRIMARY KEY ASC, todo TEXT, added_on DATETIME)",
+                                     [], onSuccess, onError);
+                       tx.executeSql("INSERT INTO todo(todo, added_on) VALUES (?,?)", ['my todo item', new Date()], onSuccess, onError);
+                       });
+        
+        function onSuccess(transaction, resultSet) {
+            console.log('eeeeeeeeeeee');
+            console.log('Query completed: ' + JSON.stringify(resultSet));
+        }
+        
+        function onError(transaction, error) {
+            console.log('ffffffffff');
+            console.log('Query failed: ' + error.message);
+        }
+        
+        function onOpenSuccess(resultSet) {
+            console.log('Open Successful');
+            
+            var response = JSON.stringify(resultSet);
+            var parsedJSON = eval('('+response+')');
+            
+            console.log("FIPS Status = " + parsedJSON.FIPSStatus);
+            console.log("T2 FIPS Versions = " + parsedJSON.T2FIPSVersion);
+            
+        }
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
