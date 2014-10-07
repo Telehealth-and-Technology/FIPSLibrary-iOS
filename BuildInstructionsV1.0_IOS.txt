@@ -47,11 +47,8 @@ Steps:
 Retrieve source files
 ================================
 
-	mkdir fcids
-	cd fcids
 
-
-	1a. Clone the T2 fcads project from git:
+	1a. Clone the T2 fcids project from git:
 	----------------------------------------
 		git clone git.t2.local:/git/mobile/crossplatform/fcids.git
 		cd fcids
@@ -72,14 +69,14 @@ Retrieve source files
 
 		Option 2:
 		--------
-  			Copy the files from the local distribution (use command: ./copyLocalSshFiles.sh)"
+  			Copy the files from the local distribution (use command: cp localFipsSslFiles/*.gz ./dev"
 
 
 		Results: 
 		========
 			fcids/dev
-				openssl-fips-ecp-2.0.2.tar.gz	
-				openssl-1.0.1f.tar.gz
+				openssl-fips-??tar.gz	
+				openssl-1.0.1?.tar.gz
 
 
 	1c. Obtain sqlcipher source files

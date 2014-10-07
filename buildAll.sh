@@ -12,7 +12,7 @@ echo "-----------------------------------------"
 
 cd $PROJECTPATH
 
-
+# Set _LIB_SIM_CRYPTO and _LIB_DEVICE_CRYPTO based on whether or not libcrypto.a exists in directories
 [[ -s ${PROJECTPATH}/devSim/libi386/libcrypto.a ]] && _LIB_SIM_CRYPTO=${PROJECTPATH}/devSim/libi386/libcrypto.a  || _LIB_SIM_CRYPTO=""
 [[ -s ${PROJECTPATH}/dev/libarmv7/libcrypto.a ]] && _LIB_DEVICE_CRYPTO=${PROJECTPATH}/dev/libarmv7/libcrypto.a || _LIB_DEVICE_CRYPTO=""
 
