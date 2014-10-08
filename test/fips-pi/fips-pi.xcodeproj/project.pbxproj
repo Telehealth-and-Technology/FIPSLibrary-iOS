@@ -325,6 +325,7 @@
 				);
 				INFOPLIST_FILE = "fips-pi/fips-pi.plist";
 				OTHER_LDFLAGS = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
+				"OTHER_LDFLAGS[arch=*]" = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				PRODUCT_NAME = "fips-pi";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/ssl/Release-iphoneos/include";
 				WRAPPER_EXTENSION = app;
