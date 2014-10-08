@@ -46,6 +46,20 @@
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = sqlcipher;
 		};
+		DF63C5DB19E46FA000767F38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF63C5D619E46FA000767F38 /* sqlcipher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = sqlcipher;
+		};
+		DF63C5DD19E46FAB00767F38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DF63C5D619E46FA000767F38 /* sqlcipher.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = sqlcipher;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +83,7 @@
 		DF5A1D9219CC9EFF009668AA /* fips_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_assert.c; sourceTree = "<group>"; };
 		DF5A1D9319CC9EFF009668AA /* fips_assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fips_assert.h; sourceTree = "<group>"; };
 		DF5A1D9419CC9EFF009668AA /* fips_premain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_premain.c; sourceTree = "<group>"; };
+		DF63C5D619E46FA000767F38 /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = "../../sqlcipher-master/sqlcipher.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +114,7 @@
 		DF5A1D4319CC8CBA009668AA = {
 			isa = PBXGroup;
 			children = (
+				DF63C5D619E46FA000767F38 /* sqlcipher.xcodeproj */,
 				DF5A1D7E19CC8D24009668AA /* sqlcipher.xcodeproj */,
 				DF5A1D5519CC8CBA009668AA /* testSqlCipher */,
 				DF5A1D6E19CC8CBB009668AA /* testSqlCipherTests */,
@@ -178,6 +194,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		DF63C5D719E46FA000767F38 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DF63C5DC19E46FA000767F38 /* libsqlcipher.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -193,6 +217,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				DF63C5DE19E46FAB00767F38 /* PBXTargetDependency */,
 				DF5A1D8619CC8D3F009668AA /* PBXTargetDependency */,
 			);
 			name = testSqlCipher;
@@ -245,6 +270,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = DF63C5D719E46FA000767F38 /* Products */;
+					ProjectRef = DF63C5D619E46FA000767F38 /* sqlcipher.xcodeproj */;
+				},
+				{
 					ProductGroup = DF5A1D7F19CC8D24009668AA /* Products */;
 					ProjectRef = DF5A1D7E19CC8D24009668AA /* sqlcipher.xcodeproj */;
 				},
@@ -263,6 +292,13 @@
 			fileType = archive.ar;
 			path = libsqlcipher.a;
 			remoteRef = DF5A1D8319CC8D24009668AA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		DF63C5DC19E46FA000767F38 /* libsqlcipher.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsqlcipher.a;
+			remoteRef = DF63C5DB19E46FA000767F38 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -336,6 +372,11 @@
 			isa = PBXTargetDependency;
 			name = sqlcipher;
 			targetProxy = DF5A1D8519CC8D3F009668AA /* PBXContainerItemProxy */;
+		};
+		DF63C5DE19E46FAB00767F38 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = sqlcipher;
+			targetProxy = DF63C5DD19E46FAB00767F38 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
