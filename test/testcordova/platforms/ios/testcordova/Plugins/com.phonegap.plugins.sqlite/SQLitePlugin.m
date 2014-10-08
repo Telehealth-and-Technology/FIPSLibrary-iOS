@@ -9,7 +9,8 @@
 #import "SQLitePlugin.h"
 #include <regex.h>
 
-
+#include <openssl/rand.h>
+#include <openssl/aes.h>
 
 
 //LIBB64
@@ -193,7 +194,12 @@ static void sqlite_regexp(sqlite3_context* context, int argc, sqlite3_value** va
 
     NSString *dbname = [self getDBPath:[options objectForKey:@"name"]];
     NSValue *dbPointer;
-
+    int mode = 0, ret = 0;
+    unsigned long err = 0;
+    
+    ret = FIPS_mode_set(1 /*on*/);
+    err = ERR_get_error();
+    
     
 
     if (dbname == NULL) {
