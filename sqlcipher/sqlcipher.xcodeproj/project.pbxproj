@@ -193,11 +193,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				HEADER_SEARCH_PATHS = (
-					"$(PROJECT_DIR)",
-					"/usr/local/ssl/Release-iphoneos/include",
-				);
-				"HEADER_SEARCH_PATHS[arch=*]" = "$(PROJECT_DIR)";
+				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)";
 				INSTALL_PATH = /usr/local/lib;
 				OTHER_CFLAGS = (
 					"-DSQLITE_HAS_CODEC",

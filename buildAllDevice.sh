@@ -32,7 +32,7 @@ sqlCipherFiles="1"
 # fips/openssl files
 sslFiles="dev/$OPENSSL_BASE.tar.gz"
 fipsFiles="dev/$FIPS_BASE.tar.gz"
-#sqlFiles="dev/android-database-sqlcipher"
+sqlFiles="dev/android-database-sqlcipher"
 
 
 echo "sslFiles = $sslFiles"

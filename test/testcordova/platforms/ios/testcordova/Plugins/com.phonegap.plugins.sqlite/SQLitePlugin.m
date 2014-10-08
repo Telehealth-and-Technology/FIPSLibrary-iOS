@@ -9,8 +9,10 @@
 #import "SQLitePlugin.h"
 #include <regex.h>
 
-#include <openssl/rand.h>
-#include <openssl/aes.h>
+// FIPS_mode, FIPS_mode_set, ERR_get_error, etc
+#include <openssl/crypto.h>
+#include <openssl/err.h>
+
 
 
 //LIBB64
