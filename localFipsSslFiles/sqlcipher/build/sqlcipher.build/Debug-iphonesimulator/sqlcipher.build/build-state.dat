@@ -1,0 +1,101 @@
+Tsqlcipher
+v6
+r1
+cCheck dependencies
+cCompileC build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlite3.o /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
+cLibtool /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator/libsqlcipher.a normal i386
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk
+c00000000534C0B310000000000000198
+t1397492529
+s408
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/SDKSettings.plist
+c00000000531F3EB700000000000003B4
+t1394556599
+s948
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/CoreServices/SystemVersion.plist
+c00000000531F3EBA000000000000019E
+t1394556602
+s414
+
+N/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk/System/Library/Frameworks/Security.framework/Security
+c00000000531F426F000000000013FD70
+t1394557551
+s1310064
+
+N/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlcipher.LinkFileList
+c00000000543451180000000000000095
+t1412714776
+s149
+
+N/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlite3.o
+t1412714778
+s1737900
+
+N/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c
+c0000000054345096000000000050980B
+t1412714646
+s5281803
+
+N/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator/libsqlcipher.a
+t2
+s0
+
+CCheck dependencies
+r0
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection18"Check dependencies18"Check dependenciescc5fa19888e4b941^7ee5a19888e4b941^---0#1#1#--18"Check dependencies36"1B0E536D-6D83-4FF0-8EA5-598EC3DE1C74-
+
+CCompileC build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlite3.o /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c normal i386 c com.apple.compilers.llvm.clang.1_0.compiler
+s434407576.632841
+e434407578.756945
+r1
+xCompileC
+xbuild/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlite3.o
+x/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.llvm.clang.1_0.compiler
+d/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c
+o[1m/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c:8445:26: [0m[0;1;35mwarning: [0m[1m
+o      unused variable 'sqlite3one' [-Wunused-const-variable][0m
+oSQLITE_PRIVATE const int sqlite3one = 1;
+o[0;1;32m                         ^
+o[0m1 warning generated.
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection76"Compile /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c182"[1mCompileC[0m build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlite3.o [1msqlite3.c[0m normal i386 c com.apple.compilers.llvm.clang.1_0.compiler1618a29888e4b941^14cfc19a88e4b941^-280"[1m/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c:8445:26: [0m[0;1;35mwarning: [0m[1m      unused variable 'sqlite3one' [-Wunused-const-variable][0mSQLITE_PRIVATE const int sqlite3one = 1;[0;1;32m                         ^[0m1 warning generated.1(36%IDEClangDiagnosticActivityLogMessage2@28"Unused variable 'sqlite3one'-434407578#18446744073709551615#0#-1#27"com.apple.dt.IDE.diagnostic23%DVTTextDocumentLocation3@75"file:///Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c0000000000000000^8444#25#8444#25#394308#0#19"Unused Entity Issue--0#0#1#-19%DVTDocumentLocation4@75"file:///Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c0000000000000000^3498"[1mCompileC[0m build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlite3.o [1msqlite3.c[0m normal i386 c com.apple.compilers.llvm.clang.1_0.compiler    cd /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher    export LANG=en_US.US-ASCII    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin:/Applications/adt-bundle-mac-x86_64-20131030/sdk/tools:/Users/scoleman/android-ndk-r9d:/Users/scoleman/apache-ant-1.9.3/bin:/Users/scoleman/android-sdk-macosx/platform-tools"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -arch i386 -fmessage-length=80 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit=0 -fcolor-diagnostics -std=c99 -Wno-trigraphs -fpascal-strings -O0 -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wunused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-shorten-64-to-32 -Wpointer-sign -Wno-newline-eof -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -fexceptions -fasm-blocks -fstrict-aliasing -Wdeprecated-declarations -g -Wno-sign-conversion -mios-simulator-version-min=4.3 -iquote /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/sqlcipher-generated-files.hmap -I/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/sqlcipher-own-target-headers.hmap -I/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/sqlcipher-all-target-headers.hmap -iquote /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/sqlcipher-project-headers.hmap -I/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator/include -I/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher -I/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/DerivedSources/i386 -I/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/DerivedSources -F/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator -DSQLITE_HAS_CODEC -DSQLITE_TEMP_STORE=2 -DSQLITE_THREADSAFE -DSQLCIPHER_CRYPTO_CC -MMD -MT dependencies -MF /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlite3.d --serialize-diagnostics /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlite3.dia -c /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/sqlite3.c -o /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlite3.o36"CC5A95CE-BF9B-4AD6-AABD-8B95DA60ECB4-
+b74C414D0-D0C9-4CD3-9A8D-DCDF44324EFD
+
+CLibtool /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator/libsqlcipher.a normal i386
+s434407578.757573
+e434407578.835483
+r1
+xLibtool
+x/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator/libsqlcipher.a
+xnormal
+xi386
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ebcdic.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ecp_nistp224.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ecp_nistp256.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ecp_nistp521.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ecp_nistputil.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(rand_win.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(rand_os2.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(rand_nw.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_des3.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_aes.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_rc5.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_md2.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_sha1.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_dss.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_dss1.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_ecdsa.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_null.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(v3_asid.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(v3_addr.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(cms_cd.o) has no symbols
+o/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_gmp.o) has no symbols
+lSLF06#21%IDEActivityLogSection1@2#32"com.apple.dt.IDE.BuildLogSection137"[1mLibtool[0m /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator/libsqlcipher.a normal i386137"[1mLibtool[0m /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator/libsqlcipher.a normal i3869702c29a88e4b941^1de8d59a88e4b941^-3619"/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ebcdic.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ecp_nistp224.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ecp_nistp256.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ecp_nistp521.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(ecp_nistputil.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(rand_win.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(rand_os2.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(rand_nw.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_des3.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_aes.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_rc5.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_md2.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_sha1.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_dss.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_dss1.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(m_ecdsa.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_null.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(v3_asid.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(v3_addr.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(cms_cd.o) has no symbols/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool: file: /usr/local/ssl/Release-iphoneos/libcrypto.a(e_gmp.o) has no symbols-0#0#1#--1381"[1mLibtool[0m /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator/libsqlcipher.a normal i386    cd /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher    export IPHONEOS_DEPLOYMENT_TARGET=4.3    export PATH="/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Applications/Xcode.app/Contents/Developer/usr/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin:/Applications/adt-bundle-mac-x86_64-20131030/sdk/tools:/Users/scoleman/android-ndk-r9d:/Users/scoleman/apache-ant-1.9.3/bin:/Users/scoleman/android-sdk-macosx/platform-tools"    /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only i386 -syslibroot /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.1.sdk -L/Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator -filelist /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/sqlcipher/build/sqlcipher.build/Debug-iphonesimulator/sqlcipher.build/Objects-normal/i386/sqlcipher.LinkFileList /usr/local/ssl/Release-iphoneos/libcrypto.a -framework Security -o /Users/scoleman/dev/IOSFipsBuilds/test1007/fcids/test/testcordova/platforms/ios/build/emulator/libsqlcipher.a36"083F4E67-8F5B-4496-A5B7-F477A25AF9B5-
+b74C414D0-D0C9-4CD3-9A8D-DCDF44324EFD
+
