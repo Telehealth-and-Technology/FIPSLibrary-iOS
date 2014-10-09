@@ -1,31 +1,9 @@
-/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
 
 Notes:
 
-	Note that builsall.sh builds all of the openssl/fips files then putss the results in /usr/local/ssl/Release-iphoneos
+	Note that buildall.sh builds all of the openssl/fips files then puts the results in directory specifyed in setEnvOpenSslFiles.sh 
+	(default: /usr/local/ssl/Release-iphoneos)
 
-	Test Programs:
-		fips-pi	
-			IOS test progrma that links directory (and only) with /usr/local/ssl/Release-iphoneos/libcrypto.a
-				Note: libcrypto.a needs to be build sperately with ./bhildAll.sh
-				Tests signature and that you can enter fips mode successfully
-		
-
-To create ios test program and link to sqlcipher and openssl files
-	1. Make regular test IOS program
-	IN test program:
-	2. 	Drag sqlcipher.xcodeproj to the test program
-	2a.		Add sqlcipher to target dependencies in "Build Phases"
-	2b.		Expand target/Build Phases/ Link with Binaries, Add libsqlcipher.a
-	3. 	In Build Settings add -DSQLITE_HAS_CODEC
-	4. Add to header search paths: /usr/local/ssl/Release-iphoneos/include
-	  (not user header search paths)
-	5. Add to Other linker flags: /usr/local/ssl/Release-iphoneos/libcrypto.a
-
-	6. Add files to the supporting files xcode dir
-		fips_assert.c/h, fips-premain.c
-	7. Add new run build script phase to taeget (Embed fingerprint)
-		/usr/local/bin/incore_macho --debug -exe "$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH"
 
 
 Tools Necessary for Build
@@ -60,16 +38,21 @@ Retrieve source files
 			fcids/doc
 				.. files
 
+		Note: After you've cloned fcids.git, you can do a build and it will offer co copy the unofficial openssl
+		      and sqlcipher files of they are missing.
+
 	1b. Obtain fips/opsnssl files copy them to fcads/dev
 	-----------------------------------------------------
 
 		Option 1 (the official way):
 		----------------------------
-			OBtain the official disk and copy $sslFiles, and fipsFiles to the dev directory"
+			Obtain the official disk and copy openssl-fips-??tar.gz, and  openssl-1.0.1?.tar.gz to the fcids/dev, and fcids/devSim directory"
+
 
 		Option 2:
 		--------
-  			Copy the files from the local distribution (use command: cp localFipsSslFiles/*.gz ./dev"
+  			Copy the files from the local distribution (use command: cp localFipsSslFiles/*.gz ./dev, and cp localFipsSslFiles/*.gz ./devSim"
+  			(Alternately, the main build file will offer to copy these files for you if they are missing)
 
 
 		Results: 
@@ -82,29 +65,36 @@ Retrieve source files
 	1c. Obtain sqlcipher source files
 	---------------------------------
 
+		Option 1 (the official way):
+		----------------------------
 		git clone git.t2.local/git/mobile/crossplatform/sqlcipher.git
+
+		Option 2:
+		---------
+		Copy the files from the local distribution (use command cp -r localFipsSslFiles/sqlcipher ./)
+		(Alternately, the main build file will offer to copy these files for you if they are missing)
+
 
 
 	Results: 
 	========
-		fcads/dev/android-database-sqlcipher
+		fcids/sqlcipher
 			.. Lots of files and directories (~2.9 Gb)
 
 
 ******************
 2. BuildFiles
 ******************
+	2a. Confirm the correct openssl and fiops files are specified for the build in the file setEnvOpenSslFiles.sh
+	    Currently the defauls are: openssl-1.0.1f, openssl-fips-2.0.2
 
-
-Building
-==========
-
+	2b. Execute main build file: sudo ./buildAll.sh
 
 
 ******************
 3. Test on IOS simulator and device
 ******************
-
+	See ips-pi, and testCordova below
 
 ******************
 Appendix A - IOS test programs

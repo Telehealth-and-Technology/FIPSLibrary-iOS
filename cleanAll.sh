@@ -24,8 +24,8 @@
 		rm -Rf devSim/$OPENSSL_BASE/
 
 		rm -Rf devSim/*.gz
-
 		rm -Rf dev/*.gz
+		rm -Rf sqlcipher
 
 		LIB_SIM_CRYPTO=${PROJECTPATH}/devSim/libcrypto.a
 		LIB_SIM_SSL=${PROJECTPATH}/devSim/src/$OPENSSL_BASE/libssl.a 

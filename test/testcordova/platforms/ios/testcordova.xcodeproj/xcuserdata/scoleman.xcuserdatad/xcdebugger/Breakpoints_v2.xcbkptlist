@@ -9,13 +9,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "fips-pi/ViewController.m"
-            timestampString = "434049274.463471"
+            filePath = "testcordova/Plugins/com.phonegap.plugins.sqlite/SQLitePlugin.m"
+            timestampString = "434480680.629811"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "-modeSwitched"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
+            landmarkName = "-open:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,14 +25,23 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "fips-pi/ViewController.m"
-            timestampString = "434049342.127654"
+            filePath = "testcordova/Plugins/com.phonegap.plugins.sqlite/SQLitePlugin.m"
+            timestampString = "434490496.713203"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
-            landmarkName = "-modeSwitched"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "-open:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.AddressBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            symbolName = "*0x25051">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -41,29 +50,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "fips-pi/ViewController.m"
-            timestampString = "434490308.153227"
+            filePath = "testcordova/Plugins/com.phonegap.plugins.sqlite/SQLitePlugin.m"
+            timestampString = "434490560.70499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
-            landmarkName = "-modeSwitched"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "fips-pi/ViewController.m"
-            timestampString = "434490351.833024"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "-modeSwitched"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
+            landmarkName = "-open:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
