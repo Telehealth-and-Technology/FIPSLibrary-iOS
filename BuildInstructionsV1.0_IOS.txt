@@ -9,8 +9,9 @@ Notes:
 Tools Necessary for Build
 =========================
 	MAC OS-X
-	Xcode 4.x (Note that build will fail with 5.x XCODE, there is a compiler issue!!!!)
-
+	Xcode 4.x 
+	Xcode 5.x 
+	Note: you need both sets of tools. The simulator uses 5.x but due to a compiler issue the device needs 4.x
 
 Steps:
 ======
@@ -67,7 +68,7 @@ Retrieve source files
 
 		Option 1 (the official way):
 		----------------------------
-		git clone git.t2.local/git/mobile/crossplatform/sqlcipher.git
+		git clone git.t2.local:/git/mobile/crossplatform/sqlcipher.git
 
 		Option 2:
 		---------
@@ -85,7 +86,7 @@ Retrieve source files
 ******************
 2. BuildFiles
 ******************
-	2a. Confirm the correct openssl and fiops files are specified for the build in the file setEnvOpenSslFiles.sh
+	2a. Confirm the correct openssl and fips files are specified for the build in the file setEnvOpenSslFiles.sh
 	    Currently the defauls are: openssl-1.0.1f, openssl-fips-2.0.2
 
 	2b. Execute main build file: sudo ./buildAll.sh
@@ -94,25 +95,23 @@ Retrieve source files
 ******************
 3. Test on IOS simulator and device
 ******************
-	See ips-pi, and testCordova below
+	See fips-pi, and testCordova below
+
+
+
 
 ******************
 Appendix A - IOS test programs
 ******************
 
-	1) fips-pi
+	1) fips-pi 
+		(fcids/test/fips-pi/fips-pi.xcodeproj)
 		Native IOS program that links in crypto library at
 			/usr/local/ssl/Release-iphoneos/libcrypto.a (default location for t2 build)
 		Presents ui that allows uses to manuall enter/edit fips mode
 			User nees to examine log file (in xcode) to make sure there are no errors when switching into and out of fips mode.
-	2) testSqlCipher
-		Native IOS program that links in crypto library at
-			/usr/local/ssl/Release-iphoneos/libcrypto.a (default location for t2 build)	
-		Automatically enters fips mode when db is opened
-		Meant to be a test bed to experiment with native sqlite commands, ex:
-			sqlite3_exec(db, "CREATE TABLE t1(a INTEGER, b INTEGER, c VARCHAR(100));", NULL, NULL, NULL);
-		** Doesn't need to be run as part of build test suite
-	3) testCordova
+	2) testCordova
+		(fcids/test/testcordova/platforms/ios/testcordova.xcodeproj)
 		Coirdova program that links in crypto library at
 			/usr/local/ssl/Release-iphoneos/libcrypto.a (default location for t2 build)
 		Does very basic db insert to verify operation of T2's IOS portion of Cordova-SqlcipherPlugin

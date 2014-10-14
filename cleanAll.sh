@@ -26,6 +26,8 @@
 		rm -Rf devSim/*.gz
 		rm -Rf dev/*.gz
 		rm -Rf sqlcipher
+		rm -Rf release
+		rm libcrypto.a
 
 		LIB_SIM_CRYPTO=${PROJECTPATH}/devSim/libcrypto.a
 		LIB_SIM_SSL=${PROJECTPATH}/devSim/src/$OPENSSL_BASE/libssl.a 

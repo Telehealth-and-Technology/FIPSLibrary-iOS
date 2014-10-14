@@ -1236,6 +1236,7 @@ cp -p -f fipscanister.o fipscanister.o.sha1 \
 making install in test...
 make[1]: Nothing to be done for `install'.
 Step 5 build FIPS Capable library
+mkdir: libarmv7: File exists
 Operating system: armv7-whatever-iphoneos
 Configuring for iphoneos-cross
 Configuring for iphoneos-cross
