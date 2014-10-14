@@ -170,6 +170,9 @@ else
 
 	fi
 
+	# Make sure cqlcipher files are RW
+	chmod -R 777 ./sqlcipher 
+
 fi
 
 

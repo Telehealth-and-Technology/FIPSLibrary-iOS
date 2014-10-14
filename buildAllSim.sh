@@ -10,6 +10,7 @@ echo "buildallSim.sh"  1>$LOGFILE 2>&1
 echo ""
 echo "-----------------------------------------"
 echo " Building for IOS Simulator"
+echo " See logfile $LOGFILE"
 echo "-----------------------------------------"
 
 

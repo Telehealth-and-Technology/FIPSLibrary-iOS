@@ -8,6 +8,7 @@ echo "buildallDevice.sh"  1>$LOGFILE 2>&1
 echo ""
 echo "-----------------------------------------"
 echo " Building for IOS Device (armv7)"
+echo " See logfile $LOGFILE"
 echo "-----------------------------------------"
 
 
