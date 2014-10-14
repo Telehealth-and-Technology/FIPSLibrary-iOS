@@ -63,7 +63,8 @@ checkForSqlcipherFiels()
 			echo "Copying local files"
 			cp -r localFipsSslFiles/sqlcipher ./
 			cd sqlCipher
-			chmod 777 .
+				# Make sure cqlcipher files are RW
+			chmod -R 777 ./
 			cd ..
 			
 
