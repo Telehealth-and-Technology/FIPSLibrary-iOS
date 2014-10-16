@@ -45,12 +45,15 @@ cp -r $doc1Src* $docDst/doc
 
 
 #copy source files
-
 cp -r dev/SupplementalFiles* release/$ReleaseName/source/dev
 cp -r devSim/SupplementalFiles* release/$ReleaseName/source/devSim
 
-# #copy test files
+# copy test files
 cp -r test $docDst/test
+
+# copy install fips script
+cp ./dev/SupplementalFiles/installFipsRelease.sh release/$ReleaseName
+cp ./setEnvOpenSslFiles.sh release/$ReleaseName
 
 # #Remove lib build instructions so they dont confuse end app developers
 rm -f release/$ReleaseName/doc/BuildInstructions*.txt

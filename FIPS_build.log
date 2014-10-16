@@ -6,19 +6,19 @@ TERM=xterm-256color
 SHELL=/bin/bash
 INSTALL_DIR=/usr/local/ssl/Release-iphoneos
 KERNEL_BITS=32
-OLDPWD=/Users/scoleman/dev/IOSFipsBuilds/test1014/fcids
+OLDPWD=/Users/scoleman/dev/IOSFipsBuilds/test1015/fcids
 FIPS_BASE=openssl-fips-2.0.2
 USER=root
 SUDO_USER=scoleman
 SUDO_UID=501
-SSH_AUTH_SOCK=/tmp/launch-MnZFXF/Listeners
+SSH_AUTH_SOCK=/tmp/launch-kT6ipt/Listeners
 __CF_USER_TEXT_ENCODING=0x1F5:0:0
 USERNAME=root
 OPENSSL_BASE=openssl-1.0.1f
 SYSTEM=Darwin
-PATH=/Users/scoleman/dev/IOSFipsBuilds/test1014/fcids/dev/iOS:/usr/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin:/Applications/adt-bundle-mac-x86_64-20131030/sdk/tools:/Users/scoleman/android-ndk-r9d:/Users/scoleman/apache-ant-1.9.3/bin:/Users/scoleman/android-sdk-macosx/platform-tools
+PATH=/Users/scoleman/dev/IOSFipsBuilds/test1015/fcids/dev/iOS:/usr/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin:/Applications/adt-bundle-mac-x86_64-20131030/sdk/tools:/Users/scoleman/android-ndk-r9d:/Users/scoleman/apache-ant-1.9.3/bin:/Users/scoleman/android-sdk-macosx/platform-tools
 MAIL=/var/mail/root
-PWD=/Users/scoleman/dev/IOSFipsBuilds/test1014/fcids/dev
+PWD=/Users/scoleman/dev/IOSFipsBuilds/test1015/fcids/dev
 LANG=en_US.UTF-8
 MACHINE=i386
 HOME=/Users/scoleman
@@ -531,7 +531,7 @@ CMLL_ENC      =camellia.o cmll_misc.o cmll_cbc.o
 MODES_OBJ     =
 ENGINES_OBJ   =
 PROCESSOR     =
-RANLIB        =/Users/scoleman/dev/IOSFipsBuilds/test1014/fcids/dev/openssl-fips-2.0.2/iOS/ranlib
+RANLIB        =/Users/scoleman/dev/IOSFipsBuilds/test1015/fcids/dev/openssl-fips-2.0.2/iOS/ranlib
 ARFLAGS       =
 PERL          =/usr/bin/perl
 THIRTY_TWO_BIT mode
@@ -1191,6 +1191,11 @@ make[3]: Nothing to be done for `all'.
 making all in fips/utl...
 make[3]: Nothing to be done for `all'.
 make[2]: `lib' is up to date.
+created directory `/usr/local/ssl/Release-iphoneos'
+created directory `/usr/local/ssl/Release-iphoneos/bin'
+created directory `/usr/local/ssl/Release-iphoneos/lib'
+created directory `/usr/local/ssl/Release-iphoneos/include'
+created directory `/usr/local/ssl/Release-iphoneos/include/openssl'
 making install in crypto...
 making install in crypto/sha...
 making install in crypto/hmac...
@@ -1236,7 +1241,6 @@ cp -p -f fipscanister.o fipscanister.o.sha1 \
 making install in test...
 make[1]: Nothing to be done for `install'.
 Step 5 build FIPS Capable library
-mkdir: libarmv7: File exists
 Operating system: armv7-whatever-iphoneos
 Configuring for iphoneos-cross
 Configuring for iphoneos-cross
