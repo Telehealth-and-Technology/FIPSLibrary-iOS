@@ -27,7 +27,7 @@ mv crypto/err/err_all.c.new crypto/err/err_all.c
 . ../setenv-ios-11.sh
 
 # configure and make FIPS Capable library
-./config fips -no-shared -no-comp -no-dso -no-hw -no-engines -no-sslv2 -no-sslv3 --with-fipsdir=/usr/local/ssl/Release-iphoneos
+./config fips -no-shared -no-comp -no-dso -no-hw -no-engines -no-sslv2 -no-sslv3 --with-fipsdir=$INSTALL_DIR
 make build_libs
 
 # copy the lib to the intermediate lib directory

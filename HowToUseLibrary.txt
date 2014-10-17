@@ -37,6 +37,9 @@ Section 2 - Verifying successful operation of release
 
 		  Clean, build and run. Confirm that you can enter and exit fips mode without errors.
 		  (observe log files in xcode)
+		  eg.
+		  Succesfully entered FIPS mode
+		  Succesfully exited FIPS mode
 
 	  ----------------
 	  2A2 - Integrate into your own native xcode project
@@ -62,6 +65,9 @@ Section 2 - Verifying successful operation of release
 
 		  Clean, build and run. Confirm database access proceeded without errors
 		  eg.
+		  	Open Successful
+			FIPS Status = 1
+			T2 FIPS Versions = 1.0.0
 		  	Query completed: {"rows":{"length":0},"rowsAffected":0}
 			Query completed: {"rows":{"length":0},"rowsAffected":1,"insertId":19}
 	  
@@ -159,7 +165,7 @@ Appendix A - Plugin control flow
 	------------------------------------------------------------------------------
 	Control flow example for SQLCipher
 	------------------------------------------------------------------------------
-	Category      |   File               |   Code
+	Category      |   Example File       |   Example Code
 	------------------------------------------------------------------------------
 	JavaScript    |   index.js           |   window.sqlitePlugin.openDatabase()
 	              |                      |

@@ -18,12 +18,6 @@ fanisterSha="/usr/local/ssl/fips-2.0/lib/fipscanister.o.sha1"
 sslSrc="./libcrypto.a"
 sslDst="release/$ReleaseName/object/openssl"
 
-
-
-doc1Src="*.txt"
-docSrc="doc"
-docDst="release/$ReleaseName"
-
 mkdir -p release
 mkdir -p release/$ReleaseName
 mkdir -p release/$ReleaseName/source
@@ -40,16 +34,17 @@ cp -f $sslSrc $sslDst
 
 
 # #copy doc files
-cp -r $docSrc* $docDst
-cp -r $doc1Src* $docDst/doc
 
+cp HowToUseLibrary.txt release/$ReleaseName
+cp *.txt release/$ReleaseName/doc
+cp -r doc release/$ReleaseName
 
 #copy source files
 cp -r dev/SupplementalFiles* release/$ReleaseName/source/dev
 cp -r devSim/SupplementalFiles* release/$ReleaseName/source/devSim
 
 # copy test files
-cp -r test $docDst/test
+cp -r test release/$ReleaseName/test
 
 # copy install fips script
 cp ./dev/SupplementalFiles/installFipsRelease.sh release/$ReleaseName

@@ -89,6 +89,9 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
         if(1 != ret) {
             DisplayErrorMessage("\n  FIPS_mode_set failed", err);
         }
+        else {
+            NSLog(@"\n  Successfully entered FIPS mode");
+        }
     }
     else
     {
@@ -101,6 +104,10 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
         if(1 != ret) {
             DisplayErrorMessage("\n  FIPS_mode_set failed", err);
         }
+        else {
+            NSLog(@"\n  Successfully exited FIPS mode");
+        }
+
     }
     
     // Verify mode is consistent.

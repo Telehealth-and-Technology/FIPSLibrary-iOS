@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>4693B60F-3337-436E-B2FE-3535A9398BBE</string>
+	<string>DFFE9DCF-85DA-4FDF-9FF9-8F2CF11644D5</string>
 	<key>IDESourceControlProjectName</key>
 	<string>fips-pi</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>4CAB94C2-D1B3-4A13-A186-3EB9EA252497</key>
-		<string>ssh://git.t2.local/git/mobile/crossplatform/fcids.git</string>
+		<key>33B1AC60-DA42-451C-9DBD-897EFF5CA944</key>
+		<string>git.t2.local:/git/mobile/crossplatform/fcids.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>test/fips-pi/fips-pi.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>4CAB94C2-D1B3-4A13-A186-3EB9EA252497</key>
+		<key>33B1AC60-DA42-451C-9DBD-897EFF5CA944</key>
 		<string>../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://git.t2.local/git/mobile/crossplatform/fcids.git</string>
+	<string>git.t2.local:/git/mobile/crossplatform/fcids.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4CAB94C2-D1B3-4A13-A186-3EB9EA252497</string>
+	<string>33B1AC60-DA42-451C-9DBD-897EFF5CA944</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4CAB94C2-D1B3-4A13-A186-3EB9EA252497</string>
+			<string>33B1AC60-DA42-451C-9DBD-897EFF5CA944</string>
 			<key>IDESourceControlWCCName</key>
 			<string>fcids</string>
 		</dict>

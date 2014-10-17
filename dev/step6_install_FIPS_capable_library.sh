@@ -12,8 +12,8 @@ cd $OPENSSL_BASE/
 . ../setenv-reset.sh
 . ../setenv-ios-11.sh
 
-FIPSDIR=/usr/local/ssl/Release-iphoneos
-INCDIR=/usr/local/ssl/Release-iphoneos/include/openssl
+FIPSDIR=$INSTALL_DIR
+INCDIR=$INSTALL_DIR/include/openssl
 
 # install - may require root...
 # libraries
@@ -32,4 +32,7 @@ cp crypto/evp/evp.h         $INCDIR
 cp crypto/objects/objects.h $INCDIR
 cp crypto/objects/obj_mac.h $INCDIR
 cp crypto/asn1/asn1.h       $INCDIR
+cp crypto/ui/ui_compat.h 	$INCDIR
+cp crypto/ui/ui_locl.h 		$INCDIR
+cp crypto/ui/ui.h 			$INCDIR
 

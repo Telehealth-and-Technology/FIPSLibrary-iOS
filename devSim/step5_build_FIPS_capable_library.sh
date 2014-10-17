@@ -34,7 +34,7 @@
 
         set +e
 
-        ./Configure iphoneos-cross --openssldir="${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk" fips --with-fipsdir=/usr/local/ssl/Release-iphoneos 
+        ./Configure iphoneos-cross --openssldir="${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk" fips --with-fipsdir=$INSTALL_DIR
 
 
         if [ $? != 0 ];

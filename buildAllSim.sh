@@ -26,6 +26,12 @@ echo "-----------------------------------------"
   RETURN_CODE=0
 
   #----------------------------------------------------------------------
+  echo "Step 1 remove quarantine"
+  echo "Step 1 remove quarantine" 1>>$LOGFILE 2>&1
+  #----------------------------------------------------------------------
+  ./dev/step1_remove_Quarantine.sh 1>>$LOGFILE 2>&1
+
+  #----------------------------------------------------------------------
       echo "Step 2 build and install Incore Utility"
       echo "Step 2 build and install Incore Utility" 1>>$LOGFILE 2>&1
   #----------------------------------------------------------------------
@@ -73,5 +79,17 @@ echo "-----------------------------------------"
         RETURN_CODE=1
       fi
     fi
+
+  if [ "$RETURN_CODE" -eq "0" ] ; then
+  #----------------------------------------------------------------------
+  echo "Step 6 install FIPS Capable library (/usr/local/ssl/Release-iphoneos/)"
+  echo "Step 6 install FIPS Capable library (/usr/local/ssl/Release-iphoneos/)" 1>>$LOGFILE 2>&1
+  #----------------------------------------------------------------------
+  ./dev/step6_install_FIPS_capable_library.sh 1>>$LOGFILE 2>&1
+
+    if [ $? -ne 0 ] ; then
+      echo "\t***error***"
+    fi
+  fi
 
 

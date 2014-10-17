@@ -22,7 +22,7 @@ checkforFipsFiles()
 	  	echo "Option n - Stop build so you can download the official files"
 	 	echo ""
 
-	   	read -p "press y or n" yn
+	   	read -p "press y or n : " yn
 	    case $yn in
 	      [Yy]* ) 
 			echo "Copying local files"
@@ -57,7 +57,7 @@ checkForSqlcipherFiels()
 	  	echo "Option n - Stop build so you can download the official files"
 	  	echo ""
 
-	   	read -p "press y or n" yn
+	   	read -p "press y or n : " yn
 	    case $yn in
 	      [Yy]* ) 
 			echo "Copying local files"
