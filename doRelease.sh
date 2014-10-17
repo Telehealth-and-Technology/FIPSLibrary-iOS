@@ -55,6 +55,10 @@ cp -r test $docDst/test
 cp ./dev/SupplementalFiles/installFipsRelease.sh release/$ReleaseName
 cp ./setEnvOpenSslFiles.sh release/$ReleaseName
 
+# copy canned sqlcipher directory
+cp -r ./sqlcipher release/$ReleaseName
+
+
 # #Remove lib build instructions so they dont confuse end app developers
 rm -f release/$ReleaseName/doc/BuildInstructions*.txt
 

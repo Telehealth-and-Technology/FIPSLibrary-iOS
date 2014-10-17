@@ -5,48 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>5A5D11CC-B42A-4CF3-B892-9AEB1CF8FE41</string>
+	<string>9E8E640A-18B8-4876-992E-3F554B6474AA</string>
 	<key>IDESourceControlProjectName</key>
 	<string>testcordova</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>0E22BA92-D446-45FD-B338-C8AC2BDBF911</key>
-		<string>ssh://git.t2.local/git/mobile/crossplatform/sqlcipher.git</string>
-		<key>4CAB94C2-D1B3-4A13-A186-3EB9EA252497</key>
-		<string>ssh://git.t2.local/git/mobile/crossplatform/fcids.git</string>
+		<key>25A22CEE-9928-4F13-A400-F4E7FF9D75EE</key>
+		<string>git.t2.local:/git/mobile/crossplatform/fcids.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>test/testcordova/platforms/ios/testcordova.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>0E22BA92-D446-45FD-B338-C8AC2BDBF911</key>
-		<string>../../../../../../sqlcipher</string>
-		<key>4CAB94C2-D1B3-4A13-A186-3EB9EA252497</key>
+		<key>25A22CEE-9928-4F13-A400-F4E7FF9D75EE</key>
 		<string>../../../../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://git.t2.local/git/mobile/crossplatform/fcids.git</string>
+	<string>git.t2.local:/git/mobile/crossplatform/fcids.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>4CAB94C2-D1B3-4A13-A186-3EB9EA252497</string>
+	<string>25A22CEE-9928-4F13-A400-F4E7FF9D75EE</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>4CAB94C2-D1B3-4A13-A186-3EB9EA252497</string>
+			<string>25A22CEE-9928-4F13-A400-F4E7FF9D75EE</string>
 			<key>IDESourceControlWCCName</key>
 			<string>fcids</string>
-		</dict>
-		<dict>
-			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
-			<string>public.vcs.git</string>
-			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>0E22BA92-D446-45FD-B338-C8AC2BDBF911</string>
-			<key>IDESourceControlWCCName</key>
-			<string>sqlcipher</string>
 		</dict>
 	</array>
 </dict>

@@ -1,83 +1,158 @@
-TBD - Add section about downloading files
+These instructions are for using the IOS FIPS capable Library 
+
+******************
+Section 1 - Release files
+******************
+
+The directory structure of the fcids release (pre-built) is as follows:
+Vx.y.x_DD-DD-YY
+	doc                   documentation for FIPS compliance
+	object
+		usr               release binary and header files (see note 1)
+	source                Supplental files and tools used in build (for reference only)
+	test                  Test IOS applications used to test release
+		fips-pi           Tests inclusion of library in a native IOS app
+		testcordova       Tests inclusion of library in a cordova plugin using sqlcipher
+
+Note 1: The release vinary and header files are the actual product of the release. They need to be 
+        installed in the protected space of the devlopement machine that the developer is using
+        The utility installFipsRelease.sh.
+        e.g. installs files to /usr/local/ssl/Release-iphoneos
+
+******************
+Section 2 - Verifying successful operation of release
+******************
+
+  ----------------
+  2A - Verifying/Using release in native IOS project
+  ----------------
+  After you have downloaded the release, run the installFipsRelease.sh script to install the binaries and headers
+  in your development machine.
+
+	  ----------------
+	  2A1 - Use the test project supplied in the release
+	  ----------------
+		  You can test project supplied in the release: test/fips-pi/fips-pi.xcodeproj
+		  which has modifications mentioned in 2A2 already made made to it
+
+		  Clean, build and run. Confirm that you can enter and exit fips mode without errors.
+		  (observe log files in xcode)
+
+	  ----------------
+	  2A2 - Integrate into your own native xcode project
+	  ----------------
+		  Update the settings for your project to know about the library:
+		  	Add to "Other Linker Flags" - /usr/local/ssl/Release-iphoneos/libcrypto.a
+		  	Add to "User Header Search Paths": /usr/local/ssl/Release-iphoneos/include
+
+		  Clean, build and run. Confirm that you can enter and exit fips mode without errors.
 
 
-Using the FCIDS FIPS compliant library in an IOS project:
-=====================================================================
+  ----------------
+  2B - Verifying/Using release in project which uses sqlcipher and the cordova plugin
+  ----------------
+  After you have downloaded the release, run the installFipsRelease.sh script to install the binaries and headers
+  in your development machine.
 
+	  ----------------
+	  2B1 - Use the test project included in the relase which uses sqlcipher and the cordova plugin
+	  ----------------
+		  You can test project supplied in the release: test/testcordova/platforms/ios/testcordova.xcodeproj
+		  which has modifications mentioned in 2B2 already made made to it
 
-	Building a project to integrate sqlcipher with sqliite plugin
-	===========================================================
-	Tools necessary:
-		Cordova 3.5.xxx
+		  Clean, build and run. Confirm database access proceeded without errors
+		  eg.
+		  	Query completed: {"rows":{"length":0},"rowsAffected":0}
+			Query completed: {"rows":{"length":0},"rowsAffected":1,"insertId":19}
+	  
+	  ----------------
+	  2B2 - Integrate into your own project that uses sqlcipher and the cordova plugin
+	  ----------------
 
-	These instructions assume that you previously cloned fcids into directory test1010 (project root directory),
-	downloaded files, and successfully run buildAll.sh
+		!!! Note: The cordova test application testcordova.xcodeproj uses a canned version sqlcioher contained in the release
+		          please make sure that your application does not use this canned version. You must clone a real version from 
+		          the repository at t2.local/git/mobile/crossplatform/sqlcipher.git
 
-	Navigate to your project root directory
-		mkdir test1010
+		Using the FCIDS FIPS compliant library in an IOS project:
+		=====================================================================
 
-	Create the project that you want to add fips storage to:
-		cordova create testExample com.t2.testexample testExample
-		cd testExample
+		  After you have downloaded the release, run the installFipsRelease.sh script to install the binaries and headers
+		  in your development machine.
 
-	Add IOS platform and install plugins:
-		cordova platform add ios
-		cordova plugin add ssh://scoleman@git.t2.local/git/mobile/crossplatform/cordova-plugin-console.git
-		cordova plugin add ssh://scoleman@git.t2.local/git/mobile/crossplatform/Cordova-SqlcipherPlugin.git
+			Building a project to integrate sqlcipher with sqliite plugin
+			===========================================================
+			Tools necessary:
+				Cordova 3.5.xxx
 
-	Update your project with the necessary references
-		Open xcode project at: test1010/testExample/platforms/ios/testExample.xcodeproj
+			These instructions assume that you previously cloned fcids into directory test1010 (project root directory),
+			downloaded files, and successfully run buildAll.sh
 
-		Add the subproject references for sqlcipher (using opt-cmd-a)
-			test1010/fcids/sqlcipher/sqlcipher.xcodeproj
+			Navigate to your project root directory
+				mkdir test1010
 
-		Update "Build Phases" of testExample project 
-			In add target dependencies, add sqlcipher
-			In Link Binary with Libraries:
-				Add libsqlcipher.a
-				Remove libsqlite3.dylib
-				Add Security.framework
+			Create the project that you want to add fips storage to:
+				cordova create testExample com.t2.testexample testExample
+				cd testExample
 
-		Update "Build Settings" of testExample project
-			add -DSQLITE_HAS_CODEC to "other C flags" (Any archetecture, any sdk - both debug and release)
-			Add /usr/local/ssl/Release-iphoneos/include to "Header Search Paths" (Any archetecture, any sdk - both debug and release)
-			Add /usr/local/ssl/Release-iphoneos/libcrypto.a to "Other Linker Flags" (Any archetecture, any sdk - both debug and release)
+			Add IOS platform and install plugins:
+				cordova platform add ios
+				cordova plugin add ssh://scoleman@git.t2.local/git/mobile/crossplatform/cordova-plugin-console.git
+				cordova plugin add ssh://scoleman@git.t2.local/git/mobile/crossplatform/Cordova-SqlcipherPlugin.git
 
-		in xcode co clean then build
+			Update your project with the necessary references
+				Open xcode project at: test1010/testExample/platforms/ios/testExample.xcodeproj
 
-			To test to see if everything works you can add the following to your index.js
-		        var db = window.sqlitePlugin.openDatabase({name: "myencrypt1.db", password: "password233333"}, onOpenSuccess);
-		        
-		        db.transaction(function (tx) {
-		           tx.executeSql("CREATE TABLE IF NOT EXISTS todo(ID INTEGER PRIMARY KEY ASC, todo TEXT, added_on DATETIME)",
-		                         [], onSuccess, onError);
-		           tx.executeSql("INSERT INTO todo(todo, added_on) VALUES (?,?)", ['my todo item', new Date()], onSuccess, onError);
-		           });
-		        
-		        function onSuccess(transaction, resultSet) {
-		            console.log('Query completed: ' + JSON.stringify(resultSet));
-		        }
-		        
-		        function onError(transaction, error) {
-		            console.log('Query failed: ' + error.message);
-		        }
-		        
-		        function onOpenSuccess(resultSet) {
-		            console.log('Open Successful');
-		            console.log('ssss: ' + JSON.stringify(resultSet));
-		            
-		            var response = JSON.stringify(resultSet);
-		            var parsedJSON = eval('('+response+')');
-		            
-		            console.log("FIPS Status = " + parsedJSON.FIPSStatus);
-		            console.log("T2 FIPS Versions = " + parsedJSON.T2FIPSVersion);
-		            
-		        }   
+				Add the subproject references for sqlcipher (using opt-cmd-a)
+					test1010/fcids/sqlcipher/sqlcipher.xcodeproj
 
-	
-	When application is complete, create the following FIPS documentation files from templates:
-		doc/FIPS140-2ApplicationComplianceStatementTemplate.txt
-		doc/FIPS140-2ApplicationComplianceRecordTemplate.txt
+				Update "Build Phases" of testExample project 
+					In add target dependencies, add sqlcipher
+					In Link Binary with Libraries:
+						Add libsqlcipher.a
+						Remove libsqlite3.dylib
+						Add Security.framework
+
+				Update "Build Settings" of testExample project
+					add -DSQLITE_HAS_CODEC to "other C flags" (Any archetecture, any sdk - both debug and release)
+					Add /usr/local/ssl/Release-iphoneos/include to "Header Search Paths" (Any archetecture, any sdk - both debug and release)
+					Add /usr/local/ssl/Release-iphoneos/libcrypto.a to "Other Linker Flags" (Any archetecture, any sdk - both debug and release)
+
+				in xcode co clean then build
+
+					To test to see if everything works you can add the following to your index.js
+				        var db = window.sqlitePlugin.openDatabase({name: "myencrypt1.db", password: "password233333"}, onOpenSuccess);
+				        
+				        db.transaction(function (tx) {
+				           tx.executeSql("CREATE TABLE IF NOT EXISTS todo(ID INTEGER PRIMARY KEY ASC, todo TEXT, added_on DATETIME)",
+				                         [], onSuccess, onError);
+				           tx.executeSql("INSERT INTO todo(todo, added_on) VALUES (?,?)", ['my todo item', new Date()], onSuccess, onError);
+				           });
+				        
+				        function onSuccess(transaction, resultSet) {
+				            console.log('Query completed: ' + JSON.stringify(resultSet));
+				        }
+				        
+				        function onError(transaction, error) {
+				            console.log('Query failed: ' + error.message);
+				        }
+				        
+				        function onOpenSuccess(resultSet) {
+				            console.log('Open Successful');
+				            console.log('ssss: ' + JSON.stringify(resultSet));
+				            
+				            var response = JSON.stringify(resultSet);
+				            var parsedJSON = eval('('+response+')');
+				            
+				            console.log("FIPS Status = " + parsedJSON.FIPSStatus);
+				            console.log("T2 FIPS Versions = " + parsedJSON.T2FIPSVersion);
+				            
+				        }   
+
+			
+			When application is complete, create the following FIPS documentation files from templates:
+				doc/FIPS140-2ApplicationComplianceStatementTemplate.txt
+				doc/FIPS140-2ApplicationComplianceRecordTemplate.txt
+
 ******************
 Appendix A - Plugin control flow
 ******************
@@ -113,9 +188,9 @@ Appendix B - Description of code and plugins used
 			https://github.com/apache/cordova-plugin-console
 
 
-
-A note about encryption keys:
-------------------------------
+******************
+Appendix C - A note about encryption keys:
+******************
 
 When initialized with a passphrase SQLCipher derives the key data using PBKDF2 (OpenSSL’s PKCS5_PBKDF2_HMAC_SHA1). Each database is initialized with a unique random salt in the first 16 bytes of the file. This salt is used for key derivation and it ensures that even if two databases are created using the same password, they will not have the same encryption key. The default configuration uses 64000 iterations for key derivation (this can be changed at runtime using “PRAGMA kdf_iter”).
 
