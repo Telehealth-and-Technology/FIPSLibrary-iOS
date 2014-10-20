@@ -93,19 +93,19 @@ Section 2 - Verifying successful operation of release
 			These instructions assume that you previously cloned fcids into directory test1010 (project root directory),
 			downloaded files, and successfully run buildAll.sh
 
-			Navigate to your project root directory
+			1. Navigate to your project root directory
 				mkdir test1010
 
-			Create the project that you want to add fips storage to:
+			2. Create the project that you want to add fips storage to:
 				cordova create testExample com.t2.testexample testExample
 				cd testExample
 
-			Add IOS platform and install plugins:
+			3. Add IOS platform and install plugins:
 				cordova platform add ios
 				cordova plugin add ssh://scoleman@git.t2.local/git/mobile/crossplatform/cordova-plugin-console.git
 				cordova plugin add ssh://scoleman@git.t2.local/git/mobile/crossplatform/Cordova-SqlcipherPlugin.git
 
-			Update your project with the necessary references
+			4. Update your project with the necessary references
 				Open xcode project at: test1010/testExample/platforms/ios/testExample.xcodeproj
 
 				Add the subproject references for sqlcipher (using opt-cmd-a)
@@ -154,8 +154,12 @@ Section 2 - Verifying successful operation of release
 				            
 				        }   
 
-			
-			When application is complete, create the following FIPS documentation files from templates:
+			5. Copy the file /usr/local/ssl/Release-iphoneos/lib/fips_premain.c to your root project and include it in build
+
+		    6. In your root project under "build phases" add a "run script" Build phase with the following script:
+		    	/usr/local/bin/incore_macho --debug -exe "$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH"
+
+			7. When application is complete, create the following FIPS documentation files from templates:
 				doc/FIPS140-2ApplicationComplianceStatementTemplate.txt
 				doc/FIPS140-2ApplicationComplianceRecordTemplate.txt
 

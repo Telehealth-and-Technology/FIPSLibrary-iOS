@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		1D3623260D0F684500981E51 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1D3623250D0F684500981E51 /* AppDelegate.m */; };
 		1D60589B0D05DD56006BFB54 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; };
@@ -40,9 +41,10 @@
 		B0AF225215BE4CE8A14648D8 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FC7C27FA36490BB9BA51B3 /* CDVLogger.m */; };
 		D03794AAFD6C475D89B30626 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B8BEE14D949BBA726026D /* SQLitePlugin.m */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
+		DB431A9FF602433EA9A5953F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A3BCA5A99B4AAE81A5D614 /* libsqlite3.dylib */; };
 		DF63C5E919E486F000767F38 /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF63C5E619E486C300767F38 /* libsqlcipher.a */; };
 		DF63C5EB19E4870000767F38 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF63C5EA19E4870000767F38 /* Security.framework */; };
-		DB431A9FF602433EA9A5953F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A3BCA5A99B4AAE81A5D614 /* libsqlite3.dylib */; };
+		DFA7983819F56FEE00691698 /* fips_premain.c in Sources */ = {isa = PBXBuildFile; fileRef = DFA7983719F56FEE00691698 /* fips_premain.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +108,7 @@
 		530B25CB620749459EAF0FD0 /* SQLitePlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SQLitePlugin.h; path = com.phonegap.plugins.sqlite/SQLitePlugin.h; sourceTree = "<group>"; };
 		5AEE5B34173C68D80009041E /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		69A3BCA5A99B4AAE81A5D614 /* libsqlite3.dylib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		7E7966D41810823500FA85AD /* icon-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40.png"; sourceTree = "<group>"; };
 		7E7966D51810823500FA85AD /* icon-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-40@2x.png"; sourceTree = "<group>"; };
 		7E7966D61810823500FA85AD /* icon-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-50.png"; sourceTree = "<group>"; };
@@ -122,12 +125,12 @@
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
 		DF63C5E019E486C300767F38 /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = ../../../../sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
 		DF63C5EA19E4870000767F38 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DFA7983719F56FEE00691698 /* fips_premain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_premain.c; sourceTree = "<group>"; };
 		EB87FDF21871DA7A0020F90C /* merges */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merges; path = ../../merges; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		F62B8BEE14D949BBA726026D /* SQLitePlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SQLitePlugin.m; path = com.phonegap.plugins.sqlite/SQLitePlugin.m; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = testcordova/config.xml; sourceTree = "<group>"; };
-		69A3BCA5A99B4AAE81A5D614 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libsqlite3.dylib"; path = "usr/lib/libsqlite3.dylib"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +211,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				DFA7983719F56FEE00691698 /* fips_premain.c */,
 				32CA4F630368D1EE00C91783 /* testcordova-Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -342,6 +346,7 @@
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+				DFA7983519F56D7B00691698 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -462,6 +467,19 @@
 			shellScript = "cordova/lib/copy-www-build-step.sh";
 			showEnvVarsInLog = 0;
 		};
+		DFA7983519F56D7B00691698 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/incore_macho --debug -exe \"$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -471,6 +489,7 @@
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
+				DFA7983819F56FEE00691698 /* fips_premain.c in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				B0AF225215BE4CE8A14648D8 /* CDVLogger.m in Sources */,
 				D03794AAFD6C475D89B30626 /* SQLitePlugin.m in Sources */,
