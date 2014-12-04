@@ -68,6 +68,7 @@ Retrieve source files
 
 		Option 1 (the official way):
 		----------------------------
+		cd fcids
 		git clone git.t2.local:/git/mobile/crossplatform/sqlcipher.git
 
 		Option 2:

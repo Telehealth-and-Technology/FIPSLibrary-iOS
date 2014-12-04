@@ -2,7 +2,6 @@
 #
 # files are necessary from fips/openssl, and sqlcipher
 
-SDKVERSION="7.1"    
 
 LOGFILE=FIPS_buildSimulator.log
 echo "buildallSim.sh"  1>$LOGFILE 2>&1

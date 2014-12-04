@@ -23,7 +23,7 @@ export CROSS_TOP="/Applications/Xcode.app/Contents/Developer/Platforms/iPhone$CR
 
 # CROSS_SDK is the SDK version being used - adjust as appropriate
 # for 4.3 or 5.0 (default)
-for i in 7.1 5.1 5.0 4.3 do
+for i in 8.1 7.1 5.1 5.0 4.3 do
 do
   if [ -d "$CROSS_DEVELOPER/Platforms/iPhone$CROSS_TYPE.platform//Developer/SDKs/iPhone$CROSS_TYPE"$i".sdk" ]; then
     SDKVER=$i
