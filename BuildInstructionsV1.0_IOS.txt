@@ -10,7 +10,7 @@ Tools Necessary for Build
 =========================
 	MAC OS-X
 	Xcode 4.x 
-	Xcode 5.x 
+	Xcode 5.x (or 6.x)
 	Note: you need both sets of tools. The simulator uses 5.x but due to a compiler issue the device needs 4.x
 
 Steps:

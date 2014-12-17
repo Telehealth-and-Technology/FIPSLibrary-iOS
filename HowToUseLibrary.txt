@@ -6,16 +6,16 @@ Section 1 - Release files
 
 The directory structure of the fcids release (pre-built) is as follows:
 Vx.y.x_DD-DD-YY
-	doc                   documentation for FIPS compliance
+	doc               documentation for FIPS compliance
 	object
-		usr               release binary and header files (see note 1)
-	source                Supplental files and tools used in build (for reference only)
-	test                  Test IOS applications used to test release
-		fips-pi           Tests inclusion of library in a native IOS app
-		testcordova       Tests inclusion of library in a cordova plugin using sqlcipher
+	usr               release binary and header files (see note 1)
+	source            Supplemental files and tools used in build (for reference only)
+	test              Test IOS applications used to test release
+	fips-pi           Tests inclusion of library in a native IOS app
+	testcordova       Tests inclusion of library in a cordova plugin using sqlcipher
 
-Note 1: The release vinary and header files are the actual product of the release. They need to be 
-        installed in the protected space of the devlopement machine that the developer is using
+Note 1: The release binary and header files are the actual product of the release. They need to be 
+        installed in the protected space of the development machine that the developer is using
         The utility installFipsRelease.sh.
         e.g. installs files to /usr/local/ssl/Release-iphoneos
 
@@ -38,8 +38,8 @@ Section 2 - Verifying successful operation of release
 		  Clean, build and run. Confirm that you can enter and exit fips mode without errors.
 		  (observe log files in xcode)
 		  eg.
-		  Succesfully entered FIPS mode
-		  Succesfully exited FIPS mode
+		  Successfully entered FIPS mode
+		  Successfully exited FIPS mode
 
 	  ----------------
 	  2A2 - Integrate into your own native xcode project
@@ -58,10 +58,10 @@ Section 2 - Verifying successful operation of release
   in your development machine.
 
 	  ----------------
-	  2B1 - Use the test project included in the relase which uses sqlcipher and the cordova plugin
+	  2B1 - Use the test project included in the release which uses sqlcipher and the cordova plugin
 	  ----------------
 		  You can test project supplied in the release: test/testcordova/platforms/ios/testcordova.xcodeproj
-		  which has modifications mentioned in 2B2 already made made to it
+		  which has modifications mentioned in section 2B2 already made made to it
 
 		  Clean, build and run. Confirm database access proceeded without errors
 		  eg.
@@ -75,7 +75,7 @@ Section 2 - Verifying successful operation of release
 	  2B2 - Integrate into your own project that uses sqlcipher and the cordova plugin
 	  ----------------
 
-		!!! Note: The cordova test application testcordova.xcodeproj uses a canned version sqlcioher contained in the release
+		!!! Note: The cordova test application testcordova.xcodeproj uses a canned version sqlcipher contained in the release
 		          please make sure that your application does not use this canned version. You must clone a real version from 
 		          the repository at t2.local/git/mobile/crossplatform/sqlcipher.git
 
@@ -85,10 +85,10 @@ Section 2 - Verifying successful operation of release
 		  After you have downloaded the release, run the installFipsRelease.sh script to install the binaries and headers
 		  in your development machine.
 
-			Building a project to integrate sqlcipher with sqliite plugin
+			Building a project to integrate sqlcipher with sqlite plugin
 			===========================================================
 			Tools necessary:
-				Cordova 3.5.xxx
+				Cordova 3.5.xxx (Note: if you’re using Xcode 6 > then you need to use Cordova 4.1.0 or greater)
 
 			These instructions assume that you previously cloned fcids into directory test1010 (project root directory),
 			downloaded files, and successfully run buildAll.sh
@@ -119,9 +119,9 @@ Section 2 - Verifying successful operation of release
 						Add Security.framework
 
 				Update "Build Settings" of testExample project
-					add -DSQLITE_HAS_CODEC to "other C flags" (Any archetecture, any sdk - both debug and release)
-					Add /usr/local/ssl/Release-iphoneos/include to "Header Search Paths" (Any archetecture, any sdk - both debug and release)
-					Add /usr/local/ssl/Release-iphoneos/libcrypto.a to "Other Linker Flags" (Any archetecture, any sdk - both debug and release)
+					add -DSQLITE_HAS_CODEC to "other C flags" (Any architecture, any sdk - both debug and release)
+					Add /usr/local/ssl/Release-iphoneos/include to "Header Search Paths" (Any architecture, any sdk - both debug and release)
+					Add /usr/local/ssl/Release-iphoneos/libcrypto.a to "Other Linker Flags" (Any architecture, any sdk - both debug and release)
 
 				in xcode co clean then build
 
@@ -208,3 +208,13 @@ The key used to calculate page HMACs is different that the encryption key. It is
 
 If use of a passphrase is undesirable, an application may provide raw binary key data (for instance to support vaulted keys, or the use of PKI based key exchange).
 
+******************
+Appendix D - Potential Issues
+******************
+
+		if you get an error when trying to run  on simulator:
+			cordova needs ios-sim version 3.0 or greater you have version xxx
+		Do
+			npm install -g ios-sim
+
+			then check version - ios-sim --version
