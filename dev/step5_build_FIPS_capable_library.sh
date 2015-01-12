@@ -3,8 +3,8 @@
 #---------------------------------------------------------
 
 # move to Source dir
-cd dev
-mkdir libarmv7
+cd $T2_BUILD_DIR
+mkdir lib$T2_BUILD_PLATFORM
 
 # make incore_macho available to build
 export PATH="/usr/local/bin":$PATH
@@ -31,4 +31,4 @@ mv crypto/err/err_all.c.new crypto/err/err_all.c
 make build_libs
 
 # copy the lib to the intermediate lib directory
-cp libcrypto.a ../libarmv7
+cp libcrypto.a ../lib$T2_BUILD_PLATFORM

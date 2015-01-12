@@ -3,7 +3,7 @@
 #---------------------------------------------------------
 
 # move to Source dir
-cd dev
+cd $T2_BUILD_DIR
 
 # delete old artifacts
 rm -Rf $FIPS_BASE/

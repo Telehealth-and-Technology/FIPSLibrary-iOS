@@ -3,7 +3,7 @@
 #---------------------------------------------------------
 
 # move to Source dir
-cd devSim
+cd $T2_BUILD_DIR
 
 #extract the fips code base into devSim direcgtory
 tar xzf $FIPS_BASE.tar.gz

@@ -4,8 +4,8 @@
         # Switch to new (5.5 dev tools) for device build 
         sudo xcode-select --switch /Applications/Xcode.app
 
-        cd devSim
-        mkdir libi386
+        cd $T2_BUILD_DIR
+        mkdir lib$T2_BUILD_PLATFORM
 
         . ./setenv-reset.sh
 

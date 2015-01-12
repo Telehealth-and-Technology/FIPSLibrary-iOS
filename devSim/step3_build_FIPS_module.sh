@@ -3,7 +3,7 @@
 #---------------------------------------------------------
 
 # move to fips' dir
-cd devSim/$FIPS_BASE
+cd $T2_BUILD_DIR/$FIPS_BASE
 
 make clean
 rm -f *.dylib

@@ -4,8 +4,8 @@
 # /usr/local/ssl/Release-iphoneos/
 #---------------------------------------------------------
 
-# move to Source dir
-cd devSim
+# move to Source directory 
+cd $T2_BUILD_DIR
 
 # move to fips' dir
 cd $FIPS_BASE

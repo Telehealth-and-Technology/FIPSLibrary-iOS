@@ -153,10 +153,28 @@ else
   	echo ""
   	echo "--- All files present and accounted for, proceeding with build ---"
  	echo "" 
+
+
+
+ 	# Note: when adding new platforms, don't forget to set up the command variables T2_BUILD_DIR, and T2_BUILD_PLATFORM
+ 	# T2_BUILD_DIR tells the sub-shell what directory to use
+ 	# T2_BUILD_PLATFORM tells the sub-shell what platform (and what to name the folder to put the architecture specific .a file)
+ 	#     Used in Aggregate link files section below
+
+ # 	---- Build for 32 bit device ------------
+ 	echo " Building for 32 bit device"
+ 	export T2_BUILD_DIR="dev"
+	export T2_BUILD_PLATFORM="armv7"
 	. ./buildAllDevice.sh
+	
+ # 	# ---- Build for 32 bit simulator ------------
+ 	echo " Building for IOS 32 bit Simulator"
+	export T2_BUILD_DIR="devSim"
+	export T2_BUILD_PLATFORM="i386"
 	. ./buildAllSim.sh
 
-
+ # 	# ---- Build for 64 bit simulator ------------
+ 	echo " Building for IOS 64 bit Simulator"
 	export T2_BUILD_DIR="devSim64"
 	export T2_BUILD_PLATFORM="x86_64"
 	. ./buildAllSim64.sh
@@ -168,6 +186,8 @@ else
 
 	cd $PROJECTPATH
 
+
+	#  *** Aggregate link files ***
 	# Check for the existence of linker files, if any exist, create a fat file with the ones that exist in it
 	# NOOTE: when new platforms are added to this file the following lines must be appended
 

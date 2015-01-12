@@ -8,7 +8,7 @@ echo "buildallSim$T2_BUILD_PLATFORM.sh"  1>$LOGFILE 2>&1
 
 echo ""
 echo "-----------------------------------------"
-echo " Building for IOS 64 bit Simulator"
+echo " Building $T2_BUILD_PLATFORM"
 echo " See logfile $LOGFILE"
 echo "-----------------------------------------"
 

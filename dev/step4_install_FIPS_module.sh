@@ -5,7 +5,7 @@
 #---------------------------------------------------------
 
 # move to Source dir
-cd dev
+cd $T2_BUILD_DIR
 
 # move to fips' dir
 cd $FIPS_BASE

@@ -3,7 +3,7 @@
 #---------------------------------------------------------
 
 # move to Source dir
-cd dev
+cd $T2_BUILD_DIR
 
 # move to ssl' dir
 cd $OPENSSL_BASE/

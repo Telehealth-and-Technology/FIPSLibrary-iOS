@@ -3,7 +3,7 @@
 #---------------------------------------------------------
 
 # move to Source dir
-cd devSim
+cd $T2_BUILD_DIR
 
 xattr -r -d "com.apple.quarantine" *.tar
 xattr -r -d "com.apple.quarantine" *.sh
