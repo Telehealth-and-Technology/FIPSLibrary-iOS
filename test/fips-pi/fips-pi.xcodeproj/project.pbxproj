@@ -317,6 +317,7 @@
 		201BBCB216987399001368B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fips-pi/fips-pi.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -324,10 +325,13 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "fips-pi/fips-pi.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				"OTHER_LDFLAGS[arch=*]" = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				PRODUCT_NAME = "fips-pi";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/ssl/Release-iphoneos/include";
+				VALID_ARCHS = "armv5 armv6 armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -335,6 +339,7 @@
 		201BBCB316987399001368B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = armv7;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fips-pi/fips-pi.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -342,9 +347,12 @@
 					"NS_BLOCK_ASSERTIONS=1",
 				);
 				INFOPLIST_FILE = "fips-pi/fips-pi.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				PRODUCT_NAME = "fips-pi";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/ssl/Release-iphoneos/include";
+				VALID_ARCHS = "armv5 armv6 armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

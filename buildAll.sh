@@ -12,8 +12,10 @@ checkforFipsFiles()
 	  	echo "" 
 		echo "sslFiles_dev = $sslFiles_dev"
 		echo "sslFiles_sim = $sslFiles_sim"
+				echo "sslFiles_sim64 = $sslFiles_sim64"
 		echo "fipsFiles_dev = $fipsFiles_dev"
 		echo "fipsFiles_sim = $fipsFiles_sim"		
+				echo "fipsFiles_sim64 = $fipsFiles_sim64"	
 		echo ""
 
 	  	echo "You have two options:"
@@ -28,7 +30,7 @@ checkforFipsFiles()
 			echo "Copying local files"
 			cp localFipsSslFiles/*.gz ./dev
 			cp localFipsSslFiles/*.gz ./devSim
-
+			cp localFipsSslFiles/*.gz ./devSim64
 	      ;;
 	      [Yn]* ) 
 	        echo "you chose no"
@@ -99,6 +101,9 @@ fipsFiles_dev="dev/$FIPS_BASE.tar.gz"
 sslFiles_sim="devSim/$OPENSSL_BASE.tar.gz"
 fipsFiles_sim="devSim/$FIPS_BASE.tar.gz"
 
+sslFiles_sim64="devSim64/$OPENSSL_BASE.tar.gz"
+fipsFiles_sim64="devSim64/$FIPS_BASE.tar.gz"
+
 # sqlcipher files
 sqlcipherFiles="sqlcipher"
 
@@ -112,12 +117,22 @@ if [ ! -f "$sslFiles_sim" ]; then
 fi
 
 
+if [ ! -f "$sslFiles_sim64" ]; then
+  sslFiles_sim64=""
+fi
+
+
 if [ ! -f "$fipsFiles_dev" ]; then
   fipsFiles_dev=""
 fi
 
 if [ ! -f "$fipsFiles_sim" ]; then
   fipsFiles_sim=""
+fi
+
+
+if [ ! -f "$fipsFiles_sim" ]; then
+  fipsFiles_sim64=""
 fi
 
 if [ ! -f "$sqlcipherFiles" ]; then
@@ -141,6 +156,11 @@ else
 	. ./buildAllDevice.sh
 	. ./buildAllSim.sh
 
+
+	export T2_BUILD_DIR="devSim64"
+	export T2_BUILD_PLATFORM="x86_64"
+	. ./buildAllSim64.sh
+
 	echo ""
 	echo "-----------------------------------------"
 	echo " Now building and installing final fat lib files"
@@ -148,29 +168,34 @@ else
 
 	cd $PROJECTPATH
 
-	# Set _LIB_SIM_CRYPTO and _LIB_DEVICE_CRYPTO based on whether or not libcrypto.a exists in directories
-	[[ -s ${PROJECTPATH}/devSim/libi386/libcrypto.a ]] && _LIB_SIM_CRYPTO=${PROJECTPATH}/devSim/libi386/libcrypto.a  || _LIB_SIM_CRYPTO=""
-	[[ -s ${PROJECTPATH}/dev/libarmv7/libcrypto.a ]] && _LIB_DEVICE_CRYPTO=${PROJECTPATH}/dev/libarmv7/libcrypto.a || _LIB_DEVICE_CRYPTO=""
+	# Check for the existence of linker files, if any exist, create a fat file with the ones that exist in it
+	# NOOTE: when new platforms are added to this file the following lines must be appended
 
-	#todo: Add processing for libssl - although not that important since we are not using it, only libcrypto
+	FILES=""
+	TEST_PATH=${PROJECTPATH}/devSim64/libX86_64/libcrypto.a
+	[ -f $TEST_PATH ] && FILES=$FILES" $TEST_PATH"
 
-	echo "_LIB_SIM_CRYPTO = $_LIB_SIM_CRYPTO"
-	echo "_LIB_DEVICE_CRYPTO = $_LIB_DEVICE_CRYPTO"
+	TEST_PATH=${PROJECTPATH}/devSim/libi386/libcrypto.a
+	[ -f $TEST_PATH ] && FILES=$FILES" $TEST_PATH"
 
-	# Create the fat file
-	# *** Note: we're using the tool lipo here. The problem is that lipo changed locations from xcode 4x to 5x and is dependent on if you have
-	# mavricks or not. To side step this issue we store a known good copy of the tool (iphoneoslipo) in CMS to use here
+	TEST_PATH=${PROJECTPATH}/dev/libarmv7/libcrypto.a
+	[ -f $TEST_PATH ] && FILES=$FILES" $TEST_PATH"
 
-	if test ! -z "$_LIB_SIM_CRYPTO" || test ! -z "$_LIB_DEVICE_CRYPTO";  then
-	    echo "command line = ./iphoneoslipo -create $_LIB_SIM_CRYPTO  $_LIB_DEVICE_CRYPTO -output ./libcrypto.a" 
-	    ./iphoneoslipo -create $_LIB_SIM_CRYPTO  $_LIB_DEVICE_CRYPTO -output ./libcrypto.a
+
+	# if any existed, make a fat file and copy it to the install dire
+	if [ "$FILES" != "" ]; then
+
+		COMMAND="./iphoneoslipo -create $FILES -output ./libcrypto.a"
+		echo "running COMMAND = " $COMMAND
+
+	    $COMMAND
 	    cp ./libcrypto.a $INSTALL_DIR
-	    echo ""
-	    echo "Installed libcrypto.a (fat files) at $INSTALL_DIR"
-	else
-	    echo "No libaraies to create fat file from!"
 
+	else
+		echo "*****************  No files to add to fat link file!!"
 	fi
+
+
 
 	# Make sure cqlcipher files are RW
 	chmod -R 777 ./sqlcipher 
