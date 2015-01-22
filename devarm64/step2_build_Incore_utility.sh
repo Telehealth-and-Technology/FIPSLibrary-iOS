@@ -6,7 +6,7 @@ echo "#---------------------------------------------------------"
 # move to Source dir
 cd $T2_BUILD_DIR
 
-#extract the fips code base into devSim direcgtory
+# get a fresh copy of fips module source 
 tar xzf $FIPS_BASE.tar.gz
 
 #unpack incore tools to a sub-sirectory in the fips directory
@@ -27,17 +27,27 @@ make clean
 
 # configure and make fips module for incore utility
 ./Configure darwin64-x86_64-cc
+
+# now build the fips module
 make
 
-# make the incore utility with the fips module just built
+# now make the incore utility with the fips module just built
 cd iOS/
 make
 
-# copy the infore utility to local bin dirt
-cp ./incore_macho /usr/local/bin
+if [ $? != 0 ];
+then 
+    echo "Problem while make - Please check ${LOG}"
+    exit 1
+fi
 
+
+echo "Copying ./incore_macho /usr/local/bin"
+# copy the infore utility to local bin dir
+cp ./incore_macho /usr/local/bin
 
 
 # Clean up
 cd ..
 make clean
+

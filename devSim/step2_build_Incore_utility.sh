@@ -9,7 +9,7 @@ cd $T2_BUILD_DIR
 tar xzf $FIPS_BASE.tar.gz
 
 #unpack incore tools to a sub-sirectory in the fips directory
-cp -r SupplementalFiles/iOSIncoreTools/iOS $FIPS_BASE
+cp -r ../SupplementalFiles/iOSIncoreTools/iOS $FIPS_BASE
 
 # setup environment for os-x for build the incore utility
 # this utility is used by the applicaition build process to embed the fips fingerprint into 
@@ -34,7 +34,6 @@ cp ./incore_macho /usr/local/bin
 
 
 
-# # Clean up
-# cd ..
-# make clean
-# rm -f *.dylib
+# Clean up
+cd ..
+make clean

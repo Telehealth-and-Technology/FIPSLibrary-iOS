@@ -31,6 +31,7 @@ checkforFipsFiles()
 			cp localFipsSslFiles/*.gz ./dev
 			cp localFipsSslFiles/*.gz ./devSim
 			cp localFipsSslFiles/*.gz ./devSim64
+			cp localFipsSslFiles/*.gz ./devarm64
 	      ;;
 	      [Yn]* ) 
 	        echo "you chose no"
@@ -161,23 +162,30 @@ else
  	# T2_BUILD_PLATFORM tells the sub-shell what platform (and what to name the folder to put the architecture specific .a file)
  	#     Used in Aggregate link files section below
 
- # 	---- Build for 32 bit device ------------
+ 	# 	---- Build for 32 bit device ------------
  	echo " Building for 32 bit device"
  	export T2_BUILD_DIR="dev"
 	export T2_BUILD_PLATFORM="armv7"
 	. ./buildAllDevice.sh
 	
- # 	# ---- Build for 32 bit simulator ------------
+ 	# ---- Build for 32 bit simulator ------------
  	echo " Building for IOS 32 bit Simulator"
 	export T2_BUILD_DIR="devSim"
 	export T2_BUILD_PLATFORM="i386"
 	. ./buildAllSim.sh
 
- # 	# ---- Build for 64 bit simulator ------------
+ 	# ---- Build for 64 bit simulator ------------
  	echo " Building for IOS 64 bit Simulator"
 	export T2_BUILD_DIR="devSim64"
 	export T2_BUILD_PLATFORM="x86_64"
 	. ./buildAllSim64.sh
+
+	# ---- Build for 64 bit device ------------
+ 	echo " Building for IOS 64 bit device"
+	export T2_BUILD_DIR="devarm64"
+	export T2_BUILD_PLATFORM="arm64"
+	. ./buildAllarm64.sh
+
 
 	echo ""
 	echo "-----------------------------------------"
@@ -192,6 +200,9 @@ else
 	# NOOTE: when new platforms are added to this file the following lines must be appended
 
 	FILES=""
+	TEST_PATH=${PROJECTPATH}/devarm64/libarm64/libcrypto.a
+	[ -f $TEST_PATH ] && FILES=$FILES" $TEST_PATH"
+
 	TEST_PATH=${PROJECTPATH}/devSim64/libX86_64/libcrypto.a
 	[ -f $TEST_PATH ] && FILES=$FILES" $TEST_PATH"
 

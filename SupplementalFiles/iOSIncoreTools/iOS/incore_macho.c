@@ -91,6 +91,8 @@
 #include <string.h>
 #include <openssl/hmac.h>
 
+#include <mach/machine.h>
+
 /* JW: perhaps it would be better to take directly from Apple:       */
 /* http://opensource.apple.com/source/dyld/dyld-210.2.3/src/dyld.cpp */
 
@@ -114,6 +116,11 @@
 #ifndef CPU_SUBTYPE_ARM64_V8
 # define CPU_SUBTYPE_ARM64_V8 ((cpu_subtype_t) 1)
 #endif
+
+#ifndef CPU_TYPE_ARM64
+# define CPU_TYPE_ARM64          (CPU_TYPE_ARM | CPU_ARCH_ABI64)
+#endif
+
 
 static int gVerbosity = 0;
 
@@ -234,7 +241,7 @@ static cpu_adjust_t cpu_adjustment[] =
     { CPU_TYPE_ARM, CPU_SUBTYPE_ARM_V6, -8, -8 },
     { CPU_TYPE_ARM, CPU_SUBTYPE_ARM64_V8, -8, -8 },
     { CPU_TYPE_X86_64, CPU_SUBTYPE_X86_64_ALL, 0, 0 },
-    
+    { CPU_TYPE_ARM64, CPU_SUBTYPE_ARM64_ALL, 12, 12 },
     { CPU_TYPE_ANY, 0, 0, 0 }
 };
 
@@ -786,7 +793,7 @@ static int fingerprint(macho_file_t* inFile, int addFingerprint)
         const unsigned char * p3 = FIPS_rodata_start->mapped;
         const unsigned char * p4 = FIPS_rodata_end->mapped;
         static const char          FIPS_hmac_key[]="etaonrishdlcupfm";
-        
+
         cpu_adjust_t *cpu = cpu_lookup( inFile->cpu_type, inFile->cpu_subtype );
         if( cpu )
         {
@@ -1064,7 +1071,7 @@ int main (int argc, const char * argv[])
     
     if( gVerbosity < 0 )
         gVerbosity = 1;
-    
+
     while( --argc )
     {
         ++argv;

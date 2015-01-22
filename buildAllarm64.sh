@@ -2,8 +2,9 @@
 #
 # files are necessary from fips/openssl, and sqlcipher
 
+
 LOGFILE=FIPS_build$T2_BUILD_PLATFORM.log
-echo "buildall$T2_BUILD_PLATFORM.sh"  1>$LOGFILE 2>&1
+echo "buildallSim$T2_BUILD_PLATFORM.sh"  1>$LOGFILE 2>&1
 
 echo ""
 echo "-----------------------------------------"
@@ -13,19 +14,17 @@ echo "-----------------------------------------"
 
 
 
-
 # This sets up environment vars to point to which openssl/fips we cant to use
 . ./setEnvOpensslFiles.sh
 
- #----------------------------------------------------------------------
-  #
-  # Build iOS FIPS module and library
-  #
 
 
   # Switch to old (4.6 dev tools) for device build 
   # Note that the 5.x xcode version of the tools DO NOT work when compiling for device!
-  xcode-select --switch /XCode4.6/Xcode.app
+  #xcode-select --switch /XCode4.6/Xcode.app
+
+ # Switch to new (5.5 dev tools) for device build 
+  sudo xcode-select --switch /Applications/Xcode.app
 
 
   #----------------------------------------------------------------------
@@ -41,8 +40,8 @@ echo "-----------------------------------------"
   ./$T2_BUILD_DIR/step2_build_Incore_utility.sh 1>>$LOGFILE 2>&1
   if [ $? != 0 ];
   then 
-    echo "Problem building step 2 - See logfile $LOGFILE"
-    exit 1
+      echo "Problem building step 2 - See logfile $LOGFILE"
+      exit 1
   fi
 
   #----------------------------------------------------------------------
@@ -52,10 +51,9 @@ echo "-----------------------------------------"
   ./$T2_BUILD_DIR/step3_build_FIPS_module.sh 1>>$LOGFILE 2>&1
   if [ $? != 0 ];
   then 
-    echo "Problem building step 3 - See logfile $LOGFILE"
-    exit 1
+      echo "Problem building step 3 - See logfile $LOGFILE"
+      exit 1
   fi
-
 
   #----------------------------------------------------------------------
   echo "Step 4 install FIPS Object Module to $INSTALL_DIR "
@@ -64,11 +62,9 @@ echo "-----------------------------------------"
   ./$T2_BUILD_DIR/step4_install_FIPS_module.sh 1>>$LOGFILE 2>&1
   if [ $? != 0 ];
   then 
-    echo "Problem building step 4 - See logfile $LOGFILE"
-    exit 1
+      echo "Problem building step 4 - See logfile $LOGFILE"
+      exit 1
   fi
-
-
 
   #----------------------------------------------------------------------
   echo "Step 5 build FIPS Capable library"
@@ -77,19 +73,19 @@ echo "-----------------------------------------"
   ./$T2_BUILD_DIR/step5_build_FIPS_capable_library.sh 1>>$LOGFILE 2>&1
   if [ $? != 0 ];
   then 
-    echo "Problem building step 5 - See logfile $LOGFILE"
-    exit 1
+      echo "Problem building step 5 - See logfile $LOGFILE"
+      exit 1
   fi
 
 
-#----------------------------------------------------------------------
-echo "Step 6 install FIPS Capable library to $INSTALL_DIR "
-echo "Step 6 install FIPS Capable library to $INSTALL_DIR " 1>>$LOGFILE 2>&1
-#----------------------------------------------------------------------
-./$T2_BUILD_DIR/step6_install_FIPS_capable_library.sh 1>>$LOGFILE 2>&1
+  #----------------------------------------------------------------------
+  echo "Step 6 install FIPS Capable library to $INSTALL_DIR "
+  echo "Step 6 install FIPS Capable library to $INSTALL_DIR " 1>>$LOGFILE 2>&1
+  #----------------------------------------------------------------------
+  ./$T2_BUILD_DIR/step6_install_FIPS_capable_library.sh 1>>$LOGFILE 2>&1
   if [ $? != 0 ];
   then 
-    echo "Problem building step 6 - See logfile $LOGFILE"
-    exit 1
+      echo "Problem building step 6 - See logfile $LOGFILE"
+      exit 1
   fi
 

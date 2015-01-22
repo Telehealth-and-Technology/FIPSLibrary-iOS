@@ -1,6 +1,6 @@
 echo ""
 echo "#---------------------------------------------------------"
-echo "# Step 1 remove quarantine bit and ensure the execute bit is set"
+echo "# Step 1 Remove quarantine bit and ensure the execute bit is set"
 echo "#---------------------------------------------------------"
 
 # move to Source dir

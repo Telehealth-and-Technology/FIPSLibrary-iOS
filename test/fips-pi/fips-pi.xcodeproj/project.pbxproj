@@ -317,7 +317,7 @@
 		201BBCB216987399001368B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fips-pi/fips-pi.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -339,7 +339,7 @@
 		201BBCB316987399001368B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = armv7;
+				ARCHS = "$(ARCHS_STANDARD)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fips-pi/fips-pi.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (

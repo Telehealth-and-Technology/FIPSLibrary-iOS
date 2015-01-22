@@ -16,17 +16,30 @@
 
 		rm -Rf devSim/bin/
 		rm -Rf devSim/libi386/
+
 		rm -Rf devSim64/bin/
 		rm -Rf devSim64/libx86_64/
+
+		rm -Rf devarm64/bin/
+		rm -Rf devarm64/libarm64/
+
 		rm -Rf dev/libarmv7/
 
+# 
 		rm -Rf dev/$OPENSSL_BASE/
 		rm -Rf dev/$FIPS_BASE/
+
 		rm -Rf devSim/$FIPS_BASE/
 		rm -Rf devSim/$OPENSSL_BASE/
-				rm -Rf devSim64/$FIPS_BASE/
+
+		rm -Rf devSim64/$FIPS_BASE/
 		rm -Rf devSim64/$OPENSSL_BASE/
 
+		rm -Rf devarm64/$FIPS_BASE/
+		rm -Rf devarm64/$OPENSSL_BASE/
+
+# 
+		rm -Rf devarm64/*.gz
 		rm -Rf devSim64/*.gz
 		rm -Rf devSim/*.gz
 		rm -Rf dev/*.gz

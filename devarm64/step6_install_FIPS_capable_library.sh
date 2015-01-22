@@ -1,6 +1,7 @@
-#---------------------------------------------------------
-# install FIPS Capable library
-#---------------------------------------------------------
+echo ""
+echo "#---------------------------------------------------------"
+echo "# Step 6 install FIPS Capable library"
+echo "#---------------------------------------------------------"
 
 # move to Source dir
 cd $T2_BUILD_DIR
@@ -8,8 +9,6 @@ cd $T2_BUILD_DIR
 # move to ssl' dir
 cd $OPENSSL_BASE/
 
-# setup environment
-. ../setenv-reset.sh
 
 FIPSDIR=$INSTALL_DIR
 INCDIR=$INSTALL_DIR/include/openssl
@@ -17,9 +16,11 @@ INCDIR=$INSTALL_DIR/include/openssl
 # install - may require root...
 # libraries
 
-# Don't copy these, wait until we create a fat file from them in buildAll.sh then copy them
+# Don't copy these next 2, wait until we create a fat file from them in buildAll.sh then copy them
 # cp libssl.a $FIPSDIR
 # cp libcrypto.a $FIPSDIR
+
+
 # headers
 cp crypto/stack/stack.h     $INCDIR
 cp crypto/stack/safestack.h $INCDIR

@@ -58,6 +58,5 @@
     make install 
   #  make clean 
 pwd
- # cp ${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk/lib/libcrypto.a $CURRENTPATH
     # copy the lib to the intermediate lib directory
     cp libcrypto.a ../libi386

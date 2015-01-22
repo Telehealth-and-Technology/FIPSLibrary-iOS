@@ -22,7 +22,7 @@
 		<key>1CD061F110C0C98C1E9E42968B9B0DB83BA95A1A</key>
 		<string>../../../../../..</string>
 		<key>A8F9EB29309480C6B0E1246565FACD5371D0F27B</key>
-		<string>../../../../../..sqlcipher/</string>
+		<string>../../../../../..sqlcipher</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>git.t2.local:/git/mobile/crossplatform/fcids.git</string>
@@ -46,7 +46,7 @@
 			<key>IDESourceControlWCCIdentifierKey</key>
 			<string>A8F9EB29309480C6B0E1246565FACD5371D0F27B</string>
 			<key>IDESourceControlWCCName</key>
-			<string>sqlcipher</string>
+			<string>fcidssqlcipher</string>
 		</dict>
 	</array>
 </dict>

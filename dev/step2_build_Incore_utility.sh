@@ -12,18 +12,14 @@ rm -Rf $FIPS_BASE/
 tar xzf $FIPS_BASE.tar.gz
 
 #unpack incore tools to a sub-sirectory in the fips directory
-cp -r SupplementalFiles/iOSIncoreTools/iOS $FIPS_BASE
+cp -r ../SupplementalFiles/iOSIncoreTools/iOS $FIPS_BASE
 
 # setup environment
 . ./setenv-reset.sh
 . ./setenv-darwin-i386.sh
 
-# verify paths set by darwin script
-env
-
 # move to fips' dir
 cd $FIPS_BASE
-
 
 # configure and make
 ./config
@@ -33,6 +29,12 @@ make
 cd iOS/
 make
 
+# copy the infore utility to local bin dirt
+cp ./incore_macho /usr/local/bin
+
+# Clean up
+cd ..
+make clean
 
 
 

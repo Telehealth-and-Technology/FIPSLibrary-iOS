@@ -1,35 +1,7 @@
-buildallSimarmv7.sh
+buildallarmv7.sh
 Step 1 remove quarantine
 xattr: No such file: *.tar
 Step 2 build and install Incore Utility
-TERM=xterm-256color
-SHELL=/bin/bash
-INSTALL_DIR=/usr/local/ssl/Release-iphoneos
-KERNEL_BITS=32
-OLDPWD=/Users/scoleman/dev/fips/fcids
-FIPS_BASE=openssl-fips-2.0.2
-USER=root
-SUDO_USER=scoleman
-SUDO_UID=501
-SSH_AUTH_SOCK=/tmp/launch-0BBBpI/Listeners
-__CF_USER_TEXT_ENCODING=0x1F5:0:0
-USERNAME=root
-OPENSSL_BASE=openssl-1.0.1f
-SYSTEM=Darwin
-PATH=/Users/scoleman/dev/fips/fcids/dev/iOS:/usr/bin:/opt/local/bin:/opt/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/MacGPG2/bin:/Applications/adt-bundle-mac-x86_64-20131030/sdk/tools:/Users/scoleman/android-ndk-r9d:/Users/scoleman/apache-ant-1.9.3/bin:/Users/scoleman/android-sdk-macosx/platform-tools
-MAIL=/var/mail/root
-PWD=/Users/scoleman/dev/fips/fcids/dev
-LANG=en_US.UTF-8
-MACHINE=i386
-T2_BUILD_DIR=dev
-HOME=/Users/scoleman
-SUDO_COMMAND=./buildAll.sh
-SHLVL=2
-T2_BUILD_PLATFORM=armv7
-LOGNAME=root
-SDKVERSION=8.1
-SUDO_GID=20
-_=/usr/bin/env
 Operating system: i686-apple-darwinDarwin Kernel Version 13.3.0: Tue Jun 3 21:27:35 PDT 2014; root:xnu-2422.110.17~1/RELEASE_X86_64
 Auto Configuring fipsonly
 Auto Configuring fipsonly
@@ -463,7 +435,7 @@ ar: creating archive ../libcrypto.a
 /usr/bin/ranlib ../libcrypto.a || echo Never mind.
 if [ "y" = "n" -a -n "fipscanister.o" ]; then ar  r ../libcrypto.a fipscanister.o; fi
 cc -I.. -I../include  -DOPENSSL_FIPSCANISTER -fPIC -fno-common -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -arch i386 -O3 -fomit-frame-pointer -DL_ENDIAN -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM   -c -o incore_macho.o incore_macho.c
-incore_macho.c:717:21: warning: assigning to 'char *' from 'const char *' discards qualifiers [-Wincompatible-pointer-types]
+incore_macho.c:778:21: warning: assigning to 'char *' from 'const char *' discards qualifiers [-Wincompatible-pointer-types]
         fingerprint = (const char *)FINGERPRINT_ascii_value->mapped;
                     ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1 warning generated.
@@ -480,7 +452,75 @@ shlib_target=; if [ -n "libcrypto.1.1.0.dylib libssl.1.1.0.dylib" ]; then \
 		LIBDEPS="-Wl,-search_paths_first $LIBRARIES " \
 		link_app.${shlib_target}
 ( :; LIBDEPS="${LIBDEPS:--Wl,-search_paths_first -L.. -lcrypto }"; LDCMD="${LDCMD:-cc}"; LDFLAGS="${LDFLAGS:--DOPENSSL_FIPSCANISTER -fPIC -fno-common -DOPENSSL_PIC -DOPENSSL_THREADS -D_REENTRANT -DDSO_DLFCN -DHAVE_DLFCN_H -arch i386 -O3 -fomit-frame-pointer -DL_ENDIAN -DOPENSSL_BN_ASM_PART_WORDS -DOPENSSL_IA32_SSE2 -DOPENSSL_BN_ASM_MONT -DOPENSSL_BN_ASM_GF2m -DSHA1_ASM -DSHA256_ASM -DSHA512_ASM -DMD5_ASM -DRMD160_ASM -DAES_ASM -DWHIRLPOOL_ASM -DGHASH_ASM}"; LIBPATH=`for x in $LIBDEPS; do echo $x; done | sed -e 's/^ *-L//;t' -e d | uniq`; LIBPATH=`echo $LIBPATH | sed -e 's/ /:/g'`; LD_LIBRARY_PATH=$LIBPATH:$LD_LIBRARY_PATH ${LDCMD} ${LDFLAGS} -o ${APPNAME:=incore_macho} incore_macho.o  ${LIBDEPS} )
+rm -f *.map *.so *.so.* *.dll engines/*.so engines/*.dll *.a engines/*.a */lib */*/lib
+rm -f shlib/*.o *.o core a.out fluff testlog make.log cctest cctest.c
+making clean in crypto...
+rm -f buildinf.h *.s *.o */*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/sha...
+rm -f *.s *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/hmac...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/des...
+rm -f *.s *.o *.obj des lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/aes...
+rm -f *.s *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/modes...
+rm -f *.s *.o */*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/bn...
+rm -f *.s *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/ec...
+rm -f *.o */*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/rsa...
+rm -f *.o */*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/dsa...
+rm -f *.o */*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/ecdsa...
+rm -f *.o */*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/dh...
+rm -f *.o */*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/buffer...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/evp...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/ecdh...
+rm -f *.o */*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in crypto/cmac...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips...
+rm -f fipscanister.o.sha1 fips_premain_dso fips_standalone_sha1 \
+		*.s *.o */*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips/sha...
+rm -f *.o asm/*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff fips_standalone_sha1
+making clean in fips/rand...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips/des...
+rm -f *.o asm/*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff testlist
+making clean in fips/aes...
+rm -f *.o asm/*.o *.obj lib tags core .pure .nfs* *.old *.bak fluff testlist
+making clean in fips/dsa...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips/ecdh...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips/ecdsa...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips/rsa...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips/dh...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips/cmac...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips/hmac...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in fips/utl...
+rm -f *.o *.obj lib tags core .pure .nfs* *.old *.bak fluff
+making clean in test...
+rm -f .rnd tmp.bntest tmp.bctest *.o *.obj *.dll lib tags core .pure .nfs* *.old *.bak fluff bntest ectest  ecdsatest ecdhtest ideatest md2test  md4test md5test hmactest wp_test rc2test rc4test rc5test destest shatest sha1test sha256t sha512t mdc2test rmdtest randtest dhtest enginetest bftest casttest ssltest exptest dsatest rsa_test evp_test igetest jpaketest srptest fips_shatest fips_desmovs fips_randtest fips_aesavs fips_hmactest fips_rsavtest fips_rsastest fips_rsagtest fips_dssvs fips_dsatest fips_rngvs fips_drbgvs fips_dhvs  fips_test_suite fips_gcmtest fips_ecdsavs fips_ecdhvs fips_cmactest *.ss *.srl log dummytest
+rm -f 
+rm -f openssl.pc libssl.pc libcrypto.pc
+rm -f speed.* .pure
+rm -f openssl-fips-2.0.tar
 Step 3 build FIPS Object Module
+cp: SupplementalFiles/iOSIncoreTools/iOS: No such file or directory
 Operating system: armv7-whatever-iphoneos
 Auto Configuring fipsonly
 Auto Configuring fipsonly
@@ -533,7 +573,7 @@ CMLL_ENC      =camellia.o cmll_misc.o cmll_cbc.o
 MODES_OBJ     =
 ENGINES_OBJ   =
 PROCESSOR     =
-RANLIB        =/Users/scoleman/dev/fips/fcids/dev/openssl-fips-2.0.2/iOS/ranlib
+RANLIB        =/usr/bin/ranlib
 ARFLAGS       =
 PERL          =/usr/bin/perl
 THIRTY_TWO_BIT mode
@@ -1050,6 +1090,25 @@ ar: creating archive ../libcrypto.a
 /XCode4.6/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/ranlib ../libcrypto.a || echo Never mind.
 if [ "y" = "n" -a -n "fipscanister.o" ]; then /XCode4.6/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/ar  r ../libcrypto.a fipscanister.o; fi
 Step 4 install FIPS Object Module to /usr/local/ssl/Release-iphoneos 
+
+MACHINE = 
+SYSTEM = 
+BUILD = 
+CROSS_ARCH = 
+CROSS_TYPE = 
+CROSS_DEVELOPER = 
+CROSS_TOP = 
+CROSS_CHAIN = 
+CROSS_SDK = 
+CROSS_SYSROOT = 
+CROSS_COMPILE = 
+IOS_TARGET = 
+RELEASE = 
+KERNEL_BITS = 
+INSTALL_DIR =  /usr/local/ssl/Release-iphoneos
+OPENSSL_BASE =  openssl-1.0.1f
+FIPS_BASE =  openssl-fips-2.0.2
+
 if [ -n "libcrypto" ]; then \
 		EXCL_OBJ='aes_core.o aes_cbc.o bn_asm.o des_enc.o fcrypt_b.o mem_clr.o   ../crypto/aes/aes_cfb.o ../crypto/aes/aes_ecb.o ../crypto/aes/aes_ofb.o ../crypto/bn/bn_add.o ../crypto/bn/bn_blind.o ../crypto/bn/bn_ctx.o ../crypto/bn/bn_div.o ../crypto/bn/bn_exp2.o ../crypto/bn/bn_exp.o ../crypto/bn/bn_gcd.o ../crypto/bn/bn_gf2m.o ../crypto/bn/bn_lib.o ../crypto/bn/bn_mod.o ../crypto/bn/bn_mont.o ../crypto/bn/bn_mul.o ../crypto/bn/bn_nist.o ../crypto/bn/bn_prime.o ../crypto/bn/bn_rand.o ../crypto/bn/bn_recp.o ../crypto/bn/bn_shift.o ../crypto/bn/bn_sqr.o ../crypto/bn/bn_word.o ../crypto/bn/bn_x931p.o ../crypto/buffer/buf_str.o ../crypto/cmac/cmac.o ../crypto/cryptlib.o ../crypto/des/cfb64ede.o ../crypto/des/cfb64enc.o ../crypto/des/cfb_enc.o ../crypto/des/ecb3_enc.o ../crypto/des/ofb64ede.o ../crypto/des/fcrypt.o ../crypto/des/set_key.o ../crypto/dh/dh_check.o ../crypto/dh/dh_gen.o ../crypto/dh/dh_key.o ../crypto/dsa/dsa_gen.o ../crypto/dsa/dsa_key.o ../crypto/dsa/dsa_ossl.o ../crypto/ec/ec_curve.o ../crypto/ec/ec_cvt.o ../crypto/ec/ec_key.o ../crypto/ec/ec_lib.o ../crypto/ec/ecp_mont.o ../crypto/ec/ec_mult.o ../crypto/ec/ecp_nist.o ../crypto/ec/ecp_smpl.o ../crypto/ec/ec2_mult.o ../crypto/ec/ec2_smpl.o ../crypto/ecdh/ech_key.o ../crypto/ecdh/ech_ossl.o ../crypto/ecdsa/ecs_ossl.o ../crypto/evp/e_aes.o ../crypto/evp/e_des3.o ../crypto/evp/e_null.o ../crypto/evp/m_sha1.o ../crypto/evp/m_dss1.o ../crypto/evp/m_dss.o ../crypto/evp/m_ecdsa.o ../crypto/hmac/hmac.o ../crypto/modes/cbc128.o ../crypto/modes/ccm128.o ../crypto/modes/cfb128.o ../crypto/modes/ctr128.o ../crypto/modes/gcm128.o ../crypto/modes/ofb128.o ../crypto/modes/xts128.o ../crypto/rsa/rsa_eay.o ../crypto/rsa/rsa_gen.o ../crypto/rsa/rsa_crpt.o ../crypto/rsa/rsa_none.o ../crypto/rsa/rsa_oaep.o ../crypto/rsa/rsa_pk1.o ../crypto/rsa/rsa_pss.o ../crypto/rsa/rsa_ssl.o ../crypto/rsa/rsa_x931.o ../crypto/rsa/rsa_x931g.o ../crypto/sha/sha1dgst.o ../crypto/sha/sha256.o ../crypto/sha/sha512.o ../crypto/thr_id.o ../crypto/uid.o' ; export EXCL_OBJ ; \
 		ARX='/usr/bin/perl ${TOP}/util/arx.pl /XCode4.6/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/ar  r' ; \
