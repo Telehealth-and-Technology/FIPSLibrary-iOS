@@ -237,7 +237,7 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
         [f2 appendFormat:@"%02x", calculated[j]];
     
     [m_calculatedLabel setText:f2];
-    [m_calculatedLabel setText:f1];     // TODO remove this when compiler issue is fixed!
+    [m_calculatedLabel setText:f1];     // TODO remove this when compiler issue is fixed! - Note, this affects simulatoer only
     
     /******************************************/
     

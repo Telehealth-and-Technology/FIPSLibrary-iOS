@@ -47,7 +47,7 @@ cp -r devSim/SupplementalFiles* release/$ReleaseName/source/devSim
 cp -r test release/$ReleaseName/test
 
 # copy install fips script
-cp ./dev/SupplementalFiles/installFipsRelease.sh release/$ReleaseName
+cp ./SupplementalFiles/installFipsRelease.sh release/$ReleaseName
 cp ./setEnvOpenSslFiles.sh release/$ReleaseName
 
 # copy canned sqlcipher directory

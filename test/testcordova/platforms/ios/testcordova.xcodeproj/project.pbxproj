@@ -41,9 +41,9 @@
 		B0AF225215BE4CE8A14648D8 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FC7C27FA36490BB9BA51B3 /* CDVLogger.m */; };
 		D03794AAFD6C475D89B30626 /* SQLitePlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = F62B8BEE14D949BBA726026D /* SQLitePlugin.m */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
-		DB431A9FF602433EA9A5953F /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 69A3BCA5A99B4AAE81A5D614 /* libsqlite3.dylib */; };
-		DF63C5E919E486F000767F38 /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF63C5E619E486C300767F38 /* libsqlcipher.a */; };
 		DF63C5EB19E4870000767F38 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF63C5EA19E4870000767F38 /* Security.framework */; };
+		DFA1EDA21A73090300BC1A85 /* libraries in Resources */ = {isa = PBXBuildFile; fileRef = DFA1EDA11A73090300BC1A85 /* libraries */; };
+		DFA1EDA81A730DB800BC1A85 /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFA1EDA51A730CC100BC1A85 /* libsqlcipher.a */; };
 		DFA7983819F56FEE00691698 /* fips_premain.c in Sources */ = {isa = PBXBuildFile; fileRef = DFA7983719F56FEE00691698 /* fips_premain.c */; };
 /* End PBXBuildFile section */
 
@@ -61,20 +61,6 @@
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC07D0554694100DB518D;
 			remoteInfo = CordovaLib;
-		};
-		DF63C5E519E486C300767F38 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DF63C5E019E486C300767F38 /* sqlcipher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = sqlcipher;
-		};
-		DF63C5E719E486E700767F38 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DF63C5E019E486C300767F38 /* sqlcipher.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
-			remoteInfo = sqlcipher;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -123,8 +109,9 @@
 		B3FC7C27FA36490BB9BA51B3 /* CDVLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVLogger.m; path = org.apache.cordova.console/CDVLogger.m; sourceTree = "<group>"; };
 		C5E2AA2EE89C4C9391DB8CC7 /* CDVLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVLogger.h; path = org.apache.cordova.console/CDVLogger.h; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
-		DF63C5E019E486C300767F38 /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = ../../../../sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
 		DF63C5EA19E4870000767F38 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DFA1EDA11A73090300BC1A85 /* libraries */ = {isa = PBXFileReference; lastKnownFileType = folder; path = libraries; sourceTree = "<group>"; };
+		DFA1EDA51A730CC100BC1A85 /* libsqlcipher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsqlcipher.a; path = ../../libraries/libsqlcipher.a; sourceTree = "<group>"; };
 		DFA7983719F56FEE00691698 /* fips_premain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_premain.c; sourceTree = "<group>"; };
 		EB87FDF21871DA7A0020F90C /* merges */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merges; path = ../../merges; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
@@ -139,13 +126,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF63C5EB19E4870000767F38 /* Security.framework in Frameworks */,
-				DF63C5E919E486F000767F38 /* libsqlcipher.a in Frameworks */,
 				5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */,
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				5AEE5B35173C68D80009041E /* CoreLocation.framework in Frameworks */,
-				DB431A9FF602433EA9A5953F /* libsqlite3.dylib in Frameworks */,
+				DFA1EDA81A730DB800BC1A85 /* libsqlcipher.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +178,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				DF63C5E019E486C300767F38 /* sqlcipher.xcodeproj */,
+				DFA1EDA11A73090300BC1A85 /* libraries */,
 				EB87FDF41871DAF40020F90C /* config.xml */,
 				EB87FDF31871DA8E0020F90C /* www */,
 				EB87FDF21871DA7A0020F90C /* merges */,
@@ -237,6 +223,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DFA1EDA51A730CC100BC1A85 /* libsqlcipher.a */,
 				DF63C5EA19E4870000767F38 /* Security.framework */,
 				5AEE5B34173C68D80009041E /* CoreLocation.framework */,
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
@@ -318,14 +305,6 @@
 			path = se.lproj;
 			sourceTree = "<group>";
 		};
-		DF63C5E119E486C300767F38 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				DF63C5E619E486C300767F38 /* libsqlcipher.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		EB87FDF11871DA420020F90C /* Staging */ = {
 			isa = PBXGroup;
 			children = (
@@ -351,7 +330,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				DF63C5E819E486E700767F38 /* PBXTargetDependency */,
 				301BF551109A68C00062928A /* PBXTargetDependency */,
 			);
 			name = testcordova;
@@ -388,10 +366,6 @@
 					ProductGroup = 301BF52E109A57CC0062928A /* Products */;
 					ProjectRef = 301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */;
 				},
-				{
-					ProductGroup = DF63C5E119E486C300767F38 /* Products */;
-					ProjectRef = DF63C5E019E486C300767F38 /* sqlcipher.xcodeproj */;
-				},
 			);
 			projectRoot = "";
 			targets = (
@@ -406,13 +380,6 @@
 			fileType = archive.ar;
 			path = libCordova.a;
 			remoteRef = 301BF534109A57CC0062928A /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		DF63C5E619E486C300767F38 /* libsqlcipher.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libsqlcipher.a;
-			remoteRef = DF63C5E519E486C300767F38 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -445,6 +412,7 @@
 				D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */,
 				7E7966E11810823500FA85AD /* icon-50@2x.png in Resources */,
 				7E7966E51810823500FA85AD /* icon-76@2x.png in Resources */,
+				DFA1EDA21A73090300BC1A85 /* libraries in Resources */,
 				30FC414916E50CA1004E6F35 /* icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -503,11 +471,6 @@
 			isa = PBXTargetDependency;
 			name = CordovaLib;
 			targetProxy = 301BF550109A68C00062928A /* PBXContainerItemProxy */;
-		};
-		DF63C5E819E486E700767F38 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = sqlcipher;
-			targetProxy = DF63C5E719E486E700767F38 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -572,6 +535,10 @@
 				);
 				INFOPLIST_FILE = "testcordova/testcordova-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/scoleman/dev/fips/fcids/test/testcordova/libraries,
+				);
 				"OTHER_CFLAGS[arch=*]" = "-DSQLITE_HAS_CODEC";
 				OTHER_LDFLAGS = (
 					"/usr/local/ssl/Release-iphoneos/libcrypto.a",
@@ -612,6 +579,10 @@
 				);
 				INFOPLIST_FILE = "testcordova/testcordova-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/scoleman/dev/fips/fcids/test/testcordova/libraries,
+				);
 				"OTHER_CFLAGS[arch=*]" = "-DSQLITE_HAS_CODEC";
 				OTHER_LDFLAGS = (
 					"-weak_framework",

@@ -13,7 +13,7 @@
 #include <openssl/crypto.h>
 #include <openssl/err.h>
 
-static const NSString *t2VersionString =@"1.0.1";
+static const NSString *t2VersionString =@"1.2.0";
 
 
 

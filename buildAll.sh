@@ -85,6 +85,15 @@ checkForSqlcipherFiels()
 
 # This sets up environment vars to point to which openssl/fips we want to use
 . ./setEnvOpensslFiles.sh
+
+. ./checkDevTools.sh
+  if [ $? != 0 ];
+  then 
+    echo "Problem You need to install proper dev tools!"
+    exit 1
+  fi
+
+
 echo "Using IOS SDK $SDKVERSION !!!!"
 echo "using $OPENSSL_BASE.tar.gz"
 echo "using $FIPS_BASE.tar.gz"

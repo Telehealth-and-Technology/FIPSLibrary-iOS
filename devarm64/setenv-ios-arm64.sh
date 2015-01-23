@@ -9,7 +9,7 @@
 #
 # setenv-ios-11-arm64.sh
 #
-
+export FIPSDIR=/usr/local/ssl/Release-iphoneos
 
 #
 # fips/sha/Makefile uses HOSTCC for building fips_standalone_sha1

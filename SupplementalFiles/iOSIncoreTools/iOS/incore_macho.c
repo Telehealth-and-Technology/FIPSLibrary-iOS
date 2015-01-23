@@ -122,7 +122,7 @@
 #endif
 
 
-static int gVerbosity = 0;
+static int gVerbosity = 1;
 
 static void hexdump(const unsigned char *buf,size_t len,
                     unsigned long address,FILE* fp)
