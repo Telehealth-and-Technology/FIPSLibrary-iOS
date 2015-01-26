@@ -1,0 +1,6 @@
+To install this IOS release on your MAC you must have admin privileges.
+
+	1. copy release to a local directory
+	2. sudo ./installFipsRelease.sh (Installs FIPS files in protected space of development machine)
+
+Note: Don’t forget the sudo!

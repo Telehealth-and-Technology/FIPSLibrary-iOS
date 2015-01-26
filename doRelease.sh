@@ -10,25 +10,21 @@ echo "using $INSTALL_DIR"
 gccVersion="4.2.1"
 
 fipsDir=$INSTALL_DIR
-premainC="/usr/local/ssl/fips-2.0/lib/fips_premain.c"
-premainSha="/usr/local/ssl/fips-2.0/lib/fips_premain.c.sha1"
-canisterO="/usr/local/ssl/fips-2.0/lib/fipscanister.o"
-fanisterSha="/usr/local/ssl/fips-2.0/lib/fipscanister.o.sha1"
+
 
 sslSrc="./libcrypto.a"
 sslDst="release/$ReleaseName/object/openssl"
 
 mkdir -p release
 mkdir -p release/$ReleaseName
-mkdir -p release/$ReleaseName/source
-mkdir -p release/$ReleaseName/source/dev
-mkdir -p release/$ReleaseName/source/devSim
 mkdir -p release/$ReleaseName/object
 mkdir -p release/$ReleaseName/object/usr/local/ssl
 mkdir -p release/$ReleaseName/doc
 mkdir -p $sslDst
+mkdir -p release/$ReleaseName/SupplementalFiles
 
-# # copy object files
+
+# # # copy object files
 cp -r $fipsDir* release/$ReleaseName/object/usr/local/ssl
 cp -f $sslSrc $sslDst 
 
@@ -40,8 +36,14 @@ cp *.txt release/$ReleaseName/doc
 cp -r doc release/$ReleaseName
 
 #copy source files
-cp -r dev/SupplementalFiles* release/$ReleaseName/source/dev
-cp -r devSim/SupplementalFiles* release/$ReleaseName/source/devSim
+cp -r SupplementalFiles* release/$ReleaseName
+
+# Copy incore_macho file
+cp -r ./devarm64/openssl-fips-2.0.2/iOS/incore_macho release/$ReleaseName
+
+# copy test record file
+cp -r *.xlsx release/$ReleaseName
+cp -r HowToInstallRelease.txt release/$ReleaseName
 
 # copy test files
 cp -r test release/$ReleaseName/test

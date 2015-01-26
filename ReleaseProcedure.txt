@@ -1,36 +1,23 @@
-1. Clear out existing installation files at
+*. Confirm release number correct in Version Number.txt
+
+*. Clear out existing installation files at
 	/usr/local/ssl/Release-iphoneos
 
-2. Perform clean build of project
+*. Perform clean build of project
 	(do sudo ./cleanAll/sh if necessary first)
 
-3. Check for correctness of main projects:
-	3.1 Open native project at fcids/test/fips-pi/fips-pi.xcodeproj
-		Clean build for simulator - confirm you can enter/exit fips mode without error
-		Clean build for device - confirm you can enter/exit fips mode without error
-	3.2 Open cordova project at fcids/test/testcordova/platforms/ios/testcordova.xcodeproj
-		Clean build for simulator - confirm database access has no errors and FIPS Status = 1
-		Clean build for device - onfirm database access has no errors  and FIPS Status = 1
+*. Check operation - see ReleaseTesting.xlsx
 
-4. Clear out existing installation files at
-	/usr/local/ssl/Release-iphoneos
-
-4. Perform release:
+*. Perform release:
 	./doRelease Vx.y.z_mm-dd-yy
 
-5. Install release files:
-	sudo ./installFipsRelease.txt
+*. Install release files:
+	sudo ./installFipsRelease.sh
 
-6. Check for correctness of main projects:
-	6.1 Open native project at fcids/release/Vx.y.z_mm-dd-yy/test/fips-pi/fips-pi.xcodeproj
-		Clean build for simulator - confirm you can enter/exit fips mode without error
-		Clean build for device - confirm you can enter/exit fips mode without error
-	6.2 Open cordova project at fcids/release/Vx.y.z_mm-dd-yy/ttest/testcordova/platforms/ios/testcordova.xcodeproj
-		Clean build for simulator - confirm database access has no errors and FIPS Status = 1
-		Clean build for device - onfirm database access has no errors  and FIPS Status = 1
+*. Check operation - see ReleaseTesting.xlsx
 
-7. Copy release files to shared drive:
+*. Copy release files to shared drive:
 	/Volumes/shares/Groups/Tech Team/Current Projects/FIPS/release/FCIDS
 	Update /Users/scoleman/dev/IOSFipsBuilds/test1020/fcids/ReleaseProcedure.txt
 
-8. Create a git branch corresponding to release (Branch named Vx.y.z_mm-dd-yy)
+*. Create a git branch corresponding to release (Branch named Vx.y.z_mm-dd-yy)
