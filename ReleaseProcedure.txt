@@ -20,4 +20,4 @@
 	/Volumes/shares/Groups/Tech Team/Current Projects/FIPS/release/FCIDS
 	Update /Users/scoleman/dev/IOSFipsBuilds/test1020/fcids/ReleaseProcedure.txt
 
-*. Create a git branch corresponding to release (Branch named Vx.y.z_mm-dd-yy)
+*. Create a git tag corresponding to release (Tag named Vx.y.z_mm-dd-yy)
