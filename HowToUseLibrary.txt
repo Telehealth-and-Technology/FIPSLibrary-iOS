@@ -13,6 +13,7 @@ Vx.y.x_DD-DD-YY
 	test              Test IOS applications used to test release
 	fips-pi           Tests inclusion of library in a native IOS app
 	testcordova       Tests inclusion of library in a cordova plugin using sqlcipher
+	t2Crypto	  File containing RawEncrypt and RawDecrypt - for native apps
 
 Note 1: The release binary and header files are the actual product of the release. They need to be 
         installed in the protected space of the development machine that the developer is using
@@ -41,12 +42,17 @@ Section 2 - Verifying successful operation of release
 		  Successfully entered FIPS mode
 		  Successfully exited FIPS mode
 
+		  Confirm that rawEncrypt() and rawDecrypt() function correctly
+		  Confirm encrypted key/value storage functions correctly
+
 	  --------------------------------------------------
 	  2A2 - Integrate into your own native xcode project
 	  --------------------------------------------------
 		  Update the settings for your project to know about the library:
 		  	Add to "Other Linker Flags" - /usr/local/ssl/Release-iphoneos/libcrypto.a
 		  	Add to "User Header Search Paths": /usr/local/ssl/Release-iphoneos/include
+
+			Copy t2Crypto.m and t2Crypto.h to your project and add calls ass appropriate.
 
 		  Clean, build and run. Confirm that you can enter and exit fips mode without errors.
 
@@ -223,5 +229,13 @@ Appendix D - Potential Issues
 
 		You probably forgot steps 5, and 6 in step 2B2 above.
 
+		
+	3. *** Cordova IOS plugin issue *** 
+	-------------------------
+	    After removing and re-installing a plugin you must go to each source (.m) file of the 
+	    module in the plugins directory and make sure (in XCode) the Target membership checkbox is checked.
+
+	    Alternatively, you can to this
+	        in XCode goto Build Phases->Compile sources and add each source (.m) file of the plugins just added
 
 

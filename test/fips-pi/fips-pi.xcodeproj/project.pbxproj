@@ -13,7 +13,6 @@
 		201BBC9C16987399001368B5 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 201BBC9A16987399001368B5 /* InfoPlist.strings */; };
 		201BBC9E16987399001368B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 201BBC9D16987399001368B5 /* main.m */; };
 		201BBCA216987399001368B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 201BBCA116987399001368B5 /* AppDelegate.m */; };
-		201BBCAB16987399001368B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 201BBCAA16987399001368B5 /* ViewController.m */; };
 		201BBCAE16987399001368B5 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 201BBCAC16987399001368B5 /* ViewController.xib */; };
 		201BBCB916987450001368B5 /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = 201BBCB816987450001368B5 /* Icons */; };
 		201BBCC116987B3B001368B5 /* fips_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = 201BBCBF16987B3B001368B5 /* fips_assert.c */; };
@@ -21,6 +20,8 @@
 		2024028E16A4781E00472D13 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2024028D16A4781E00472D13 /* Icon.png */; };
 		2024029016A4782300472D13 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2024028F16A4782300472D13 /* Icon@2x.png */; };
 		20E98E8C1698A49400453A52 /* fips_premain.c in Sources */ = {isa = PBXBuildFile; fileRef = 20E98E8B1698A49400453A52 /* fips_premain.c */; };
+		DF40213E1ABB6B6700108E2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF40213D1ABB6B6700108E2C /* ViewController.m */; };
+		DF7F74D51B27663D00C47188 /* T2Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7F74D41B27663D00C47188 /* T2Crypto.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +36,6 @@
 		201BBCA016987399001368B5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		201BBCA116987399001368B5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		201BBCA916987399001368B5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		201BBCAA16987399001368B5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		201BBCAD16987399001368B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		201BBCB816987450001368B5 /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
 		201BBCBF16987B3B001368B5 /* fips_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_assert.c; sourceTree = "<group>"; };
@@ -44,6 +44,9 @@
 		2024028D16A4781E00472D13 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		2024028F16A4782300472D13 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		20E98E8B1698A49400453A52 /* fips_premain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_premain.c; sourceTree = "<group>"; };
+		DF40213D1ABB6B6700108E2C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DF7F74D31B27663D00C47188 /* T2Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T2Crypto.h; sourceTree = "<group>"; };
+		DF7F74D41B27663D00C47188 /* T2Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T2Crypto.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,10 +95,12 @@
 		201BBC9716987399001368B5 /* fips-pi */ = {
 			isa = PBXGroup;
 			children = (
+				DF7F74D31B27663D00C47188 /* T2Crypto.h */,
+				DF7F74D41B27663D00C47188 /* T2Crypto.m */,
+				DF40213D1ABB6B6700108E2C /* ViewController.m */,
 				201BBCA016987399001368B5 /* AppDelegate.h */,
 				201BBCA116987399001368B5 /* AppDelegate.m */,
 				201BBCA916987399001368B5 /* ViewController.h */,
-				201BBCAA16987399001368B5 /* ViewController.m */,
 				201BBCAC16987399001368B5 /* ViewController.xib */,
 				201BBC9816987399001368B5 /* Supporting Files */,
 			);
@@ -205,9 +210,10 @@
 			files = (
 				201BBC9E16987399001368B5 /* main.m in Sources */,
 				201BBCA216987399001368B5 /* AppDelegate.m in Sources */,
-				201BBCAB16987399001368B5 /* ViewController.m in Sources */,
 				201BBCC116987B3B001368B5 /* fips_assert.c in Sources */,
 				20E98E8C1698A49400453A52 /* fips_premain.c in Sources */,
+				DF7F74D51B27663D00C47188 /* T2Crypto.m in Sources */,
+				DF40213E1ABB6B6700108E2C /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +275,7 @@
 				OTHER_LDFLAGS = /usr/local/ssl/iphoneos/lib/libcrypto.a;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = /usr/local/ssl/iphoneos/include;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALID_ARCHS = "armv5 armv6 armv7 armv7s";
 			};
 			name = Debug;
@@ -308,7 +314,7 @@
 				OTHER_LDFLAGS = /usr/local/ssl/iphoneos/lib/libcrypto.a;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
-				USER_HEADER_SEARCH_PATHS = /usr/local/ssl/iphoneos/include;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "armv5 armv6 armv7 armv7s";
 			};

@@ -18,6 +18,7 @@ sslDst="release/$ReleaseName/object/openssl"
 mkdir -p release
 mkdir -p release/$ReleaseName
 mkdir -p release/$ReleaseName/object
+mkdir -p release/$ReleaseName/t2crypto
 mkdir -p release/$ReleaseName/object/usr/local/ssl
 mkdir -p release/$ReleaseName/doc
 mkdir -p $sslDst
@@ -54,6 +55,9 @@ cp ./setEnvOpenSslFiles.sh release/$ReleaseName
 
 # copy canned sqlcipher directory
 cp -r ./sqlcipher release/$ReleaseName
+
+#copy t2Crypto files
+cp -r t2Crypto release/$ReleaseName/
 
 
 # #Remove lib build instructions so they dont confuse end app developers

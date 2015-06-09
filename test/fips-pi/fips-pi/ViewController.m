@@ -23,6 +23,11 @@
 // Debug instrumentation
 #include "fips_assert.h"
 
+#include "T2Crypto.h"
+
+
+
+
 //
 // Symbols from fips_premain.c
 static const unsigned int   MAGIC_20 = 20;
@@ -30,6 +35,8 @@ extern const void*          FIPS_text_start(),  *FIPS_text_end();
 extern const unsigned char  FIPS_rodata_start[], FIPS_rodata_end[];
 extern unsigned char        FIPS_signature[20];
 extern unsigned int         FIPS_incore_fingerprint (unsigned char *, unsigned int);
+
+
 
 
 @interface ViewController ()
@@ -124,19 +131,20 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
         static const unsigned int AES_KEYSIZE = 16;
         static const unsigned int AES_BLOCKSIZE = 16;
         
-        static const unsigned char t[AES_BLOCKSIZE] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+        static const unsigned char testBlock[AES_BLOCKSIZE] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
         
-        AES_KEY k1 = {}, k2 = {};
-        unsigned char r[AES_KEYSIZE];
-        unsigned char d[AES_BLOCKSIZE];
+        AES_KEY encryptKey = {};
+        AES_KEY decryptKey = {};
+        unsigned char keyBytes[AES_KEYSIZE]; // 128 bits
+        unsigned char dataBytes[AES_BLOCKSIZE];
         
-        memcpy(d, t, sizeof(d));
+        memcpy(dataBytes, testBlock, sizeof(dataBytes));
         
         do {
             
             // RAND_bytes() returns 1 on success, 0 otherwise. The error
             // code can be obtained by ERR_get_error(3).
-            ret = RAND_bytes(r, sizeof(r));
+            ret = RAND_bytes(keyBytes, sizeof(keyBytes));
             err = ERR_get_error();
             
             FIPS_ASSERT(ret == 1);
@@ -145,7 +153,7 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
                 break; /* failed */
             }
             
-            ret = AES_set_encrypt_key(r, AES_KEYSIZE * 8 /*bits*/, &k1);
+            ret = AES_set_encrypt_key(keyBytes, AES_KEYSIZE * 8 /*bits*/, &encryptKey);
             err = ERR_get_error();
             
             FIPS_ASSERT(ret == 0);
@@ -154,7 +162,7 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
                 break; /* failed */
             }
             
-            ret = AES_set_decrypt_key(r, AES_KEYSIZE * 8 /*bits*/, &k2);
+            ret = AES_set_decrypt_key(keyBytes, AES_KEYSIZE * 8 /*bits*/, &decryptKey);
             err = ERR_get_error();
             
             FIPS_ASSERT(ret == 0);
@@ -163,13 +171,13 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
                 break; /* failed */
             }
             
-            // Hmm... void - cannot fail 
-            AES_encrypt(d, d, &k1);
-            AES_decrypt(d, d, &k2);
+            // Encrypt bytes in dataBytes, then decrypt, se should end up with the same string!
+            AES_encrypt(dataBytes, dataBytes, &encryptKey);
+            AES_decrypt(dataBytes, dataBytes, &decryptKey);
             
             // Did it round trip?
-            FIPS_ASSERT(0 == memcmp(d, t, sizeof(d)));
-            if(!(0 == memcmp(d, t, sizeof(d)))) {
+            FIPS_ASSERT(0 == memcmp(dataBytes, testBlock, sizeof(dataBytes)));
+            if(!(0 == memcmp(dataBytes, testBlock, sizeof(dataBytes)))) {
                 DisplayErrorMessage("\n  Data did not round trip", 0);
                 break; /* failed */
             }
@@ -244,6 +252,50 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
     const int mode = FIPS_mode();
     const BOOL state = mode ? YES : NO;
     [m_modeSwitch setOn:state];
+    
+
+    // Test out Crypto module
+    // -----------------------
+    
+    // First initialize it
+    NSString *pin = @"1746";
+    initializeCrypto();
+
+    // -----------------------------------------
+    // Test functionality of T2Crypto
+    // -----------------------------------------
+    
+    
+    // First test out raw encrypt/decrypt
+    NSString *plainText = @"This is a test string to encrypt";
+    NSLog(@"INFO: plainText: = %@ ",plainText);
+    
+    NSString *encryptedText;
+    encryptedText = encryptRaw(pin, plainText);
+    NSLog(@"INFO: encryptedText: = %@ ",encryptedText);
+    
+    NSString *decryptedText = decryptRaw(pin, encryptedText);
+    NSLog(@"INFO: decryptedText: = %@ ",decryptedText);
+    
+    
+    
+    // Now test out key/value interface
+    NSString *value = @"Some value";
+    NSString *key1 = @"Some key";
+    NSString *key2 = @"Some  other key";
+    
+    encryptedSaveValueForKey( pin, value, key1);
+    NSLog(@"INFO: Saved value: \"%@\" with key: \"%@\" ",value, key1);
+    encryptedSaveValueForKey( pin, value, key2);
+    NSLog(@"INFO: Saved value: \"%@\" with key: \"%@\" ",value, key2);
+    
+    NSLog(@"");
+    
+    NSString *recalledValue = encryptedGetValueForKey(pin, key1);
+    NSLog(@"INFO: Recalled value: \"%@\" with key \"%@\" ",recalledValue, key1);
+    recalledValue = encryptedGetValueForKey(pin, key2);
+    NSLog(@"INFO: Recalled value: \"%@\" with key \"%@\" ",recalledValue, key2);
+    
 }
 
 - (void)didReceiveMemoryWarning
