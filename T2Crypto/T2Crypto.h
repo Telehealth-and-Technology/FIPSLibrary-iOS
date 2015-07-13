@@ -1,10 +1,10 @@
 /*
  *
- * Copyright � 2009-2014 United States Government as represented by
+ * Copyright � 2009-2015 United States Government as represented by
  * the Chief Information Officer of the National Center for Telehealth
  * and Technology. All Rights Reserved.
  *
- * Copyright � 2009-2014 Contributors. All Rights Reserved.
+ * Copyright � 2009-2015 Contributors. All Rights Reserved.
  *
  * THIS OPEN SOURCE AGREEMENT ("AGREEMENT") DEFINES THE RIGHTS OF USE,
  * REPRODUCTION, DISTRIBUTION, MODIFICATION AND REDISTRIBUTION OF CERTAIN
@@ -18,11 +18,11 @@
  * RESPONSIBILITIES AND OBLIGATIONS CONTAINED IN THIS AGREEMENT.
  *
  * Government Agency: The National Center for Telehealth and Technology
- * Government Agency Original Software Designation: ProviderResilience
- * Government Agency Original Software Title: ProviderResilience
+ * Government Agency Original Software Designation: T2Crypto
+ * Government Agency Original Software Title: T2Crypto
  * User Registration Requested. Please send email
  * with your contact information to: robert.a.kayl.civ@mail.mil
- * Government Agency Point of Contact for Original Software: robert.a.kayl.civ@mail.milcryp
+ * Government Agency Point of Contact for Original Software: robert.a.kayl.civ@mail.mil
  *
  */
 void initializeCrypto();

@@ -13,12 +13,13 @@ Vx.y.x_DD-DD-YY
 	test              Test IOS applications used to test release
 	fips-pi           Tests inclusion of library in a native IOS app
 	testcordova       Tests inclusion of library in a cordova plugin using sqlcipher
-	t2Crypto	  File containing RawEncrypt and RawDecrypt - for native apps
+	t2Crypto	  	File containing RawEncrypt and RawDecrypt - for native apps
 
 Note 1: The release binary and header files are the actual product of the release. They need to be 
         installed in the protected space of the development machine that the developer is using
         The utility installFipsRelease.sh.
         e.g. installs files to /usr/local/ssl/Release-iphoneos
+
 
 *****************************************************
 Section 2 - Verifying successful operation of release
@@ -45,24 +46,6 @@ Section 2 - Verifying successful operation of release
 		  Confirm that rawEncrypt() and rawDecrypt() function correctly
 		  Confirm encrypted key/value storage functions correctly
 
-	  --------------------------------------------------
-	  2A2 - Integrate into your own native xcode project
-	  --------------------------------------------------
-		  Update the settings for your project to know about the library:
-		  	Add to "Other Linker Flags" - /usr/local/ssl/Release-iphoneos/libcrypto.a
-		  	Add to "User Header Search Paths": /usr/local/ssl/Release-iphoneos/include
-
-			Copy t2Crypto.m and t2Crypto.h to your project and add calls ass appropriate.
-
-		  Clean, build and run. Confirm that you can enter and exit fips mode without errors.
-
-
-  ------------------------------------------------------------------------------------
-  2B - Verifying/Using release in project which uses sqlcipher and the cordova plugin
-  ------------------------------------------------------------------------------------
-  After you have downloaded the release, run the installFipsRelease.sh script to install the binaries and headers
-  in your development machine.
-
 	  ----------------------------------------------------------------------------------------------
 	  2B1 - Use the test project included in the release which uses sqlcipher and the cordova plugin
 	  ----------------------------------------------------------------------------------------------
@@ -76,11 +59,98 @@ Section 2 - Verifying successful operation of release
 			T2 FIPS Versions = 1.0.0
 		  	Query completed: {"rows":{"length":0},"rowsAffected":0}
 			Query completed: {"rows":{"length":0},"rowsAffected":1,"insertId":19}
-	  
-	  --------------------------------------------------------------------------------
-	  2B2 - Integrate into your own project that uses sqlcipher and the cordova plugin
-	  --------------------------------------------------------------------------------
 
+
+*****************************************************
+Section 3 - Incorporating into your own project
+*****************************************************
+
+  --------------------------------------------------
+  3A - Incorporating into a native IOS project
+  --------------------------------------------------
+		1.  Update the settings for your project to know about the library:
+			add -DSQLITE_HAS_CODEC to "other C flags" and "other c++ flags"  (Any architecture, any sdk - both debug and release) - target
+			Add /usr/local/ssl/Release-iphoneos/include to "Header Search Paths" (Any architecture, any sdk - both debug and release) - target
+			Add /usr/local/ssl/Release-iphoneos/libcrypto.a to "Other Linker Flags" (Any architecture, any sdk - both debug and release) - target
+
+		2. Copy the following files into your project:
+			t2crypto/fips_assert.c
+			t2crypto/fips_assert.h
+			t2crypto/FIPS_iOS_routines.h
+			t2crypto/FIPS_iOS_routines.m
+			t2crypto/fips_premain.c
+			t2crypto/T2Crypto.h
+			t2crypto/T2Crypto.m
+
+			Note:
+			If you get errors after including any of the .c files see: 
+    			http://stackoverflow.com/questions/5983103/adding-an-empty-c-file-to-xcode-cocoa-project-causes-thousands-of-errors
+
+
+		3. In your root project under "build phases" add a "run script" Build phase with the following script:
+		    	/usr/local/bin/incore_macho --debug -exe "$CONFIGURATION_BUILD_DIR/$EXECUTABLE_PATH"	
+		    	name it EmbedFingerprint
+
+		*** Note, if you forget step 3 the app won't launch (Because fips_premain.c requires an embedded fingerprint).
+
+		4. When application is complete, create the following FIPS documentation files from templates:
+			doc/FIPS140-2ApplicationComplianceStatementTemplate.txt
+			doc/FIPS140-2ApplicationComplianceRecordTemplate.txt
+
+
+		  Clean, build and run. Confirm that you can enter and exit fips mode without errors.
+
+		  Ex:
+		  	#include "T2Crypto.h"
+			#include <openssl/crypto.h>
+			#include <openssl/err.h>
+			#include <openssl/rand.h>
+			#include <openssl/aes.h>
+
+		    int mode = 0, ret = 0;
+	    
+		    mode = FIPS_mode();
+		    
+		    if(mode == 0)  {
+		        ret = FIPS_mode_set(1 /*on*/);
+		        if(1 != ret) {
+		            NSLog(@"\n  FIPS_mode_set failed");
+		        }
+		        else {
+		            NSLog(@"\n  Successfully entered FIPS mode");
+		        }
+		    }			
+
+	  ---------------------------------------------------------
+	  3A.1 - Incorporating sqlCipher (With support for CoreData)
+	  ---------------------------------------------------------
+	  	1. Copy files into your project:
+	  		t2crypto/EncryptedStore.h
+			t2crypto/EncryptedStore.m
+
+	  	2. Clone SqlCipher (git.t2.local:/git/mobile/crossplatform/sqlcipher.git)
+	  	3. Add sqlcipher as a sub-project
+	  		Easiest way to do this is to drag sqlcipher.xcodeproj to your IDE under your main project
+	    3.1 In  Build Phases of your main project:
+	    		Under "Target Dependencies" add sqlcipher
+	    		Under "Link binary with Libraries: add libsqlcipher.a"
+
+
+	  	
+
+	  	4. In AppDelegate.m Change the line:    
+	  		NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+	  		to:
+        	NSPersistentStoreCoordinator *coordinator = [EncryptedStore makeStore:[self managedObjectModel] passcode:@"SOME_PASSWORD"];
+
+		4.1 Add #import "EncryptedStore.h"
+
+        Project should build now with no errors. CoreData storage will be encrypted now
+
+
+  -------------------------------------------------------------------------------------
+  3B - Incorporating into a Cordova project that uses sqlcipher and the cordova plugin
+  -------------------------------------------------------------------------------------
 		!!! Note: The cordova test application testcordova.xcodeproj uses a canned version sqlcipher contained in the release
 		          please make sure that your application does not use this canned version. You must clone a real version from 
 		          the repository at t2.local/git/mobile/crossplatform/sqlcipher.git
@@ -169,6 +239,8 @@ Section 2 - Verifying successful operation of release
 				doc/FIPS140-2ApplicationComplianceStatementTemplate.txt
 				doc/FIPS140-2ApplicationComplianceRecordTemplate.txt
 
+
+
 ********************************
 Appendix A - Plugin control flow
 ********************************
@@ -227,7 +299,7 @@ Appendix D - Potential Issues
 
 	2. If you get error 755413103 when fips_mode() is called
 
-		You probably forgot steps 5, and 6 in step 2B2 above.
+		You probably forgot steps 5, and 6 in step 3B above.
 
 		
 	3. *** Cordova IOS plugin issue *** 

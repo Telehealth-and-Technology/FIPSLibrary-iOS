@@ -18,13 +18,16 @@
  * RESPONSIBILITIES AND OBLIGATIONS CONTAINED IN THIS AGREEMENT.
  *
  * Government Agency: The National Center for Telehealth and Technology
- * Government Agency Original Software Designation: ProviderResilience
- * Government Agency Original Software Title: ProviderResilience
+ * Government Agency Original Software Designation: T2Crypto
+ * Government Agency Original Software Title: T2Crypto
  * User Registration Requested. Please send email
  * with your contact information to: robert.a.kayl.civ@mail.mil
  * Government Agency Point of Contact for Original Software: robert.a.kayl.civ@mail.mil
  *
  */
+
+@import Foundation;
+
 #include "openssl/evp.h"
 // FIPS_mode, FIPS_mode_set, ERR_get_error, etc
 #include "openssl/crypto.h"

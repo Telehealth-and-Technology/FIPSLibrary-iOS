@@ -1,1 +1,1 @@
-Current version number is V1.2.1
+Current version number is V1.2.2
