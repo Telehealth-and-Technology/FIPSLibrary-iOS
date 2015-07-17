@@ -25,9 +25,6 @@
  * Government Agency Point of Contact for Original Software: robert.a.kayl.civ@mail.mil
  *
  */
-
-@import Foundation;
-
 #include "openssl/evp.h"
 // FIPS_mode, FIPS_mode_set, ERR_get_error, etc
 #include "openssl/crypto.h"
@@ -37,7 +34,7 @@
 #include "openssl/rand.h"
 #include "openssl/aes.h"
 
-
+#include "t2Crypto.h"
 #define LOGE(...) \
 NSLog(@__VA_ARGS__);
 
@@ -50,11 +47,7 @@ NSLog(@__VA_ARGS__);
 #define EVP_aes_256_cbc_Key_LENGTH 32
 #define EVP_aes_256_cbc_Iv_LENGTH 16
 
-int const T2Error2 = -1;
-int const T2Success2 = 0;
 
-int const T2True = 1;
-int const T2False = 0;
 unsigned char * genericBuffer[GENERIC_BUFFER_SIZE];
 
 // Make sure that length of cannedKeyBytes = CANNED_RI_KEY_BYTES_LENGTH!!!!!!
@@ -249,7 +242,7 @@ unsigned char * aes_encrypt_malloc(EVP_CIPHER_CTX * encryptContext , unsigned ch
 }
 
 /*!
- * @brief Decrypts encrypted test
+ * @brief Decrypts encrypted text
  * @discussion
  * @param decryptContext Decryption context
  * @param ciphertext bytes to decrypt
@@ -297,7 +290,7 @@ int key_init(unsigned char * key_data, int key_data_len, unsigned char * salt, T
     i = EVP_BytesToKey(EVP_aes_256_cbc(), EVP_sha1(), salt, key_data, key_data_len, nrounds, aCredentials->key, aCredentials->iv);
     if (i != EVP_aes_256_cbc_Key_LENGTH) {
         LOGI("ERROR: Key size is %d bits - should be %d bits\n", i, EVP_aes_256_cbc_Key_LENGTH * 8);
-        return T2Error2;
+        return T2Error;
     }
     
     // For EVP_aes_256_cbc, key length = 32 bytes, iv length = 16 types
@@ -314,7 +307,7 @@ int key_init(unsigned char * key_data, int key_data_len, unsigned char * salt, T
     EVP_CIPHER_CTX_init(&aCredentials->decryptContext);                                     // Initialize ciipher context
     EVP_DecryptInit_ex(&aCredentials->decryptContext, EVP_aes_256_cbc(), NULL, aCredentials->key, aCredentials->iv);    // Set up context to use specific cyper type
     
-    return T2Success2;
+    return T2Success;
 }
 
 
@@ -390,6 +383,178 @@ NSString * encryptRaw(NSString *pin, NSString *plainText) {
     }
     NSString* message = [NSString stringWithFormat:@"%s", (char *) genericBuffer];
     return message;
+    
+}
+/*!
+ * @brief Encrypts or Decrypts a binary file
+ * @discussion Uses FIPS encryption/deccryption
+ * @param inputFile File to read from
+ * @param outputFile File to write processed file to
+ * @param operation T2Encrypt, T2Encrypt, T2NOOP
+ * @param password Text password to use
+ * @return 0 for success
+ */
+int processBinaryFile( NSString* inputFile, NSString* outputFile, int operation, NSString* password) {
+    
+    int retVal = 0;
+    NSData* originalContents = nil;
+    
+    // Open the input file, error out if issue
+    NSFileHandle* inputHandle = [NSFileHandle fileHandleForReadingAtPath:inputFile ];
+    if (inputHandle == nil) {
+        return -1;
+    }
+    
+    // Open the output file, error out if issue
+    NSFileHandle* outFileHandle = [NSFileHandle fileHandleForWritingAtPath:outputFile];
+    if (outFileHandle == nil) {
+        
+        // File doesn't exist, must create it first
+        NSLog(@"*** creating file!");
+        [[NSFileManager defaultManager] createFileAtPath:outputFile contents:nil attributes:nil];
+        outFileHandle = [NSFileHandle fileHandleForWritingAtPath:outputFile];
+        
+        if (outFileHandle) {
+        }
+        else {
+            return -1;
+        }
+    }
+    
+    
+    // Both file handles have been created successfully
+    // Walk through the file and encrypt/decrypt it
+    while(true) {
+        
+        int  blocklength;
+        if (operation == T2Encrypt) {
+            blocklength = 1024; // Arbitarry chunk of bytes to process
+        }
+        else {
+            // since we know the plaitext block is 1024, doe to the encryption we're using the encrypted block is 1040
+            blocklength = 1040;// since we know the plaitext block is 1024, doe to the encryption we're using the encrypted block is 1040
+        }
+        
+        originalContents = [inputHandle readDataOfLength:blocklength];
+        if (originalContents.length == 0) {
+            break;
+        }
+        
+        if (operation == T2Encrypt) {
+            
+            NSData *encryptedData = encryptBytesRaw(password, originalContents);
+            [outFileHandle writeData:encryptedData];
+
+            NSData *checkData = decryptBytesRaw(password, encryptedData);
+            int i = 0;
+        
+        }
+        
+        if (operation == T2Decrypt) {
+            NSData *decryptedData = decryptBytesRaw(password, originalContents);
+
+            [outFileHandle writeData:decryptedData];
+        }
+        
+        // Just pass the data stright through (copyFile)
+        if (operation == T2NOOP) {
+            [outFileHandle writeData:originalContents];
+        }
+    }
+    
+    return retVal;
+}
+
+/*!
+ * @brief Decrypts NSData given a password
+ * @discussion Uses FIPS encryption/deccryption
+ *  Note that this routine is different than decryptRaw in that the former also decrypts the string
+ *  zero terminator. This one does not!
+ *
+ * @param pin Pin to use to generate a key
+ * @param inputData data to decrypt
+ * @return Decrypted data
+ */
+NSData * decryptBytesRaw(NSString *pin, NSData *inputData) {
+    T2Key RawKey;
+    int length;
+    
+    unsigned char *bytes = (unsigned char *)[inputData bytes];
+    
+    
+    unsigned char *key_data;
+    int key_data_len;
+    key_data = (unsigned char *)pin.UTF8String;
+    key_data_len = (int) strlen(pin.UTF8String);
+    
+    // Generate RawKey = kdf(PIN)
+    // ------------------------------
+    /* gen key and iv. init the cipher ctx object */
+    if (key_init(key_data, key_data_len, (unsigned char *)cannedSaltRaw, &RawKey)) {
+        NSCAssert(FALSE, @"ERROR: initializing key");
+        return NULL;
+    } else {
+        
+        length = (int) inputData.length;
+        unsigned char* szDecryptedBytes =  aes_decrypt_malloc(&RawKey.decryptContext, bytes, &length);
+        if (szDecryptedBytes == NULL) {
+            return nil;
+        }
+        else {
+            NSData *outputData;
+            outputData = [NSData dataWithBytes:szDecryptedBytes length: (unsigned long) length];
+            free (szDecryptedBytes);
+            return outputData;
+        }
+    }
+    
+}
+
+
+
+
+/*!
+ * @brief Encrypts NSData given a password
+ * @discussion Uses FIPS encryption/deccryption
+ *  Note that this routine is different than encryptRaw in that the former also encrypts the string
+ *  zero terminator. This one does not!
+ *
+ * @param pin Pin to use to generate a key
+ * @param inputData data to encrypt
+ * @return Encrypted data
+ */
+NSData * encryptBytesRaw(NSString *pin, NSData *inputData) {
+    T2Key RawKey;
+    int length;
+    
+    unsigned char *bytes = (unsigned char *)[inputData bytes];
+    
+    
+    unsigned char *key_data;
+    int key_data_len;
+    key_data = (unsigned char *)pin.UTF8String;
+    key_data_len = (int) strlen(pin.UTF8String);
+    
+    // Generate RawKey = kdf(PIN)
+    // ------------------------------
+    /* gen key and iv. init the cipher ctx object */
+    if (key_init(key_data, key_data_len, (unsigned char *)cannedSaltRaw, &RawKey)) {
+        NSCAssert(FALSE, @"ERROR: initializing key");
+        return NULL;
+    } else {
+        
+        length = (int) inputData.length;
+        unsigned char* szEncryptedBytes =  aes_encrypt_malloc(&RawKey.encryptContext, bytes, &length);
+        if (szEncryptedBytes == NULL) {
+            return nil;
+        }
+        else {
+            NSData *outputData;
+            outputData = [NSData dataWithBytes:szEncryptedBytes length: (unsigned long) length];
+            free (szEncryptedBytes);
+            return outputData;
+        }
+    }
     
 }
 

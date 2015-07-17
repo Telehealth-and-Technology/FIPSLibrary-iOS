@@ -1,10 +1,10 @@
 /*
  *
- * Copyright � 2009-2015 United States Government as represented by
+ * Copyright � 2009-2014 United States Government as represented by
  * the Chief Information Officer of the National Center for Telehealth
  * and Technology. All Rights Reserved.
  *
- * Copyright � 2009-2015 Contributors. All Rights Reserved.
+ * Copyright � 2009-2014 Contributors. All Rights Reserved.
  *
  * THIS OPEN SOURCE AGREEMENT ("AGREEMENT") DEFINES THE RIGHTS OF USE,
  * REPRODUCTION, DISTRIBUTION, MODIFICATION AND REDISTRIBUTION OF CERTAIN
@@ -18,11 +18,11 @@
  * RESPONSIBILITIES AND OBLIGATIONS CONTAINED IN THIS AGREEMENT.
  *
  * Government Agency: The National Center for Telehealth and Technology
- * Government Agency Original Software Designation: T2Crypto
- * Government Agency Original Software Title: T2Crypto
+ * Government Agency Original Software Designation: ProviderResilience
+ * Government Agency Original Software Title: ProviderResilience
  * User Registration Requested. Please send email
  * with your contact information to: robert.a.kayl.civ@mail.mil
- * Government Agency Point of Contact for Original Software: robert.a.kayl.civ@mail.mil
+ * Government Agency Point of Contact for Original Software: robert.a.kayl.civ@mail.milcryp
  *
  */
 void initializeCrypto();
@@ -33,4 +33,27 @@ static NSString* encodeKey = @"T2!SEf1l3*";
 void encryptedSaveValueForKey( NSString *pin, NSString *value, NSString *key);
 NSString * encryptedGetValueForKey(NSString *pin, NSString *key);
 
+
+NSData * encryptBytesRaw(NSString *pin, NSData *bytes);
+NSData * decryptBytesRaw(NSString *pin, NSData *bytes);
+
+enum T2Operation :NSInteger {
+    T2Encrypt = 1,
+    T2Decrypt = -1,
+    T2NOOP = 0
+    
+};
+
+enum T2Enums :NSInteger{
+    T2Error = -1,
+    T2Success = 0,
+    T2True = 1,
+    T2False = 0,
+    T2FipsModeOn = 1,
+    T2FipsModeOff = 0
+};
+
+
+
+int processBinaryFile( NSString* inputFile, NSString* outputFile, int operation, NSString* password);
 

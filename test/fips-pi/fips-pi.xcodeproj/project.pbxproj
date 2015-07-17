@@ -22,7 +22,28 @@
 		20E98E8C1698A49400453A52 /* fips_premain.c in Sources */ = {isa = PBXBuildFile; fileRef = 20E98E8B1698A49400453A52 /* fips_premain.c */; };
 		DF40213E1ABB6B6700108E2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF40213D1ABB6B6700108E2C /* ViewController.m */; };
 		DF7F74D51B27663D00C47188 /* T2Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7F74D41B27663D00C47188 /* T2Crypto.m */; };
+		DFBEB6DB1B5954EC0094AFEF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBEB6DA1B5954EC0094AFEF /* Security.framework */; };
+		DFBEB6DD1B5972DF0094AFEF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBEB6DC1B5972DF0094AFEF /* AVFoundation.framework */; };
+		DFBEB6DF1B5974880094AFEF /* test124.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DFBEB6DE1B5974880094AFEF /* test124.mp3 */; };
+		DFBEB6E01B599BFD0094AFEF /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBEB6D61B5952520094AFEF /* libsqlcipher.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DFBEB6D51B5952520094AFEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFBEB6D01B5952520094AFEF /* sqlcipher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = sqlcipher;
+		};
+		DFBEB6D71B59527C0094AFEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFBEB6D01B5952520094AFEF /* sqlcipher.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = sqlcipher;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		201BBC8D16987399001368B5 /* fips-pi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "fips-pi.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +68,10 @@
 		DF40213D1ABB6B6700108E2C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DF7F74D31B27663D00C47188 /* T2Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T2Crypto.h; sourceTree = "<group>"; };
 		DF7F74D41B27663D00C47188 /* T2Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T2Crypto.m; sourceTree = "<group>"; };
+		DFBEB6D01B5952520094AFEF /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = ../../../sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
+		DFBEB6DA1B5954EC0094AFEF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		DFBEB6DC1B5972DF0094AFEF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		DFBEB6DE1B5974880094AFEF /* test124.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test124.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +79,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFBEB6E01B599BFD0094AFEF /* libsqlcipher.a in Frameworks */,
+				DFBEB6DD1B5972DF0094AFEF /* AVFoundation.framework in Frameworks */,
+				DFBEB6DB1B5954EC0094AFEF /* Security.framework in Frameworks */,
 				201BBC9216987399001368B5 /* UIKit.framework in Frameworks */,
 				201BBC9416987399001368B5 /* Foundation.framework in Frameworks */,
 				201BBC9616987399001368B5 /* CoreGraphics.framework in Frameworks */,
@@ -66,6 +94,8 @@
 		201BBC8216987399001368B5 = {
 			isa = PBXGroup;
 			children = (
+				DFBEB6DE1B5974880094AFEF /* test124.mp3 */,
+				DFBEB6D01B5952520094AFEF /* sqlcipher.xcodeproj */,
 				2024028F16A4782300472D13 /* Icon@2x.png */,
 				2024028D16A4781E00472D13 /* Icon.png */,
 				201BBC9716987399001368B5 /* fips-pi */,
@@ -85,6 +115,8 @@
 		201BBC9016987399001368B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DFBEB6DC1B5972DF0094AFEF /* AVFoundation.framework */,
+				DFBEB6DA1B5954EC0094AFEF /* Security.framework */,
 				201BBC9116987399001368B5 /* UIKit.framework */,
 				201BBC9316987399001368B5 /* Foundation.framework */,
 				201BBC9516987399001368B5 /* CoreGraphics.framework */,
@@ -123,6 +155,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		DFBEB6D11B5952520094AFEF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFBEB6D61B5952520094AFEF /* libsqlcipher.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +178,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				DFBEB6D81B59527C0094AFEF /* PBXTargetDependency */,
 			);
 			name = "fips-pi";
 			productName = "fips-pi";
@@ -163,12 +204,28 @@
 			mainGroup = 201BBC8216987399001368B5;
 			productRefGroup = 201BBC8E16987399001368B5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = DFBEB6D11B5952520094AFEF /* Products */;
+					ProjectRef = DFBEB6D01B5952520094AFEF /* sqlcipher.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				201BBC8C16987399001368B5 /* fips-pi */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		DFBEB6D61B5952520094AFEF /* libsqlcipher.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsqlcipher.a;
+			remoteRef = DFBEB6D51B5952520094AFEF /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		201BBC8B16987399001368B5 /* Resources */ = {
@@ -179,6 +236,7 @@
 				201BBCAE16987399001368B5 /* ViewController.xib in Resources */,
 				201BBCB916987450001368B5 /* Icons in Resources */,
 				201BBCC616988131001368B5 /* OpenSSL-logo.png in Resources */,
+				DFBEB6DF1B5974880094AFEF /* test124.mp3 in Resources */,
 				2024028E16A4781E00472D13 /* Icon.png in Resources */,
 				2024029016A4782300472D13 /* Icon@2x.png in Resources */,
 			);
@@ -218,6 +276,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DFBEB6D81B59527C0094AFEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = sqlcipher;
+			targetProxy = DFBEB6D71B59527C0094AFEF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		201BBC9A16987399001368B5 /* InfoPlist.strings */ = {
@@ -330,9 +396,22 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					./sqlcipher/srv,
+				);
 				INFOPLIST_FILE = "fips-pi/fips-pi.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wconversion",
+					"-Wstrict-overflow",
+					"-Wno-unused-parameter",
+					"-DSQLITE_HAS_CODEC",
+				);
 				OTHER_LDFLAGS = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				"OTHER_LDFLAGS[arch=*]" = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				PRODUCT_NAME = "fips-pi";
@@ -352,9 +431,22 @@
 					"NDEBUG=1",
 					"NS_BLOCK_ASSERTIONS=1",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					./sqlcipher/srv,
+				);
 				INFOPLIST_FILE = "fips-pi/fips-pi.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Wconversion",
+					"-Wstrict-overflow",
+					"-Wno-unused-parameter",
+					"-DSQLITE_HAS_CODEC",
+				);
 				OTHER_LDFLAGS = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				PRODUCT_NAME = "fips-pi";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/ssl/Release-iphoneos/include";

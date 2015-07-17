@@ -34,3 +34,26 @@ void encryptedSaveValueForKey( NSString *pin, NSString *value, NSString *key);
 NSString * encryptedGetValueForKey(NSString *pin, NSString *key);
 
 
+NSData * encryptBytesRaw(NSString *pin, NSData *bytes);
+NSData * decryptBytesRaw(NSString *pin, NSData *bytes);
+
+enum T2Operation :NSInteger {
+    T2Encrypt = 1,
+    T2Decrypt = -1,
+    T2NOOP = 0
+    
+};
+
+enum T2Enums :NSInteger{
+    T2Error = -1,
+    T2Success = 0,
+    T2True = 1,
+    T2False = 0,
+    T2FipsModeOn = 1,
+    T2FipsModeOff = 0
+};
+
+
+
+int processBinaryFile( NSString* inputFile, NSString* outputFile, int operation, NSString* password);
+
