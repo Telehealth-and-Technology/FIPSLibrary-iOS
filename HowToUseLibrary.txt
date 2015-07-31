@@ -309,5 +309,25 @@ Appendix D - Potential Issues
 
 	    Alternatively, you can to this
 	        in XCode goto Build Phases->Compile sources and add each source (.m) file of the plugins just added
+	
+	4. If your build fails in xcode because it can’t find headers:
+	  4a. Make sure that you have installed the release (Step 2A above)
+          4b. If you have verified that the release got installed (to /usr/local/ssl/Release-iphoneos) 
+              then you probably have a permissions error. Try this:
+			chmod 555 -R /usr/local/ssl/Release-iphoneos
+
+	*** Note:         To get finder to show hidden files (Where the FCIDS libraries are installed):
+       		 In Terminal, paste the following:  defaults write com.apple.finder AppleShowAllFiles 1
+
+
+=====================================================================
+Unit Tests
+=====================================================================
+The application fips-pi contains a suite of unit tests that 
+test all of the T2Crypto functions .
+
+After running the App the phone display will indicate pass/fail status
+and the log will contain detailed information about the tests as well
+as pass/fail status.
 
 
