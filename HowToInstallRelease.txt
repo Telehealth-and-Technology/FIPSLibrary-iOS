@@ -4,3 +4,15 @@ To install this IOS release on your MAC you must have admin privileges.
 	2. sudo ./installFipsRelease.sh (Installs FIPS files in protected space of development machine)
 
 Note: Don’t forget the sudo!
+
+
+
+Notes:
+        To get finder to show hidden files (Where the FCIDS libraries are installed):
+        In Terminal, paste the following: 
+        	defaults write com.apple.finder AppleShowAllFiles 1
+
+
+	If after the build you get errors on build like (can’t find x.h)
+	you might need to set read permissions on the install directory:
+		chmod -R 555 /usr/local/ssl/Release-iphoneos
