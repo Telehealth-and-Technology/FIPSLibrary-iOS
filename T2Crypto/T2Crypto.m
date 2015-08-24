@@ -44,11 +44,16 @@ NSLog(@__VA_ARGS__);
 
 #define GENERIC_BUFFER_SIZE 1024
 
+bool verboseLoggingOn = FALSE;
+
+
 #define EVP_aes_256_cbc_Key_LENGTH 32
 #define EVP_aes_256_cbc_Iv_LENGTH 16
 
 
 unsigned char * genericBuffer[GENERIC_BUFFER_SIZE];
+unsigned char * genericBufferEncrypt[GENERIC_BUFFER_SIZE];
+unsigned char * genericBufferDecrypt[GENERIC_BUFFER_SIZE];
 
 // Make sure that length of cannedKeyBytes = CANNED_RI_KEY_BYTES_LENGTH!!!!!!
 #define MAX_KEY_LENGTH 32
@@ -297,9 +302,10 @@ int key_init(unsigned char * key_data, int key_data_len, unsigned char * salt, T
     aCredentials->keyLength = EVP_aes_256_cbc_Key_LENGTH;
     aCredentials->ivLength = EVP_aes_256_cbc_Iv_LENGTH;
     
-    //logAsHexString(( unsigned char *)aCredentials->key, (unsigned int) aCredentials->keyLength, "    key");
-    //logAsHexString((unsigned char *)aCredentials->iv, (unsigned int) aCredentials->ivLength, "     iv");
-    
+    if (verboseLoggingOn) {
+        logAsHexString(( unsigned char *)aCredentials->key, (unsigned int) aCredentials->keyLength, "    key");
+        logAsHexString((unsigned char *)aCredentials->iv, (unsigned int) aCredentials->ivLength, "     iv");
+    }
     // Setup encryption context
     EVP_CIPHER_CTX_init(&aCredentials->encryptContext);                                     // Initialize ciipher context
     EVP_EncryptInit_ex(&aCredentials->encryptContext, EVP_aes_256_cbc(), NULL, aCredentials->key, aCredentials->iv);    // Set up context to use specific cyper type
@@ -338,6 +344,104 @@ unsigned char * decryptUsingKey_malloc1(T2Key * credentials, unsigned char * enc
     unsigned char* decryptedText =  aes_decrypt_malloc(&credentials->decryptContext, encryptedText, inLength);
     return decryptedText;
 }
+
+
+/*!
+ * @brief encrypts char * string (utf 8)  using a pin
+ * @discussion ** Note that the plaintext input to this routine MUST be zero terminated
+ * @param pPin Pin use in encrypt/decrypt functions
+ * @param pPlainText Zero terminated input string
+ * @param outlength Gets set to length of output
+ * @return  Encrypted text
+ */
+unsigned char * encryptCharString(unsigned char * pPin, unsigned char * pPlainText, int * outLength) {
+    T2Key RawKey;
+    genericBufferEncrypt[0] = 0;   // Clear out generic buffer in case we fail
+    
+    if (pPin ==NULL || pPlainText == NULL || outLength == NULL) {
+        LOGE("Error Null Pointers on input");
+        return (unsigned char *) genericBufferEncrypt;
+    }
+    
+    
+    int pinLen = (int) strlen((const char *)pPin);
+    
+    if (key_init(pPin, pinLen, (unsigned char *)cannedSaltRaw, &RawKey)) {
+        LOGE("Error Initializing Key");
+        return (unsigned char *) genericBufferEncrypt;
+    } else {
+        
+        //int outLength;
+        unsigned char *encryptedText= encryptStringUsingKey_malloc(&RawKey, pPlainText, outLength);
+        NSCAssert((encryptedText != NULL), @"Memory allocation error");
+        
+        // Note: we can't return the encrhypted string directoy because JAVA will try to
+        // interpret it as a string and fail UTF-8 conversion if any of the encrypted characters
+        // have the high bit set. Therefore we must return a hex string equivalent of the binary
+        char *tmp = binAsHexString_malloc(encryptedText, (unsigned int) *outLength);
+            
+        if (tmp == NULL) {
+            LOGE("Memory allocation error");
+        } else {
+        
+            if (strlen((char *)tmp) < GENERIC_BUFFER_SIZE) {
+                sprintf((char*) genericBufferEncrypt, "%s", tmp);
+            } else {
+                LOGE("String to encrypt is too large!");
+            }
+            free(tmp);
+        }
+    }
+    
+    
+    return (unsigned char *) genericBufferEncrypt;
+}
+
+/*!
+ * @brief ederypts char * string (utf 8)  using a pin
+ * @discussion ** Note that the pEncryptedText input to this routine MUST be zero terminated
+ * @param pPin Pin use in encrypt/decrypt functions
+ * @param pEncryptedText Zero terminated input string
+ * @param outlength Gets set to length of output
+ * @return  Decrypted text
+ */
+unsigned char * decryptCharString(unsigned char * pPin, unsigned char * pEncryptedText, int * outLength) {
+    T2Key RawKey;
+    genericBufferDecrypt[0] = 0;   // Clear out generic buffer in case we fail
+    
+    int pinLen = (int) strlen((const char *)pPin);
+    
+    if (key_init(pPin, pinLen, (unsigned char *)cannedSaltRaw, &RawKey)) {
+        LOGE("Error Initializing Key");
+        return (unsigned char *) genericBufferDecrypt;
+    } else {
+        
+        
+        
+        if (pEncryptedText != NULL) {
+            *outLength = (int) strlen((const char*) pEncryptedText);
+        } else {
+            *outLength = 0;
+        }
+        
+        unsigned char *resultBinary = hexStringAsBin_malloc(pEncryptedText, outLength);
+        unsigned char *decryptedText= decryptUsingKey_malloc1(&RawKey, resultBinary, outLength);
+        NSCAssert((decryptedText != NULL), @"Memory allocation error");
+        
+        if (strlen((char *)decryptedText) < GENERIC_BUFFER_SIZE) {
+            sprintf((char*) genericBufferDecrypt, "%s", decryptedText);
+        } else {
+            LOGE("String to encrypt is too large!");
+        }
+        free(decryptedText);
+    }
+    
+    
+    return (unsigned char *) genericBufferDecrypt;
+}
+
+
+
 
 /*!
  * @brief Encrypts an NSString given a password
@@ -385,6 +489,8 @@ NSString * encryptRaw(NSString *pin, NSString *plainText) {
     return message;
     
 }
+    
+    
 /*!
  * @brief Encrypts or Decrypts a binary file
  * @discussion Uses FIPS encryption/deccryption

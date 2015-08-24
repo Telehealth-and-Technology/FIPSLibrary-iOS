@@ -28,6 +28,27 @@
 void initializeCrypto();
 NSString * decryptRaw(NSString *pin, NSString *cipherText);
 NSString * encryptRaw(NSString *pin, NSString *plainText);
+
+/*!
+ * @brief encrypts char * string (utf 8)  using a pin
+ * @discussion ** Note that the plaintext input to this routine MUST be zero terminated
+ * @param pPin Pin use in encrypt/decrypt functions
+ * @param pPlainText Zero terminated input string
+ * @param outlength Gets set to length of output
+ * @return  Encrypted text
+ */
+unsigned char * encryptCharString(unsigned char * pPin, unsigned char * pUencryptedText, int * outLength);
+
+/*!
+ * @brief ederypts char * string (utf 8)  using a pin
+ * @discussion ** Note that the pEncryptedText input to this routine MUST be zero terminated
+ * @param pPin Pin use in encrypt/decrypt functions
+ * @param pEncryptedText Zero terminated input string
+ * @param outlength Gets set to length of output
+ * @return  Decrypted text
+ */
+unsigned char * decryptCharString(unsigned char * pPin, unsigned char * pUencryptedText, int * outLength);
+
 static NSString* encodeKey = @"T2!SEf1l3*";
 
 void encryptedSaveValueForKey( NSString *pin, NSString *value, NSString *key);

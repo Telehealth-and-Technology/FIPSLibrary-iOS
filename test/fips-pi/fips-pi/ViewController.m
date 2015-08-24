@@ -20,7 +20,7 @@
 #include <openssl/aes.h>
 
 //
-// Debug instrumentation
+// Debug instrumentatio
 #include "fips_assert.h"
 
 #include "T2Crypto.h"
@@ -54,7 +54,7 @@ int retVal;
 
 // -------------------------------------------------------
 // Set the number of test iterations to perform here
-const int NUM_ITERATIONS_TO_PERFORM = 10;
+const int NUM_ITERATIONS_TO_PERFORM = 1;
 
 
 @interface ViewController ()
@@ -243,6 +243,12 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
     /******************************************/
     
     
+
+    
+    
+    
+    
+    
     // Start Unit Tests:
     
 
@@ -322,6 +328,52 @@ void DisplayErrorMessage(const char* msg, unsigned long err)
         NSData *decryptedData = decryptBytesRaw(pin, encryptedData);
         assertT2Test(![encryptedData isEqualToData:d1], testDescription ); // Make sure encryped is different
         assertT2Test([decryptedData isEqualToData:d1], testDescription ); // Make sure reconstructed is same
+       
+        // ------------------------------------------
+        // Test 5a/6a- Test encryptCharString encrypt/decrypt - good password
+        // ------------------------------------------
+        testDescription = startTest(@"Test 5a,6a Test encryptCharString encrypt/decrypt - good password");
+        
+        char *pPlainText = "aaaabbbbkldsaflkajdljkafhdskfj;lasjd;fljas;dgjs;gadjsf";
+        char *pPin = "123";
+        
+        int length = (int) strlen(pPin);
+        
+        unsigned char *pEncrypted = encryptCharString((unsigned char *)pPin,(unsigned char *)pPlainText, &length);
+        pPin = "123";
+        unsigned char *pDecrypted = decryptCharString((unsigned char *)pPin, pEncrypted, &length);
+        
+        
+        NSString *input = [NSString stringWithFormat:@"%s", pPlainText];
+        NSString *encrypted = [NSString stringWithFormat:@"%s", pEncrypted];
+        NSString *output = [NSString stringWithFormat:@"%s", pDecrypted];
+        assertT2Test(![encrypted isEqualToString:input], testDescription ); // Make sure encryped is different
+        assertT2Test([output isEqualToString:input], testDescription ); // Make sure reconstructed is same
+
+        
+        // ------------------------------------------
+        // Test 6b- Test encryptCharString encrypt/decrypt - bad password
+        // ------------------------------------------
+        testDescription = startTest(@"Test 6b Test encryptCharString encrypt/decrypt - bad password");
+        
+        pPlainText = "fred";
+        pPin = "123";
+        
+        length = (int) strlen(pPin);
+        
+        pEncrypted = encryptCharString((unsigned char *)pPin,(unsigned char *)pPlainText, &length);
+        pPin = "124";
+        pDecrypted = decryptCharString((unsigned char *)pPin, pEncrypted, &length);
+        
+        
+        input = [NSString stringWithFormat:@"%s", pPlainText];
+        encrypted = [NSString stringWithFormat:@"%s", pEncrypted];
+        output = [NSString stringWithFormat:@"%s", pDecrypted];
+        assertT2Test(![output isEqualToString:input], testDescription ); // Make sure reconstructed is same
+        
+        
+        
+        
         
         // ------------------------------------------
         // Test 7 - Test key/value interface
