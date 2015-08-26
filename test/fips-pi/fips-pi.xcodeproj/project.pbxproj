@@ -20,9 +20,9 @@
 		2024029016A4782300472D13 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2024028F16A4782300472D13 /* Icon@2x.png */; };
 		20E98E8C1698A49400453A52 /* fips_premain.c in Sources */ = {isa = PBXBuildFile; fileRef = 20E98E8B1698A49400453A52 /* fips_premain.c */; };
 		DF278AB01B8E0BA800BC0851 /* fips_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = DF278AAF1B8E0BA800BC0851 /* fips_assert.c */; };
+		DF278AB21B8E115C00BC0851 /* T2Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = DF278AB11B8E115C00BC0851 /* T2Crypto.m */; };
 		DF40213E1ABB6B6700108E2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF40213D1ABB6B6700108E2C /* ViewController.m */; };
 		DF75AFA21B6BD1F700E9F30B /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF75AFA11B6BD1F700E9F30B /* libsqlcipher.a */; };
-		DF7F74D51B27663D00C47188 /* T2Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7F74D41B27663D00C47188 /* T2Crypto.m */; };
 		DFBEB6DB1B5954EC0094AFEF /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBEB6DA1B5954EC0094AFEF /* Security.framework */; };
 		DFBEB6DD1B5972DF0094AFEF /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DFBEB6DC1B5972DF0094AFEF /* AVFoundation.framework */; };
 		DFBEB6DF1B5974880094AFEF /* test124.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DFBEB6DE1B5974880094AFEF /* test124.mp3 */; };
@@ -48,10 +48,10 @@
 		20E98E8B1698A49400453A52 /* fips_premain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_premain.c; sourceTree = "<group>"; };
 		DF278AAE1B8E0A5800BC0851 /* fips_assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fips_assert.h; sourceTree = "<group>"; };
 		DF278AAF1B8E0BA800BC0851 /* fips_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_assert.c; sourceTree = "<group>"; };
+		DF278AB11B8E115C00BC0851 /* T2Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T2Crypto.m; sourceTree = "<group>"; };
 		DF40213D1ABB6B6700108E2C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DF75AFA11B6BD1F700E9F30B /* libsqlcipher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsqlcipher.a; sourceTree = "<group>"; };
 		DF7F74D31B27663D00C47188 /* T2Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T2Crypto.h; sourceTree = "<group>"; };
-		DF7F74D41B27663D00C47188 /* T2Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = T2Crypto.m; sourceTree = "<group>"; };
 		DFBEB6DA1B5954EC0094AFEF /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		DFBEB6DC1B5972DF0094AFEF /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		DFBEB6DE1B5974880094AFEF /* test124.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = test124.mp3; sourceTree = "<group>"; };
@@ -110,8 +110,8 @@
 		201BBC9716987399001368B5 /* fips-pi */ = {
 			isa = PBXGroup;
 			children = (
+				DF278AB11B8E115C00BC0851 /* T2Crypto.m */,
 				DF7F74D31B27663D00C47188 /* T2Crypto.h */,
-				DF7F74D41B27663D00C47188 /* T2Crypto.m */,
 				DF40213D1ABB6B6700108E2C /* ViewController.m */,
 				201BBCA016987399001368B5 /* AppDelegate.h */,
 				201BBCA116987399001368B5 /* AppDelegate.m */,
@@ -167,6 +167,11 @@
 			attributes = {
 				LastUpgradeCheck = 0450;
 				ORGANIZATIONNAME = "OpenSSL Foundation";
+				TargetAttributes = {
+					201BBC8C16987399001368B5 = {
+						DevelopmentTeam = LM8B99RWJA;
+					};
+				};
 			};
 			buildConfigurationList = 201BBC8716987399001368B5 /* Build configuration list for PBXProject "fips-pi" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -228,7 +233,7 @@
 				DF278AB01B8E0BA800BC0851 /* fips_assert.c in Sources */,
 				201BBCA216987399001368B5 /* AppDelegate.m in Sources */,
 				20E98E8C1698A49400453A52 /* fips_premain.c in Sources */,
-				DF7F74D51B27663D00C47188 /* T2Crypto.m in Sources */,
+				DF278AB21B8E115C00BC0851 /* T2Crypto.m in Sources */,
 				DF40213E1ABB6B6700108E2C /* ViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,6 +345,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fips-pi/fips-pi.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -369,6 +376,7 @@
 				OTHER_LDFLAGS = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				"OTHER_LDFLAGS[arch=*]" = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				PRODUCT_NAME = "fips-pi";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/ssl/Release-iphoneos/include";
 				VALID_ARCHS = "armv5 armv6 armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;
@@ -379,6 +387,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "fips-pi/fips-pi.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -407,6 +417,7 @@
 				);
 				OTHER_LDFLAGS = "/usr/local/ssl/Release-iphoneos/libcrypto.a";
 				PRODUCT_NAME = "fips-pi";
+				PROVISIONING_PROFILE = "";
 				USER_HEADER_SEARCH_PATHS = "/usr/local/ssl/Release-iphoneos/include";
 				VALID_ARCHS = "armv5 armv6 armv7 armv7s arm64";
 				WRAPPER_EXTENSION = app;

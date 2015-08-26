@@ -2,7 +2,7 @@ buildallSimi386.sh
 Step 1 remove quarantine
 xattr: No such file: *.tar
 Step 2 build and install Incore Utility
-Operating system: i686-apple-darwinDarwin Kernel Version 13.3.0: Tue Jun 3 21:27:35 PDT 2014; root:xnu-2422.110.17~1/RELEASE_X86_64
+Operating system: i686-apple-darwinDarwin Kernel Version 13.4.0: Sun Aug 17 19:50:11 PDT 2014; root:xnu-2422.115.4~1/RELEASE_X86_64
 Auto Configuring fipsonly
 Auto Configuring fipsonly
 Configuring for darwin-i386-cc

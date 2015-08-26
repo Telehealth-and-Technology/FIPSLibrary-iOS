@@ -551,9 +551,8 @@ int processBinaryFile( NSString* inputFile, NSString* outputFile, int operation,
             NSData *encryptedData = encryptBytesRaw(password, originalContents);
             [outFileHandle writeData:encryptedData];
 
-            // This next line is here incase y oiu want to do a direct encrypt/decrypt passthrough test/
             //NSData *checkData = decryptBytesRaw(password, encryptedData);
-
+            //int i = 0;
         
         }
         
