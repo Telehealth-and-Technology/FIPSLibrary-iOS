@@ -15,11 +15,11 @@
 		201BBCA216987399001368B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 201BBCA116987399001368B5 /* AppDelegate.m */; };
 		201BBCAE16987399001368B5 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 201BBCAC16987399001368B5 /* ViewController.xib */; };
 		201BBCB916987450001368B5 /* Icons in Resources */ = {isa = PBXBuildFile; fileRef = 201BBCB816987450001368B5 /* Icons */; };
-		201BBCC116987B3B001368B5 /* fips_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = 201BBCBF16987B3B001368B5 /* fips_assert.c */; };
 		201BBCC616988131001368B5 /* OpenSSL-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 201BBCC516988131001368B5 /* OpenSSL-logo.png */; };
 		2024028E16A4781E00472D13 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 2024028D16A4781E00472D13 /* Icon.png */; };
 		2024029016A4782300472D13 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2024028F16A4782300472D13 /* Icon@2x.png */; };
 		20E98E8C1698A49400453A52 /* fips_premain.c in Sources */ = {isa = PBXBuildFile; fileRef = 20E98E8B1698A49400453A52 /* fips_premain.c */; };
+		DF278AB01B8E0BA800BC0851 /* fips_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = DF278AAF1B8E0BA800BC0851 /* fips_assert.c */; };
 		DF40213E1ABB6B6700108E2C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DF40213D1ABB6B6700108E2C /* ViewController.m */; };
 		DF75AFA21B6BD1F700E9F30B /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF75AFA11B6BD1F700E9F30B /* libsqlcipher.a */; };
 		DF7F74D51B27663D00C47188 /* T2Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7F74D41B27663D00C47188 /* T2Crypto.m */; };
@@ -42,12 +42,12 @@
 		201BBCA916987399001368B5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		201BBCAD16987399001368B5 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
 		201BBCB816987450001368B5 /* Icons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Icons; sourceTree = "<group>"; };
-		201BBCBF16987B3B001368B5 /* fips_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_assert.c; sourceTree = "<group>"; };
-		201BBCC016987B3B001368B5 /* fips_assert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fips_assert.h; sourceTree = "<group>"; };
 		201BBCC516988131001368B5 /* OpenSSL-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OpenSSL-logo.png"; sourceTree = "<group>"; };
 		2024028D16A4781E00472D13 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		2024028F16A4782300472D13 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		20E98E8B1698A49400453A52 /* fips_premain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_premain.c; sourceTree = "<group>"; };
+		DF278AAE1B8E0A5800BC0851 /* fips_assert.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fips_assert.h; sourceTree = "<group>"; };
+		DF278AAF1B8E0BA800BC0851 /* fips_assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = fips_assert.c; sourceTree = "<group>"; };
 		DF40213D1ABB6B6700108E2C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		DF75AFA11B6BD1F700E9F30B /* libsqlcipher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libsqlcipher.a; sourceTree = "<group>"; };
 		DF7F74D31B27663D00C47188 /* T2Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = T2Crypto.h; sourceTree = "<group>"; };
@@ -125,10 +125,10 @@
 		201BBC9816987399001368B5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				DF278AAF1B8E0BA800BC0851 /* fips_assert.c */,
+				DF278AAE1B8E0A5800BC0851 /* fips_assert.h */,
 				201BBC9D16987399001368B5 /* main.m */,
 				20E98E8B1698A49400453A52 /* fips_premain.c */,
-				201BBCC016987B3B001368B5 /* fips_assert.h */,
-				201BBCBF16987B3B001368B5 /* fips_assert.c */,
 				201BBC9916987399001368B5 /* fips-pi.plist */,
 				201BBC9F16987399001368B5 /* fips-pi.pch */,
 				201BBC9A16987399001368B5 /* InfoPlist.strings */,
@@ -225,8 +225,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				201BBC9E16987399001368B5 /* main.m in Sources */,
+				DF278AB01B8E0BA800BC0851 /* fips_assert.c in Sources */,
 				201BBCA216987399001368B5 /* AppDelegate.m in Sources */,
-				201BBCC116987B3B001368B5 /* fips_assert.c in Sources */,
 				20E98E8C1698A49400453A52 /* fips_premain.c in Sources */,
 				DF7F74D51B27663D00C47188 /* T2Crypto.m in Sources */,
 				DF40213E1ABB6B6700108E2C /* ViewController.m in Sources */,

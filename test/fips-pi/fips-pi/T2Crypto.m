@@ -532,7 +532,7 @@ int processBinaryFile( NSString* inputFile, NSString* outputFile, int operation,
     // Walk through the file and encrypt/decrypt it
     while(true) {
         
-        int  blocklength;
+        unsigned long  blocklength;
         if (operation == T2Encrypt) {
             blocklength = 1024; // Arbitarry chunk of bytes to process
         }
@@ -551,8 +551,9 @@ int processBinaryFile( NSString* inputFile, NSString* outputFile, int operation,
             NSData *encryptedData = encryptBytesRaw(password, originalContents);
             [outFileHandle writeData:encryptedData];
 
-            NSData *checkData = decryptBytesRaw(password, encryptedData);
-            int i = 0;
+            // This next line is here incase y oiu want to do a direct encrypt/decrypt passthrough test/
+            //NSData *checkData = decryptBytesRaw(password, encryptedData);
+
         
         }
         
