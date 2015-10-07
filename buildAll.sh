@@ -171,11 +171,11 @@ else
  	# T2_BUILD_PLATFORM tells the sub-shell what platform (and what to name the folder to put the architecture specific .a file)
  	#     Used in Aggregate link files section below
 
- 	# 	---- Build for 32 bit device ------------
- 	echo " Building for 32 bit device"
- 	export T2_BUILD_DIR="dev"
-	export T2_BUILD_PLATFORM="armv7"
-	. ./buildAllDevice.sh
+ # 	# 	---- Build for 32 bit device ------------
+ # 	echo " Building for 32 bit device"
+ # 	export T2_BUILD_DIR="dev"
+	# export T2_BUILD_PLATFORM="armv7"
+	# . ./buildAllDevice.sh
 	
  	# ---- Build for 32 bit simulator ------------
  	echo " Building for IOS 32 bit Simulator"

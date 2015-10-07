@@ -34,6 +34,7 @@
 
         set +e
 
+        # ./Configure builds the makefile (Based on makefile.org and input parameters) that will be used to build the FIPS library
         ./Configure iphoneos-cross --openssldir="${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk" fips --with-fipsdir=$INSTALL_DIR
 
 
@@ -45,6 +46,11 @@
 
         # add -isysroot to CC=
         sed -ie "s!^CFLAG=!CFLAG=-isysroot ${CROSS_TOP}/SDKs/${CROSS_SDK} -miphoneos-version-min=7.0 !" "Makefile"
+
+       #there is a problem with the latest version of perl (5.18 not recognizing the POD document format.
+        # we're4 not using the documents, only the library, so don't try to build them
+        sed -ie 's/install: all install_docs install_sw/install: all install_sw/' "Makefile"
+
 
         make
 

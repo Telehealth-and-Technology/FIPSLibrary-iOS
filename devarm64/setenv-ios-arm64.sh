@@ -65,7 +65,7 @@ fi
 #################################
 
 # CROSS_SDK is the SDK version being used - adjust as appropriate
-for i in 8.1 7.1 7.0 6.1 6.0 5.1 5.0 4.3 do
+for i in 9.0 8.1 7.1 7.0 6.1 6.0 5.1 5.0 4.3 do
 do
   if [ -d "$CROSS_DEVELOPER/Platforms/$CROSS_TYPE.platform/Developer/SDKs/$CROSS_TYPE$i.sdk" ]; then
     SDKVER=$i

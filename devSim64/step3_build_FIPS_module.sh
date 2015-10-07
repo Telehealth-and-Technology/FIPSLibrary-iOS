@@ -19,9 +19,11 @@ pwd
 # Note that this breaks fips compiliance for the simulator but we're still fips compliant with the actual device build
  sed -ie 's/FIPS_check_incore_fingerprint(void)/FIPS_check_incore_fingerprint(void) {return 1;}  int dummy(void)/' "./fips/fips.c"
 
+# XCode 7.0 and above requires that miphoneos-version-min be spedified in all compiles
+ LC_ALL=C sed -ie 's/-DOPENSSL_THREADS/-DOPENSSL_THREADS -miphoneos-version-min=7.0/' "Configure"
 
-./Configure darwin64-x86_64-cc --openssldir=$IOS_INSTALLDIR
 
 echo "-------------------------Build log make"
-make
+./Configure darwin64-x86_64-cc --openssldir=$IOS_INSTALLDIR
+ make
 
