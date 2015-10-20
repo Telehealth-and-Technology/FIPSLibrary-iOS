@@ -16,17 +16,12 @@ echo "-----------------------------------------"
 
 # This sets up environment vars to point to which openssl/fips we cant to use
 . ./setEnvOpensslFiles.sh
-
+  sudo xcode-select --switch /Applications/Xcode.app
+  
  #----------------------------------------------------------------------
   #
   # Build iOS FIPS module and library
   #
-
-
-  # Switch to old (4.6 dev tools) for device build 
-  # Note that the 5.x xcode version of the tools DO NOT work when compiling for device!
-  xcode-select --switch /XCode4.6/Xcode.app
-
 
   #----------------------------------------------------------------------
   echo "Step 1 remove quarantine"

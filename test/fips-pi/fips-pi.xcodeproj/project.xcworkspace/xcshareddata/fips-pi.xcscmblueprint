@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1CD061F110C0C98C1E9E42968B9B0DB83BA95A1A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1CD061F110C0C98C1E9E42968B9B0DB83BA95A1A" : 0,
+    "A8F9EB29309480C6B0E1246565FACD5371D0F27B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "DFFE9DCF-85DA-4FDF-9FF9-8F2CF11644D5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1CD061F110C0C98C1E9E42968B9B0DB83BA95A1A" : "fcids",
+    "A8F9EB29309480C6B0E1246565FACD5371D0F27B" : "sqlcipher"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "fips-pi",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "test\/fips-pi\/fips-pi.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git.t2.local:\/git\/mobile\/crossplatform\/fcids.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1CD061F110C0C98C1E9E42968B9B0DB83BA95A1A"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "git.t2.local:\/git\/mobile\/crossplatform\/sqlcipher.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "A8F9EB29309480C6B0E1246565FACD5371D0F27B"
+    }
+  ]
+}

@@ -235,12 +235,13 @@ typedef struct cpu_adjust_rec
 static cpu_adjust_t cpu_adjustment[] =
 {
     /* values come from direct measurement using a test application      */
-    { CPU_TYPE_I386, CPU_SUBTYPE_MULTIPLE, 0, 0 }, /* subtype is 3 for lion */
+    { CPU_TYPE_I386, CPU_SUBTYPE_MULTIPLE, 16, 16}, /* subtype is 3 for lion */
     { CPU_TYPE_ARM, CPU_SUBTYPE_ARM_V7S, -8, -8 },
-    { CPU_TYPE_ARM, CPU_SUBTYPE_ARM_V7, -8, -8 },
+   // { CPU_TYPE_ARM, CPU_SUBTYPE_ARM_V7, -8, -8 },
+        { CPU_TYPE_ARM, CPU_SUBTYPE_ARM_V7, 16, 16 },
     { CPU_TYPE_ARM, CPU_SUBTYPE_ARM_V6, -8, -8 },
     { CPU_TYPE_ARM, CPU_SUBTYPE_ARM64_V8, -8, -8 },
-    { CPU_TYPE_X86_64, CPU_SUBTYPE_X86_64_ALL, 0, 0 },
+    { CPU_TYPE_X86_64, CPU_SUBTYPE_X86_64_ALL, 16, 16 },
     { CPU_TYPE_ARM64, CPU_SUBTYPE_ARM64_ALL, 12, 12 },
     { CPU_TYPE_ANY, 0, 0, 0 }
 };

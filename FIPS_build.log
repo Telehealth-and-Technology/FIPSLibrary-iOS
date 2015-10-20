@@ -1,0 +1,5 @@
+buildall.sh
+Step 1 remove quarantine
+./buildAllDevice.sh: line 30: .//step1_remove_Quarantine.sh: No such file or directory
+Step 2 build and install Incore Utility
+./buildAllDevice.sh: line 36: .//step2_build_Incore_utility.sh: No such file or directory

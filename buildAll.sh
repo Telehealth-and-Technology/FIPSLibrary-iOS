@@ -171,29 +171,29 @@ else
  	# T2_BUILD_PLATFORM tells the sub-shell what platform (and what to name the folder to put the architecture specific .a file)
  	#     Used in Aggregate link files section below
 
- # 	# 	---- Build for 32 bit device ------------
- # 	echo " Building for 32 bit device"
- # 	export T2_BUILD_DIR="dev"
-	# export T2_BUILD_PLATFORM="armv7"
-	# . ./buildAllDevice.sh
+ 	# 	---- Build for 32 bit device ------------
+ 	echo " Building for 32 bit device"
+ 	export T2_BUILD_DIR="dev"
+	export T2_BUILD_PLATFORM="armv7"
+	. ./buildAllDevice.sh
 	
- 	# ---- Build for 32 bit simulator ------------
- 	echo " Building for IOS 32 bit Simulator"
-	export T2_BUILD_DIR="devSim"
-	export T2_BUILD_PLATFORM="i386"
-	. ./buildAllSim.sh
+ # 	# ---- Build for 32 bit simulator ------------
+ # 	echo " Building for IOS 32 bit Simulator"
+	# export T2_BUILD_DIR="devSim"
+	# export T2_BUILD_PLATFORM="i386"
+	# . ./buildAllSim.sh
 
- 	# ---- Build for 64 bit simulator ------------
- 	echo " Building for IOS 64 bit Simulator"
-	export T2_BUILD_DIR="devSim64"
-	export T2_BUILD_PLATFORM="x86_64"
-	. ./buildAllSim64.sh
+ # 	# ---- Build for 64 bit simulator ------------
+ # 	echo " Building for IOS 64 bit Simulator"
+	# export T2_BUILD_DIR="devSim64"
+	# export T2_BUILD_PLATFORM="x86_64"
+	# . ./buildAllSim64.sh
 
-	# ---- Build for 64 bit device ------------
- 	echo " Building for IOS 64 bit device"
-	export T2_BUILD_DIR="devarm64"
-	export T2_BUILD_PLATFORM="arm64"
-	. ./buildAllarm64.sh
+	# # ---- Build for 64 bit device ------------
+ # 	echo " Building for IOS 64 bit device"
+	# export T2_BUILD_DIR="devarm64"
+	# export T2_BUILD_PLATFORM="arm64"
+	# . ./buildAllarm64.sh
 
 
 	echo ""

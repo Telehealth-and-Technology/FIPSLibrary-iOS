@@ -7,37 +7,35 @@
 # device we have slightly different paths which are determined entirely
 # by the CROSS_TYPE setting - either Simulator or OS
 #
-export CROSS_TYPE=Simulator
+#cross_arch="-armv7"
 export CROSS_TYPE=OS
-cross_arch=""
+#export CROSS_TYPE=Simulator
 cross_arch="-armv7"
 
-CROSS_DEVELOPER=`xcode-select -print-path`
-#CROSS_DEVELOPER="/XCode4.6/Xcode.app/Contents/Developer"
-
+##CROSS_DEVELOPER=`xcode-select -print-path`
+CROSS_DEVELOPER="/Applications//Xcode.app/Contents/Developer"
 
 # CROSS_TOP is the top of the development tools tree
-export CROSS_TOP="/XCode4.6/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer"
+export CROSS_TOP="/Applications/Xcode.app/Contents/Developer/Platforms/iPhone$CROSS_TYPE.platform/Developer"
 
 # CROSS_CHAIN is the location of the actual compiler tools
-export CROSS_CHAIN="$CROSS_TOP"/usr/bin/
+#export CROSS_CHAIN="$CROSS_TOP"/usr/bin/
 
 # CROSS_SDK is the SDK version being used - adjust as appropriate
-for i in 6.1 5.1 5.0 4.3 do
+# for 4.3 or 5.0 (default)
+for i in 8.1 7.1 5.1 5.0 4.3 do
 do
-  if [ -d "$CROSS_DEVELOPER/Platforms/iPhoneOS.platform//Developer/SDKs/iPhoneOS"$i".sdk" ]; then
+  if [ -d "$CROSS_DEVELOPER/Platforms/iPhone$CROSS_TYPE.platform//Developer/SDKs/iPhone$CROSS_TYPE"$i".sdk" ]; then
     SDKVER=$i
     break
   fi
 done
 
+echo "fred, SDKVER = " $SDKVER
+export SDKVERSION=$SDKVER
 export CROSS_SDK=iPhone"$CROSS_TYPE""$SDKVER".sdk
-
-# configure include iOS SDK PATHS
-IPHONE_SDK=$CROSS_DEVELOPER/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS"$SDKVER".sdk
-
-export C_INCLUDE_PATH=$IPHONE_SDK/usr/include
-export CPLUS_INCLUDE_PATH=$C_INCLUDE_PATH
+echo "fred, SDKVERSION " $SDKVERSION
+echo "fred, "CROSS_SDK = " $CROSS_SDK"
 
 #
 # fips/sha/Makefile uses HOSTCC for building fips_standalone_sha1
@@ -47,12 +45,11 @@ export HOSTCFLAGS="-arch i386"
 
 # CROSS_COMPILE is the prefix for the tools - in this case the scripts
 # which invoke the tools with the correct options for 'fat' binary handling
-#export CROSS_COMPILE="`pwd`"/iOS/
-export CROSS_COMPILE="$CROSS_CHAIN"
+export CROSS_COMPILE="`pwd`"/iOS/
 
 # FIPS_SIG is the tool for determining the incore fingerprint
 #export FIPS_SIG=/usr/local/ssl/fingerprint-macho
-#export FIPS_SIG="`pwd`"/iOS/incore_macho
+export FIPS_SIG="`pwd`"/iOS/incore_macho
 
 #
 # these remain to be cleaned up ... 
