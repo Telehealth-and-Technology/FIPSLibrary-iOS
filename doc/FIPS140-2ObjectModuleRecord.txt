@@ -9,6 +9,6 @@
 			make install
 		No other build-time options were specified.
 4.	The HMAC SHA-1 digest of the produced fipscanister.o is: 
-		HMAC-SHA1(fipscanister.o)= f129aeb6f91736bde36e8b0d4c11a15bd454d2d1
+		HMAC-SHA1(fipscanister.o)=22c226bb08a6f5333b42d9e4e2afd132bf2669be
 5.	The contents of the distribution file used to create 
 		fipscanister.o was not manually modified in any way at any time during the build process.

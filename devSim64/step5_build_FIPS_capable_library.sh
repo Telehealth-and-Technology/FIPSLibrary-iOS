@@ -1,68 +1,122 @@
+# Copyright � 2009-2015 United States Government as represented by
+# the Chief Information Officer of the National Center for Telehealth
+# and Technology. All Rights Reserved.
+
+# Copyright � 2009-2015 Contributors. All Rights Reserved.
+
+# THIS OPEN SOURCE AGREEMENT ("AGREEMENT") DEFINES THE RIGHTS OF USE,
+# REPRODUCTION, DISTRIBUTION, MODIFICATION AND REDISTRIBUTION OF CERTAIN
+# COMPUTER SOFTWARE ORIGINALLY RELEASED BY THE UNITED STATES GOVERNMENT
+# AS REPRESENTED BY THE GOVERNMENT AGENCY LISTED BELOW ("GOVERNMENT AGENCY").
+# THE UNITED STATES GOVERNMENT, AS REPRESENTED BY GOVERNMENT AGENCY, IS AN
+# INTENDED THIRD-PARTY BENEFICIARY OF ALL SUBSEQUENT DISTRIBUTIONS OR
+# REDISTRIBUTIONS OF THE SUBJECT SOFTWARE. ANYONE WHO USES, REPRODUCES,
+# DISTRIBUTES, MODIFIES OR REDISTRIBUTES THE SUBJECT SOFTWARE, AS DEFINED
+# HEREIN, OR ANY PART THEREOF, IS, BY THAT ACTION, ACCEPTING IN FULL THE
+# RESPONSIBILITIES AND OBLIGATIONS CONTAINED IN THIS AGREEMENT.
+
+# Government Agency: The National Center for Telehealth and Technology
+# Government Agency Original Software Designation: T2Crypto
+# Government Agency Original Software Title: T2Crypto
+# User Registration Requested. Please send email
+# with your contact information to: robert.a.kayl.civ@mail.mil
+# Government Agency Point of Contact for Original Software: robert.a.kayl.civ@mail.mil
+
+#---------------------------------------------------------
+# Builds FIPS Capable library (Using T2's fipscanister.o)
+#---------------------------------------------------------
+
 echo ""
 echo "#---------------------------------------------------------"
-echo "# Step 5 build FIPS Capable library aaaa 1"
+echo "# Step 5 build FIPS Capable library"
 echo "#---------------------------------------------------------"
-        # Switch to new (5.5 dev tools) for this build 
-        sudo xcode-select --switch /Applications/Xcode.app
 
-        cd $T2_BUILD_DIR
-        mkdir lib$T2_BUILD_PLATFORM
+cd $T2_BUILD_DIR
+mkdir lib$T2_BUILD_PLATFORM
 
-        . ./setenv-reset.sh
-        export SDKVERSION="9.0"
-
-        ARCH="x86_64"
-        CURRENTPATH=`pwd`
-        PLATFORM="iPhoneSimulator"
-        DEVELOPER=`xcode-select -print-path`
+# ========================================
+# First, set up environment variables 
+# (Make and config use these)
+# ========================================
 
 
-        set -e
+# clear out any old environment variables
+. ./setenv-reset.sh
 
-        mkdir -p "${CURRENTPATH}/bin"
+# Define local variables
+CROSS_TYPE=Simulator   
+MACHINE="iphone"  
+CROSS_ARCH="x86_64"
+PLATFORM=$MACHINE$CROSS_TYPE
+CROSS_DEVELOPER=`xcode-select -print-path`      
 
-     tar zxf $OPENSSL_BASE.tar.gz -C "${CURRENTPATH}"
-        cd "${CURRENTPATH}/$OPENSSL_BASE"
-
-        export CROSS_TOP="${DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"
-        export CROSS_SDK="${PLATFORM}${SDKVERSION}.sdk"
-        export BUILD_TOOLS="${DEVELOPER}"
-
-        echo "Building $OPENSSL_BASE for ${PLATFORM} ${SDKVERSION} ${ARCH}"
-        echo "Please stand by..."
-
-        export CC="${BUILD_TOOLS}/usr/bin/gcc -arch ${ARCH}"
-        mkdir -p "${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk"
-echo "aaaaa 2"
-        set +e
-
-     
-       ./Configure darwin64-x86_64-cc --openssldir="${CURRENTPATH}/bin/${PLATFORM}${SDKVERSION}-${ARCH}.sdk" fips --with-fipsdir=$INSTALL_DIR
-
-        if [ $? != 0 ];
-        then 
-            echo "Problem while configure - Please check ${LOG}"
-            exit 1
-        fi
-
-        # add -isysroot to CC=
-        sed -ie "s!^CFLAG=!CFLAG=-isysroot ${CROSS_TOP}/SDKs/${CROSS_SDK} -miphoneos-version-min=7.0 !" "Makefile"
-echo "aaaaa 3"
-
-       make
-echo "aaaaa 4"
-
-        if [ $? != 0 ];
-        then 
-            echo "Problem while make - Please check ${LOG}"
-            exit 1
-        fi
           
-    set -e
-echo "aaaaa 5"
-    #make install 
-  #  make clean 
-pwd
+     
+# CROSS_SDK is the SDK version being used - adjust as appropriate
+# Note: This next line needs to be updated whenever a new IOS sdk is used with this build system
+for i in 9.0 8.1 7.1 5.1 5.0 4.3 do
+do
+  if [ -d "$CROSS_DEVELOPER/Platforms/$MACHINE$CROSS_TYPE.platform//Developer/SDKs/$MACHINE$CROSS_TYPE"$i".sdk" ]; then
+    SDKVER=$i
+    break
+  fi
+done     
 
-    # copy the lib to the intermediate lib directory
-    cp libcrypto.a ../lib$T2_BUILD_PLATFORM
+
+# CROSS_TOP is the top of the development tools tree
+# Note is isysroot is created as such in .config: isysroot = ${CROSS_TOP}/SDKs/${CROSS_SDK}
+
+#define global environment variables (make and config use these)
+export CROSS_TOP="${CROSS_DEVELOPER}/Platforms/${PLATFORM}.platform/Developer"   
+export SDKVERSION=$SDKVER
+export CROSS_SDK=$MACHINE"$CROSS_TYPE""$SDKVER".sdk
+export BUILD_TOOLS="${CROSS_DEVELOPER}"
+export CC="${BUILD_TOOLS}/usr/bin/gcc -arch ${CROSS_ARCH}"
+     
+
+CURRENTPATH=`pwd`
+set -e
+
+ tar zxf $OPENSSL_BASE.tar.gz -C "${CURRENTPATH}"
+ cd "${CURRENTPATH}/$OPENSSL_BASE"
+
+ echo ""
+ echo "Building $OPENSSL_BASE for ${PLATFORM} ${SDKVERSION} ${CROSS_ARCH}"
+ echo ""
+
+. $PROJECTPATH/echoVars.sh
+EchoVars "(arm64 build - 64 bit device, Step 5 build FIPS Capable library"
+
+# ========================================
+# Now build the component
+# ========================================
+set -e
+
+# cofigure builds the makefile (Based on makefile.org and input parameters) 
+# that will be used to build the FIPS library
+# --with-fipsdir=$INSTALL_DIR tells the build to use T2's fipscanister.o
+./Configure darwin64-x86_64-cc fips --with-fipsdir=$INSTALL_DIR
+
+
+if [ $? != 0 ];
+then 
+    echo "Problem while configure - Please check ${LOG}"
+    exit 1
+fi
+
+
+# xcode 9+ requires the target ios version
+sed -ie "s!^CFLAG=!CFLAG=-miphoneos-version-min=7.0 !" "Makefile"
+
+make build_libs
+
+if [ $? != 0 ];
+then 
+    echo "Problem while make - Please check ${LOG}"
+    exit 1
+fi
+          
+
+
+# copy the lib to the intermediate lib directory
+cp libcrypto.a ../lib$T2_BUILD_PLATFORM

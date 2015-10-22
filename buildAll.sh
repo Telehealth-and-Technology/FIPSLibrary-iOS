@@ -1,3 +1,31 @@
+# Copyright � 2009-2015 United States Government as represented by
+# the Chief Information Officer of the National Center for Telehealth
+# and Technology. All Rights Reserved.
+
+# Copyright � 2009-2015 Contributors. All Rights Reserved.
+
+# THIS OPEN SOURCE AGREEMENT ("AGREEMENT") DEFINES THE RIGHTS OF USE,
+# REPRODUCTION, DISTRIBUTION, MODIFICATION AND REDISTRIBUTION OF CERTAIN
+# COMPUTER SOFTWARE ORIGINALLY RELEASED BY THE UNITED STATES GOVERNMENT
+# AS REPRESENTED BY THE GOVERNMENT AGENCY LISTED BELOW ("GOVERNMENT AGENCY").
+# THE UNITED STATES GOVERNMENT, AS REPRESENTED BY GOVERNMENT AGENCY, IS AN
+# INTENDED THIRD-PARTY BENEFICIARY OF ALL SUBSEQUENT DISTRIBUTIONS OR
+# REDISTRIBUTIONS OF THE SUBJECT SOFTWARE. ANYONE WHO USES, REPRODUCES,
+# DISTRIBUTES, MODIFIES OR REDISTRIBUTES THE SUBJECT SOFTWARE, AS DEFINED
+# HEREIN, OR ANY PART THEREOF, IS, BY THAT ACTION, ACCEPTING IN FULL THE
+# RESPONSIBILITIES AND OBLIGATIONS CONTAINED IN THIS AGREEMENT.
+
+# Government Agency: The National Center for Telehealth and Technology
+# Government Agency Original Software Designation: T2Crypto
+# Government Agency Original Software Title: T2Crypto
+# User Registration Requested. Please send email
+# with your contact information to: robert.a.kayl.civ@mail.mil
+# Government Agency Point of Contact for Original Software: robert.a.kayl.civ@mail.mil
+
+#---------------------------------------------------------
+# Builds all IOS platforms
+#---------------------------------------------------------
+
 PROJECTPATH=`pwd`
 abortBuild=0
 
@@ -172,28 +200,24 @@ else
  	#     Used in Aggregate link files section below
 
  	# 	---- Build for 32 bit device ------------
- 	echo " Building for 32 bit device"
  	export T2_BUILD_DIR="dev"
 	export T2_BUILD_PLATFORM="armv7"
 	. ./buildAllDevice.sh
 	
- # 	# ---- Build for 32 bit simulator ------------
- # 	echo " Building for IOS 32 bit Simulator"
-	# export T2_BUILD_DIR="devSim"
-	# export T2_BUILD_PLATFORM="i386"
-	# . ./buildAllSim.sh
+ 	# ---- Build for 32 bit simulator ------------
+	export T2_BUILD_DIR="devSim"
+	export T2_BUILD_PLATFORM="i386"
+	. ./buildAllSim.sh
 
- # 	# ---- Build for 64 bit simulator ------------
- # 	echo " Building for IOS 64 bit Simulator"
-	# export T2_BUILD_DIR="devSim64"
-	# export T2_BUILD_PLATFORM="x86_64"
-	# . ./buildAllSim64.sh
+ 	# ---- Build for 64 bit simulator ------------
+	export T2_BUILD_DIR="devSim64"
+	export T2_BUILD_PLATFORM="x86_64"
+	. ./buildAllSim64.sh
 
-	# # ---- Build for 64 bit device ------------
- # 	echo " Building for IOS 64 bit device"
-	# export T2_BUILD_DIR="devarm64"
-	# export T2_BUILD_PLATFORM="arm64"
-	# . ./buildAllarm64.sh
+	# ---- Build for 64 bit device ------------
+	export T2_BUILD_DIR="devarm64"
+	export T2_BUILD_PLATFORM="arm64"
+	. ./buildAllarm64.sh
 
 
 	echo ""
@@ -222,7 +246,7 @@ else
 	[ -f $TEST_PATH ] && FILES=$FILES" $TEST_PATH"
 
 
-	# if any existed, make a fat file and copy it to the install dire
+	# if any existed, make a fat file and copy it to the install dir
 	if [ "$FILES" != "" ]; then
 
 		COMMAND="./iphoneoslipo -create $FILES -output ./libcrypto.a"

@@ -23,6 +23,7 @@
 		rm -Rf devarm64/bin/
 		rm -Rf devarm64/libarm64/
 
+		rm -Rf dev/bin/
 		rm -Rf dev/libarmv7/
 
 # 

@@ -360,7 +360,7 @@
 					./sqlcipher/srv,
 				);
 				INFOPLIST_FILE = "fips-pi/fips-pi.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -403,7 +403,7 @@
 					./sqlcipher/srv,
 				);
 				INFOPLIST_FILE = "fips-pi/fips-pi.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

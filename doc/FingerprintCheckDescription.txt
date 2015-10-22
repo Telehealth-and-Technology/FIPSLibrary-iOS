@@ -1,0 +1,175 @@
+*****************************************************    UPDATED 10/22/2015
+Section 1 - Overall description
+*****************************************************
+
+    Fips capable openssl uses the concept of fingerprint checking to validate that the correct fipscanister is used 
+    in the openssl implementation. This is done using fingerprint checks. "Fingerprint" refers to a 20 byte SHA1 
+    calculated over the text and Read only data portions of the code in fipscanister.o
+
+    A fingerprint processing is done at the following times:
+
+        1. When the use compiles the Openssl capable library into an application, that appl;icaiton should have a fips_premain.c file included
+           in the application. As part of the extended coompile process ("build phases"  - see HowToUseLibrary.txt) the utility incore_macho is used to calculate the fingerprint of the fipscanister.o module that was used in the libcrypto.a library that the project includes.
+           This fingerprint is stored in the variable FINGERPRINT_ascii_value[40] defined in fips_premain.c
+
+        2. When the end user starts the application has part of the premain processing first saves the previously calculagted 
+            signature in the variable FIPS_SIGNATURE[20] defined in fips.c. This is the reference signature.
+            the app is then directed to calculate the signature of the fipscanister.o module (using the tool FIPS_incore_fingerprint) 
+            that was used in the libcrypto.a that was used in the application. This is compared to the reference fips signature, 
+            if it does not match, execution is aborted
+
+        3. As part of fips self tests that are run at the time of any api call, the same check as step 2 happens, and if signatures
+        don't match an error is returned
+
+*****************************************************
+Section 2 - Details of fingerprint processing:
+*****************************************************
+
+    Notes:
+        - signature refers to 20 byte binary SHA1
+        - fingerprint refers to ASCII version (41 bytes) of signature
+        - incoremacho is called from 2 places
+              1 - inside step 5 (in main library build)
+              2 - from the ide just after an application build
+
+
+    Fips library. FIPS-pi (or any ios application)  build/run overview (generic)
+    =========================================
+        - Step 2 create incore_macho utility and copy to protected dir
+            cp ./incore_macho /usr/local/bin
+        - Step 3/4 Build files from openssl-fips-2.0.2: Create fipscanister.o (and friends), copy it to protected directory at /usr/local/ssl/Release-iphoneos/lib
+            fips_premain.c, fips_premain.c.sha1. fipscanister.o, fipscanister.o.sha1
+            {At this point  FIPS_signature [20] is empty - all zeros)
+        
+        - step 5 Build files from openssl-1.0.1f, link into libcrypto.a
+                 link fipscanister.o from protected dir into libcrypto.a
+                 Build fipsld -> ./opensssl (.exe) , compute fingerprint and insert at FINGERPRINT_ascii_value (int=o ./openssl executable)
+                 copy libcrypto.a to protected dir
+
+        - build fips-pi application (which links to libcrypto.a  in protect dir)
+            Embed fingerprint buid phase
+                Call incore_macho with this fips-pi as the executable
+                    Compute fips fingerprint and insert into fips-pi executable at FINGERPRINT_ascii_value 
+
+        - Execution of fips-pi starts at FINGERPRINT_premain()
+            copy embedded fingerprint to FIPS_signature-> asciiToHex(FINGERPRINT_ascii_value)
+            Calculate SHA1 signature of fips sections of current executable
+            Compare result to FIPS_Signature, if different then FIPS_signature mismatch - abort
+
+
+        - viewController
+            m_embeddedLabel = FIPS_SIGNATURE
+            calculatedLabel = FIPS_incore_fingerprint(fips-pi_)
+
+
+    incore_macho overview <-- It's sent an executable in command line parameters
+    ======================
+         {Calculates the SHA signature of fips portions of executable and writes the result to FINGERPRINT_ascii_value (defined in premain)}
+         {fips portions = FIPS_text_start(), FIPS_text_end(). FIPS_rodata_start. FIPS_rodata_end}
+        - Open file (sent in input parameters) and map to memory at macho_file_t
+        - For each architecture call fingerprint() to add the fingerprint
+        -   Map following symbols to the macho_file: 
+                 FIPS_rodata_start, FIPS_rodata_end, FIPS_text_start, FIPS_text_end, 
+                 FIPS_signature, FINGERPRINT_ascii_value   - Note these are the locations of the embedded signatures
+                 This gives you access to each of these areas in the mapped file
+        -   Adjust pointers for CPU found
+        -   Adjust for punch through???
+        -   Calculate SHA signature of FIPS_xxx memory using HMAC_xxx()
+                local signature = 0 byte binary of calculated signature
+                local signature_string = ascii of calculated signature
+                local fingerprint = address of FINGERPRINT_ascii_value (in premain)
+
+        - If FINGERPRINT_ascii_value of passed executable is NOT default value (?have....)
+        -   compare FINGERPRINT_ascii_value to local ascii of calculated signature
+        -   If NOT equal then print "original fingerprint incorrect" - but don't exit
+
+        - Write local ascii of calculated fingerprint to FINGERPRINT_ascii_value  of passed executable
+
+    fipsld overview
+    ==================
+        - set sha (FINGERTYPE) tool to fips_standalone_sha1 (FIPS_SIG should be set to incore_macho already)
+        - verify fipscanister.o (in protected dir) against its detached signature - exit if fail
+        - verify fips_premain.c (in protected dir) against its detached signature. - exit if fail
+        - Set target = openssl
+        - Build ./openssl executable using existing fipscanister.o in protected dir, premain and all of the *.o fips files
+        -   /Applications/Xcode.app/Contents/Developer/usr/bin/gcc -arch i386
+        - calculate and Embed signature of .openssl using incore_macho
+        -   It's stored at FINGERPRINT_ascii_value in executable ./openssl
+        - IF incore failed generate signature
+        -    Generate signature from original, then recompile with new signature (using -DHMAC_SHA1_SIG xxxxx)
+
+        Ex: For i386 simulator -> ./openssl(i386) fingerprint: c1a3a6aa383a33ab52f961ab008775348cf30cb4
+
+    FIPS.c overview
+    ====================
+        const
+        unsigned char              FIPS_signature [20] = { 0 };   <-------------
+
+        unsigned int FIPS_incore_fingerprint(unsigned char *sig,unsigned int len)
+            {Calculates SHA1 of fips portions and writes result to *sig (parameter passed in) }
+            {fips portions = FIPS_text_start(), FIPS_text_end(). FIPS_rodata_start. FIPS_rodata_end}
+
+
+    premain.c overview
+    ====================
+        static const unsigned char FINGERPRINT_ascii_value[41] <------------------- Place for incore_macho to embed signature 
+           defaults to HMAC_SHA1_SIG = "?have to make sure this string is unique";
+
+        - Check to see if real fingerprint was embedded at FINGERPRINT_ascii_value, if not error out
+            If *FINGERPRINT_ascii_value == ? then exit error (Incore macho did not embed  the real signature at FINGERPRINT_ascii_value)
+
+            Else IPS_signature starts with \0 then copy then fill FIPS_signature with binary copy of what was embedded
+                FIPS_signature = asciiToHex(FINGERPRINT_ascii_value)
+            
+            Calculate SHA1 signature of fips sections of current executable
+            Compare result to FIPS_Signature, if different then FIPS_signature mismatch - abort
+
+*****************************************************
+Appendix A - What to do if fingerprint check fails
+*****************************************************
+
+
+  The problem is likely in the cpu_adjustment[] array in incore_macho.c (of the rool incore_macho)
+    incore_macho is a tool that re-creates the loading of an application executable. 
+    The fingerprint tests use it to confirm the fingerprint by manually loading the executable
+    , calculating the fingerprint, then comparing that the the fingerprint that fipscanister.o calculates itself
+
+    The problem is that incore_macho is dependent on how the system tools load mach o executable files
+    It has to adjust for each specific processor by adding an offset to the text segment (code)
+    when it loads it.
+
+    If the tools have changed then incore_macho may calculate the wrong fingerprint because it thinks
+    the code starts at the begining of the text section, but it actually starts later
+
+    By adjusting the values in cpu_adjustment[] you can fix this.
+
+    You can troubleshoot this by
+        Patching the tool incore_macho (incore_nmacho.c, fingerprint() routine) to print out memory contents at the location of 
+        FIPS_rodata_start (read only data), and 
+        FIPS_text_start (code)
+
+    Then patching the code in fips.c, routine FIPS_incore_fingerprint() to print out memory at the same locations
+
+    You can then compare the memory contents manually and debug (note the the cpi_adjustment, adjusts the alignment
+    of the memory loaded in incore_maco, base on the processor). You may need to adjust values in the cpu_adjustment[] array
+
+    This is also the procedure you will need to use when adding another processor to the ones covered
+
+    The problem is that each time you build the library, all of the above fiels are extracted from an archive so you will need to
+    either disable the extraction steps, or find another method of patching the files (Such as after the extraction is made
+    copying a rogue copy of the files in question to the appropriate directories)
+
+    IN ANY CASE MAKE SURE THAT YOU HAVE RESTORED ALL OF THE OROGINAL FILES BEFORE DOING A BUILD/RELEASE.
+
+
+
+
+
+
+
+
+
+
+
+
+
