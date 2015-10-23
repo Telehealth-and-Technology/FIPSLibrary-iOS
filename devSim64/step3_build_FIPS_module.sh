@@ -124,7 +124,7 @@ rm -f *.dylib
 
 
 # XCode 7.0 and above requires that miphoneos-version-min be spedified in all compiles
-LC_ALL=C sed -ie 's/-DOPENSSL_THREADS/-DOPENSSL_THREADS -miphoneos-version-min=7.0/' "Configure"
+LC_ALL=C sed -ie 's/-DOPENSSL_THREADS/-DOPENSSL_THREADS -miphoneos-version-min=7.0 -fembed-bitcode/' "Configure"
 
 echo "-------------------------Build log make"
 ./Configure darwin64-x86_64-cc --openssldir=$IOS_INSTALLDIR

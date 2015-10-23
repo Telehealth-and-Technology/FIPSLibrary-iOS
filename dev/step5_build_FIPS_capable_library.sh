@@ -107,7 +107,7 @@ fi
 
 
 # xcode 9+ requires the target ios version
-sed -ie "s!^CFLAG=!CFLAG=-miphoneos-version-min=7.0 !" "Makefile"
+sed -ie "s!^CFLAG=!CFLAG=-miphoneos-version-min=7.0 -fembed-bitcode !" "Makefile"
 
 make build_libs
 
