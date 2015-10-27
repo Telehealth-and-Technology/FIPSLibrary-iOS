@@ -115,7 +115,7 @@ export CONFIG_OPTIONS="no-asm no-shared --openssldir=$IOS_INSTALLDIR"
 
 
 . $PROJECTPATH/echoVars.sh
-EchoVars "(arm64 build - 64 bit device, Step 3 build FIPS Object Module)"
+EchoVars "(arm7 build - 32 bit device, Step 3 build FIPS Object Module)"
 
 
 

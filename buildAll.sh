@@ -192,7 +192,8 @@ else
   	echo "--- All files present and accounted for, proceeding with build ---"
  	echo "" 
 
-
+	# Just make sure we're pointing to the latest set of XCode tools
+	sudo xcode-select --switch /Applications/Xcode.app
 
  	# Note: when adding new platforms, don't forget to set up the command variables T2_BUILD_DIR, and T2_BUILD_PLATFORM
  	# T2_BUILD_DIR tells the sub-shell what directory to use

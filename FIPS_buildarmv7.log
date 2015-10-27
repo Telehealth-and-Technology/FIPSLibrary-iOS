@@ -550,7 +550,7 @@ Step 3 build FIPS Object Module
 
 -----------------------------------------------
 FIPS build environment variables  
-(arm64 build - 64 bit device, Step 3 build FIPS Object Module)
+(arm7 build - 32 bit device, Step 3 build FIPS Object Module)
 -----------------------------------------------
 CROSS_TOP =      /Applications/Xcode.app/Contents/Developer/Platforms/iphoneOS.platform/Developer
 SDKVERSION =     9.0
