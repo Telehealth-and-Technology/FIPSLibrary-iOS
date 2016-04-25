@@ -368,33 +368,29 @@ unsigned char * encryptCharString(unsigned char * pPin, unsigned char * pPlainTe
     
     if (key_init(pPin, pinLen, (unsigned char *)cannedSaltRaw, &RawKey)) {
         LOGE("Error Initializing Key");
-        return (unsigned char *) genericBufferEncrypt;
+        return pPlainText;
     } else {
         
-        //int outLength;
-        unsigned char *encryptedText= encryptStringUsingKey_malloc(&RawKey, pPlainText, outLength);
-        NSCAssert((encryptedText != NULL), @"Memory allocation error");
+        int outLength;
+        unsigned char *encryptedString = encryptStringUsingKey_malloc(&RawKey, pPlainText, &outLength);
+        NSCAssert((encryptedString != NULL), @"Memory allocation error");
         
         // Note: we can't return the encrhypted string directoy because JAVA will try to
         // interpret it as a string and fail UTF-8 conversion if any of the encrypted characters
         // have the high bit set. Therefore we must return a hex string equivalent of the binary
-        char *tmp = binAsHexString_malloc(encryptedText, (unsigned int) *outLength);
-            
-        if (tmp == NULL) {
-            LOGE("Memory allocation error");
-        } else {
+        char *tmp = binAsHexString_malloc(encryptedString, (unsigned int) outLength);
+        NSCAssert((tmp != NULL), @"Memory allocation error");
         
-            if (strlen((char *)tmp) < GENERIC_BUFFER_SIZE) {
-                sprintf((char*) genericBufferEncrypt, "%s", tmp);
-            } else {
-                LOGE("String to encrypt is too large!");
-            }
-            free(tmp);
-        }
+        unsigned long size = strlen((char*)tmp);
+        char* buffer[size * sizeof(char)];
+        
+        sprintf((char*) buffer, "%s", tmp);
+        free(tmp);
+        
+        NSString* message = [NSString stringWithFormat:@"%s", (char *) buffer];
+        return (unsigned char*) message.UTF8String;
     }
-    
-    
-    return (unsigned char *) genericBufferEncrypt;
+
 }
 
 /*!
@@ -410,34 +406,34 @@ unsigned char * decryptCharString(unsigned char * pPin, unsigned char * pEncrypt
     genericBufferDecrypt[0] = 0;   // Clear out generic buffer in case we fail
     
     int pinLen = (int) strlen((const char *)pPin);
+    int resultLength = 0;
+    if (pEncryptedText != nil) {
+        resultLength = (int) strlen(pEncryptedText);
+    } else {
+        return nil;
+    }
+    char* buffer[resultLength * sizeof(char)];
     
     if (key_init(pPin, pinLen, (unsigned char *)cannedSaltRaw, &RawKey)) {
         LOGE("Error Initializing Key");
-        return (unsigned char *) genericBufferDecrypt;
+        NSString* message = [NSString stringWithFormat:@"%s", (char *) buffer];
+        return (unsigned char*) message.UTF8String;
     } else {
         
-        
-        
-        if (pEncryptedText != NULL) {
-            *outLength = (int) strlen((const char*) pEncryptedText);
-        } else {
-            *outLength = 0;
+        unsigned char *resultBinary = hexStringAsBin_malloc(pEncryptedText, &resultLength);
+        if (resultBinary != NULL) {
+            
+            unsigned char *decrypted = decryptUsingKey_malloc1(&RawKey, ( unsigned char*)resultBinary, &resultLength);
+            
+            NSCAssert((decrypted != NULL), @"Memory allocation error");
+            
+            memcpy(buffer, decrypted, resultLength);
+            free(resultBinary);
         }
-        
-        unsigned char *resultBinary = hexStringAsBin_malloc(pEncryptedText, outLength);
-        unsigned char *decryptedText= decryptUsingKey_malloc1(&RawKey, resultBinary, outLength);
-        NSCAssert((decryptedText != NULL), @"Memory allocation error");
-        
-        if (strlen((char *)decryptedText) < GENERIC_BUFFER_SIZE) {
-            sprintf((char*) genericBufferDecrypt, "%s", decryptedText);
-        } else {
-            LOGE("String to encrypt is too large!");
-        }
-        free(decryptedText);
     }
     
-    
-    return (unsigned char *) genericBufferDecrypt;
+    NSString* message = [NSString stringWithFormat:@"%s", (char *) buffer];
+    return (unsigned char*) message.UTF8String;
 }
 
 
@@ -464,8 +460,7 @@ NSString * encryptRaw(NSString *pin, NSString *plainText) {
     /* gen key and iv. init the cipher ctx object */
     if (key_init(key_data, key_data_len, (unsigned char *)cannedSaltRaw, &RawKey)) {
         NSCAssert(FALSE, @"ERROR: initializing key");
-        NSString* message = [NSString stringWithFormat:@"%s", (char *) genericBuffer];
-        return message;
+        return plainText;
     } else {
         
         int outLength;
@@ -478,15 +473,15 @@ NSString * encryptRaw(NSString *pin, NSString *plainText) {
         char *tmp = binAsHexString_malloc(encryptedString, (unsigned int) outLength);
         NSCAssert((tmp != NULL), @"Memory allocation error");
         
-        if (strlen((char *)tmp) < GENERIC_BUFFER_SIZE) {
-            sprintf((char*) genericBuffer, "%s", tmp);
-        } else {
-            LOGE("String to encrypt is too large!");
-        }
+        unsigned long size = strlen((char*)tmp);
+        char* buffer[size * sizeof(char)];
+        
+        sprintf((char*) buffer, "%s", tmp);
         free(tmp);
+        
+        NSString* message = [NSString stringWithFormat:@"%s", (char *) buffer];
+        return message;
     }
-    NSString* message = [NSString stringWithFormat:@"%s", (char *) genericBuffer];
-    return message;
     
 }
     
@@ -679,24 +674,22 @@ NSString * decryptRaw(NSString *pin, NSString *cipherText) {
     int key_data_len;
     key_data = (unsigned char *)pin.UTF8String;
     key_data_len = (int) strlen(pin.UTF8String);
+    int resultLength = 0;
+    if (cipherText != nil) {
+        resultLength = (int) strlen(cipherText.UTF8String);
+    } else {
+        return nil;
+    }
+    char* buffer[resultLength * sizeof(char)];
     
     // Generate RawKey = kdf(PIN)
     // ------------------------------
     /* gen key and iv. init the cipher ctx object */
     if (key_init(key_data, key_data_len, (unsigned char *)cannedSaltRaw, &RawKey)) {
         NSCAssert(FALSE, @"ERROR: initializing key");
-        NSString* message = [NSString stringWithFormat:@"%s", (char *) genericBuffer];
+        NSString* message = [NSString stringWithFormat:@"%s", (char *) buffer];
         return message;
     } else {
-        
-        // 03/31/15 BGD Don't try to access cipherText if it is nil!)
-        //int resultLength = (int) strlen(cipherText.UTF8String);
-        int resultLength = 0;
-        if (cipherText != nil) {
-            resultLength = (int) strlen(cipherText.UTF8String);
-        } else {
-            resultLength = 0;
-        }
         
         unsigned char *resultBinary = hexStringAsBin_malloc((unsigned char*)cipherText.UTF8String, &resultLength);
         if (resultBinary != NULL) {
@@ -705,20 +698,13 @@ NSString * decryptRaw(NSString *pin, NSString *cipherText) {
             
             NSCAssert((decrypted != NULL), @"Memory allocation error");
             
-            if (resultLength < GENERIC_BUFFER_SIZE) {
-                memcpy(genericBuffer, decrypted, resultLength);
-            } else {
-                LOGE("String to decrypt is too large!");
-            }
+            memcpy(buffer, decrypted, resultLength);
             free(resultBinary);
-
-            
         }
     }
-
-    NSString* message = [NSString stringWithFormat:@"%s", (char *) genericBuffer];
-    return message;
     
+    NSString* message = [NSString stringWithFormat:@"%s", (char *) buffer];
+    return message;
 }
 
 
